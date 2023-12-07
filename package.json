@@ -1,0 +1,53 @@
+{
+    "title": "Frontend of hotenov.com",
+    "name": "hotenov-com-frontend",
+    "version": "2023.12.07",
+    "scripts": {
+        "build": "npm run build:scss && npm run build:scripts && npm run build:assets",
+        "build:assets": "node scripts/build-assets.js",
+        "build:scripts": "node scripts/build-scripts.js",
+        "build:scss": "node scripts/build-scss.js",
+        "clean": "node scripts/clean.js",
+        "start": "npm run build && node scripts/start.js",
+        "start:clean": "npm run clean && npm run build && node scripts/start.js",
+        "start:debug": "npm run build && node scripts/start-debug.js",
+        "start:browser": "node scripts/start.js"
+    },
+    "description": "Frontend for my personal website hotenov.com (Based on 'startbootstrap-clean-blog' v6.0.8)",
+    "keywords": [
+        "website",
+        "blog",
+        "clean-blog"
+    ],
+    "homepage": "https://github.com/hotenov/hotenov.com",
+    "bugs": {
+        "url": "https://github.com/hotenov/hotenov.com/issues",
+        "email": "qa@hotenov.com"
+    },
+    "license": "MIT",
+    "author": "Artem Hotenov",
+    "contributors": [
+        "Artem Hotenov (https://hotenov.com)"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/hotenov/hotenov.com/tree/main/src_front"
+    },
+    "dependencies": {
+        "bootstrap": "^5.3.2"
+    },
+    "devDependencies": {
+        "@fullhuman/postcss-purgecss": "^5.0.0",
+        "@popperjs/core": "^2.11.8",
+        "autoprefixer": "^10.4.16",
+        "browser-sync": "^2.29.3",
+        "chokidar": "3.5.3",
+        "concurrently": "^8.2.2",
+        "postcss": "^8.4.32",
+        "postcss-minify": "^1.1.0",
+        "prettier": "^3.1.0",
+        "sass": "^1.69.5",
+        "shelljs": "git+https://github.com/shelljs/shelljs.git#master",
+        "upath": "2.0.1"
+    }
+}

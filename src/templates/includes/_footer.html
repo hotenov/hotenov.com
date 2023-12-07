@@ -1,0 +1,61 @@
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+
+{% now "Y" as current_year %}
+
+<footer class="border-top">
+
+  <div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        <ul class="list-inline text-center">
+          <li class="list-inline-item">
+            <a href="https://mastodon.world/@hotenov">
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="fa-brands fa-mastodon fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          <li class="list-inline-item">
+            <a href="https://twitter.com/_hotenov">
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="fa-brands fa-x-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          <li class="list-inline-item">
+            <a href="https://www.linkedin.com/in/hotenov/">
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="fab fa-linkedin-in fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          <li class="list-inline-item">
+            <a href="https://github.com/hotenov">
+              <span class="fa-stack fa-lg">
+                <i class="fas fa-circle fa-stack-2x"></i>
+                <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+        </ul>
+        {% if LANGUAGE_CODE == "ru" %}
+          <div class="small text-center text-muted fst-italic">
+            Copyright &copy; 2019-{{ current_year }} hotenov.com
+            <br />
+            При использовании материалов сайта, ссылка на него повышает карму
+          </div>
+        {% else %}
+          <div class="small text-center text-muted fst-italic">
+            Copyright &copy; 2019-{{ current_year }} hotenov.com
+            <br />
+            When using information from the site, mention of it produces good karma
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</footer>

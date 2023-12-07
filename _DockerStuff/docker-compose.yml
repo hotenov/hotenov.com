@@ -1,0 +1,37 @@
+version: '3.8'
+
+name: hotenovcom_dev
+services:
+  web:
+    image: hotenovcom_webapp:${APP_VERSION:-latest}-dev
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      additional_contexts:
+        - project_root=../
+        - src=../src
+      args:
+        POETRY_VER: ${POETRY_VER:-1.7.1}
+        POETRY_DEPS_TO_INSTALL: ${POETRY_DEPS_TO_INSTALL:---only main}
+        WEB_PORT: ${WEB_PORT:-8833}
+    command: python manage.py runserver 0.0.0.0:${WEB_PORT:-8833} --configuration=Dev
+    volumes:
+      - ../src/:/usr/src/app/
+    ports:
+      - ${WEB_PORT:-8833}:${WEB_PORT:-8833}
+    env_file:
+      - ${DOCKER_ENV_PATH:-./.env.boilerplate}
+    depends_on:
+      - db
+  db:
+    image: postgres:16.1-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    env_file:
+      - ${DOCKER_ENV_PATH:-./.env.boilerplate}
+    # Public port to run unit tests within a DB container.
+    ports:
+      - 35432:5432
+
+volumes:
+  postgres_data:

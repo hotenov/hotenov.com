@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% load tags_helpers %}
+
+{% get_current_language as LANGUAGE_CODE %}
+
+{% block meta_yandex_verification %}
+<meta name="yandex-verification" content="fe2010887b41af53" />
+{% endblock meta_yandex_verification %}
+
+{% block title %}{{ page_title }}{{ block.super }}{% endblock title %}
+{% block content_description %}{{ page_description }}{% endblock content_description %}
+{% block page_keywords %}{{ page_keywords }}{% endblock page_keywords %}
+{% block link_alternate %}{% alternate_lang_links 'website:index' %}{% endblock link_alternate %}
+
+
+{% block pageheader %}
+<header class="masthead" style="background-image: url('{% static 'assets/img/earth-from-mars-bg.jpg' %}')">
+  <div class="container position-relative px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        <div class="site-heading">
+          {% if LANGUAGE_CODE == "ru" %}
+            <h1>Артём Хотенов</h1>
+            <span class="subheading">Личный сайт, резюме и блог.</span>
+          {% else %}
+            <h1>Artem Hotenov</h1>
+            <span class="subheading">Personal website, resume and blog.</span>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+{% endblock pageheader %}
+
+{% block pagecontent %}
+<main class="mb-4">
+  <div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        
+        {% if LANGUAGE_CODE == "ru" %}
+          {% language LANGUAGE_CODE %}
+          <p>Всем привет!</p>
+          <p>Меня зовут Артём и мне приятно, что вы здесь.</p>
+          <p>На этом сайте вы найдёте немного информации обо мне, моей профессиональной деятельности и увлечениях. Также в моём блоге вы, возможно, найдёте что-то полезное для себя (одну статью, вряд ли, можно назвать блогом, но я планирую писать больше, как только у меня появится на это время и силы).</p>
+          <p>Сейчас я погружён в самостоятельное изучение веб-разработки, пытаясь создать удобное и красивое местечко в Интернете для своих идей, мыслей и профессионального опыта.</p>
+          <p>Моя предыдущая профессия - специалист по тестированию программного обеспечения (с дополнительными обязанностями по управлению / координации небольшой команды разработки). Сейчас я широко открыт к предложениям и сотрудничеству. Хочется попробовать себя в новой роли - full-stack веб-разработчик (Python и/или JavaScript). Или писать Web/UI/API авто-тесты как QA (автоматизированное тестирование).</p>
+          <p>Как показывает моя карьера (на данный момент не очень продолжительная, но довольная насыщенная) у меня неплохо получается управлять / координировать по задачам небольшую (до 10-15 чел) команду. Поэтому если вам нужен менеджер IT проекта / команды, то я могу вам прекрасно подойти.</p>
+          <p>Более подробную информацию вы найдёте в моём <a href="{% url 'resume:index' %}">резюме (CV)</a>. Если вам нужно резюме для конкретной позиции (должности) - свяжитесь со мной, и я адаптирую его под определенную роль.</p>
+          {% endlanguage %}
+        {% else %}
+          {% language LANGUAGE_CODE %}
+          <p>Hello everybody!</p>
+          <p>My name is Artem Hotenov and I'm glad that you are here.</p>
+          <p>On this website you can find some information about me and some useful (I hope) information for you from my blog (I plan to write more than one post, but work, learning new things and other real-world events can interfere to do that).</p>
+          <p>I'm currently learning web development on this site, trying to build a pretty place for my ideas and background.</p>
+          <p>My last job was as a QA Engineer (with a variety of dev team management duties). Now I'm available for hire. I'd like to change my career from QA to full-stack web developer (engineer) (with core language as Python or JavaScript). At least, QA automation engineer in Python / JS. Because I still love testing and unit tests are a joy to write for me.</p>
+          <p>Throughout my career, I've noticed that I've always been good with managing tasks and resolving team members needs. So, if you need an IT team manager / project manager - I may be your choice.</p>
+          <p>
+            Look at my <a href="{% url 'resume:index' %}">CV (resume)</a>
+            to see the work experience and other details.
+            Contact me if you need a version for specific position (role).
+            I'll try to adapt it for you.
+          </p>
+          {% endlanguage %}
+        {% endif %}
+
+        <!-- Divider-->
+        <hr class="my-4" />
+
+        {% language LANGUAGE_CODE %}
+        {% if LANGUAGE_CODE == "ru" %}
+          <h3>Последние записи в блоге:</h3>
+          <!-- Post preview-->
+          <div class="post-preview">
+            <a href="{% url 'website:tms-review-2019' %}" class="text-primary-emphasis">
+              <h2 class="post-title">Выбор системы управления тестированием в 2019 году</h2>
+              <h3 class="post-subtitle">Обзорная статья со множеством скриншотов</h3>
+            </a>
+            <p class="post-meta">
+              Автор:
+              <a href="https://github.com/hotenov">Артём Хотенов</a>
+              | Опубликовано: 12 августа 2019
+            </p>
+          </div>
+        {% else %}
+          <h3>Recent posts in the blog:</h3>
+          <!-- Post preview-->
+          <div class="post-preview">
+            <a href="{% url 'website:tms-review-2019' %}" class="text-primary-emphasis">
+              <h2 class="post-title">Choosing a Test Management System in 2019</h2>
+              <h3 class="post-subtitle">Functions overview with many screenshots</h3>
+            </a>
+            <p class="post-meta">
+              Posted by
+              <a href="https://github.com/hotenov">Artem Hotenov</a>
+              on August 12, 2019
+            </p>
+          </div>
+          {% endif %}
+          {% endlanguage %}
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock pagecontent %}

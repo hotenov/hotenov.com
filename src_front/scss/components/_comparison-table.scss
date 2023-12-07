@@ -1,0 +1,444 @@
+// 
+// TMS Responsive Comparison Table
+// 
+
+// Global styling for Comparison Table
+
+.comparison {
+    max-width: 1880px;
+    margin: 0 auto;
+    font: 13px/1.4 "Helvetica Neue",Helvetica,Arial,sans-serif;
+    text-align: center;
+    padding: 10px;
+    background-color: #fdfdfd;  // force light for Bootstrap dark theme
+    color: #222;
+  }
+  
+  .comparison table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    table-layout: fixed;
+    border-bottom: 1px solid #CCC;
+  }
+  
+  .comparison td, .comparison th {
+    border-right: 1px solid #CCC;
+    empty-cells: show;
+    padding: 10px;
+  }
+  
+  .compare-heading {
+    font-size: 16px;
+    font-weight: bold !important;
+    border-bottom: 0 !important;
+    padding-top: 10px !important;
+  }
+  
+  /*Price header*/
+  .comparison th:first-child {
+    text-align: left;
+    padding: 10px;
+  }
+  
+  .comparison tbody tr:nth-child(odd) {
+    display: none;
+  }
+  
+  .comparison .compare-row {
+    background: #F5F5F5;
+  }
+  
+  .comparison .tickblue {
+    color: #0078C1;
+  }
+  
+  .comparison .tickgreen {
+    color: #009E2C;
+    font-size: 24px;
+  }
+  
+  .comparison .tickred {
+    color: #d32608;
+    font-size: 24px;
+  }
+  
+  .comparison th {
+    font-weight: normal;
+    padding: 0;
+    border-bottom: 1px solid #CCC;
+  }
+  
+  .comparison tr td:first-child {
+    text-align: left;
+  }
+  
+  .comparison .bluemergedcells, .comparison .greenmergedcells, .comparison .tl {
+    color: #FFF;
+    padding: 10px;
+    font-size: 13px;
+    border-right: 1px solid #CCC;
+    border-bottom: 0;
+  }
+  
+  .comparison .tl2 {
+    border-right: 0;
+  }
+  
+  .comparison .bluemergedcells {
+    background: #0078C1;
+    border-top-left-radius: 3px;
+    border-left: 0px;
+  }
+  
+  .comparison .greenmergedcells {
+    background: #009E2C;
+    border-top-right-radius: 3px;
+    border-right: 0px;
+  }
+  
+  .comparison .price-info {
+    padding: 5px 5px 5px 15px;
+  }
+  
+  .comparison .price-was {
+    color: #727272;
+  }
+  
+  .comparison .price-now, .comparison .price-now span {
+    color: #0078C1;
+    margin: 5px 0px 5px 0px;
+  }
+  
+  .comparison .price-now span {
+    font-size: 28px;
+  }
+  
+  .comparison .price-small {
+    font-size: 18px !important;
+    position: relative;
+    top: -11px;
+    left: 2px;
+  }
+  
+  .comparison .price-try {
+    font-size: 12px;
+  }
+  
+  .comparison .price-try a {
+    color: #727272;
+  }
+  
+  /*Text in cells*/
+  .comparison td > div, .comparison th > div {
+    padding: 0 10px;
+    line-height: 1.7em;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  
+  .comparison td p {
+    line-height: 1.1em;
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+  
+  /* Images */
+  .comparison td.image div.image img {
+    display: block;
+    max-width: 90%;
+    margin: 0 auto 5px;
+  }
+  
+  .comparison td.image div.image span {
+    display: block;
+    padding: 0 5px;
+    line-height: 20px;
+  }
+  
+  /* Tooltips */
+  .comparison .cn_tooltip {
+    position: relative;
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+    margin-left: 5px;
+    font-family: 'Lucida Grande', Arial;
+    -webkit-box-sizing: unset;
+    box-sizing: unset;
+  }
+  
+  .comparison .yes .cn_tooltip, .comparison .no .cn_tooltip, .comparison .partial .cn_tooltip {
+    margin-left: 50px;
+  }
+  
+  .comparison .rates .cn_tooltip {
+    margin-left: 115px;
+    margin-top: 2px;
+  }
+  
+  .comparison .paypal .cn_tooltip {
+    margin-top: 5px;
+  }
+  
+  .comparison .cn_tooltip_qm {
+    display: inline-block;
+    color: #fff;
+    background: #555;
+    width: 10px;
+    height: 10px !important;
+    line-height: 12px !important;
+    font-size: 12px;
+    border-radius: 50em;
+    padding: 4px !important;
+    text-align: center !important;
+    cursor: pointer;
+    text-shadow: none;
+    font-style: normal;
+    -webkit-box-sizing: initial;
+    box-sizing: initial;
+  }
+  
+  .comparison .cn_tooltip_qm:hover {
+    background: #222;
+  }
+  
+  .comparison .cn_tooltip_content {
+    display: none;
+    position: absolute;
+    z-index: 10;
+    left: 35px;
+    top: -10px;
+    width: 200px !important;
+    background: #222;
+    -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    padding: 10px !important;
+    border-radius: 3px;
+    color: #fff;
+    text-align: left !important;
+    font-size: 12px;
+    line-height: 18px;
+    text-shadow: none;
+    font-style: normal;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  
+  .comparison .cn_tooltip_content::before {
+    position: absolute;
+    top: 11px;
+    left: -16px;
+    border: solid transparent;
+    content: ' ';
+    height: 0;
+    width: 0;
+    pointer-events: none;
+    border-right-color: #222;
+    border-width: 8px;
+  }
+  
+  .comparison .cn_tooltip_content.top {
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    top: auto;
+    bottom: 30px;
+  }
+  
+  .comparison .cn_tooltip_content.top::before {
+    top: 100%;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    border-top-color: #222;
+    border-right-color: transparent;
+  }
+  
+  .comparison .cn_tooltip_content.bottom {
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    top: 30px;
+  }
+  
+  .comparison .cn_tooltip_content.bottom::before {
+    top: auto;
+    bottom: 100%;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    border-bottom-color: #222;
+    border-right-color: transparent;
+  }
+  
+  .comparison .cn_tooltip_content.left {
+    left: auto;
+    right: 35px;
+  }
+  
+  .comparison .cn_tooltip_content.left::before {
+    left: 100%;
+    top: 11px;
+    border-left-color: #222;
+    border-right-color: transparent;
+  }
+  
+  .comparison .cn_tooltip_qm:hover + .cn_tooltip_content {
+    display: block;
+  }
+  
+
+  /*Hided elements on desktop*/
+  .comparison td .screen_mobile {
+    display: none;
+  }
+  
+  .comparison th .screen_mobile {
+    display: none;
+  }
+  
+  .comparison td .text_mobile_right {
+    display: none;
+  }
+  
+  /*Responsive modifications*/
+  /*medium*/
+  @media (max-width: 1370px) {
+    .comparison .price-buy {
+      padding: 5px 10px;
+    }
+    .comparison td, .comparison th {
+      padding: 10px 5px;
+    }
+    .comparison .hide-mobile {
+      display: none;
+    }
+    .comparison .price-now span {
+      font-size: 16px;
+    }
+    .comparison .price-small {
+      font-size: 16px !important;
+      top: 0;
+      left: 0;
+    }
+    .comparison .bluemergedcells, .comparison .greenmergedcells {
+      font-size: 12px;
+      padding: 10px 5px;
+    }
+    .compare-heading {
+      font-size: 13px;
+    }
+  }
+  
+  /*narrow*/
+  @media (max-width: 1280px) {
+    .comparison td:first-child, .comparison th:first-child {
+      display: none;
+    }
+    .comparison tbody tr:nth-child(odd) {
+      display: table-row;
+      background: #fcfcfc;
+    }
+    .comparison .row {
+      background: #FFF;
+    }
+    .comparison td, .comparison th {
+      border: 1px solid #CCC;
+    }
+    .price-info {
+      border-top: 0 !important;
+    }
+  }
+  
+  /*small*/
+  @media screen and (max-width: 991px) {
+    .comparison thead tr:nth-child(-n+2) {
+      display: none;
+    }
+    .comparison tbody tr:nth-child(odd) {
+      display: none;
+    }
+    /*price header for mobile*/
+    .comparison th:first-child {
+      width: 100% !important;
+      text-align: center !important;
+      background: #fcfcfc;
+      border: none;
+      border-top: 1px solid #fcfcfc;
+      font-size: 16px;
+      color: #111111;
+    }
+    .comparison tr > td.feature {
+      width: 100% !important;
+      text-align: center !important;
+      background: #fcfcfc;
+      border: none;
+      border-top: 1px solid #fcfcfc;
+      border-bottom: 1px solid #fcfcfc;
+      font-size: 16px;
+      color: #111111;
+    }
+    table#firstComparisonTable td, table#firstComparisonTable th {
+      width: 100% !important;
+      display: block;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+    .comparison .cn_tooltip {
+      float: inherit;
+      margin-left: 0 !important;
+    }
+    .comparison td > div:not(.screen_mobile) {
+      display: inline-block;
+      width: 50% !important;
+      text-align: right !important;
+      vertical-align: middle;
+      background-position-x: right !important;
+      /*overflow: hidden;*/
+    }
+    .comparison th > div:not(.screen_mobile) {
+      display: inline-block;
+      width: 50% !important;
+      text-align: right !important;
+      vertical-align: middle;
+      background-position-x: right !important;
+      /*overflow: hidden;*/
+    }
+    .compariso td > div:not(.screen_mobile) img {
+      width: auto !important;
+      height: auto !important;
+      max-width: 90%;
+    }
+    .comparison td .text_mobile_right {
+      display: inherit;
+    }
+    .comparison td .screen_mobile {
+      display: inline-block;
+      width: 48%;
+      text-align: left;
+      vertical-align: middle;
+    }
+    /*
+      .comparison td .screen_mobile { 
+          font: 34px !important;
+      }
+      */
+    .comparison th .screen_mobile {
+      display: inline-block;
+      width: 48%;
+      text-align: left;
+      vertical-align: middle;
+    }
+    .comparison td .screen_mobile div {
+      text-align: left;
+    }
+    .comparison td .screen_mobile img {
+      max-height: 100px;
+      max-width: 45%;
+      width: auto !important;
+      height: auto !important;
+      margin: 0;
+    }
+  }

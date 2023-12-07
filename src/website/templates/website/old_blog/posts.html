@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% load tags_helpers %}
+
+{% get_current_language as LANGUAGE_CODE %}
+
+{% block title %}{{ page_title }}{{ block.super }}{% endblock title %}
+{% block content_description %}{{ page_description }}{% endblock content_description %}
+{% block page_keywords %}{{ page_keywords }}{% endblock page_keywords %}
+{% block link_alternate %}{% alternate_lang_links 'website:blog' %}{% endblock link_alternate %}
+
+{% block pageheader %}
+<header class="masthead" style="background-image: url('{% static 'assets/img/home-bg.jpg' %}')">
+  <div class="container position-relative px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        <div class="site-heading">
+          {% if LANGUAGE_CODE == "ru" %}
+            <h1>Блог</h1>
+            <h2 class="subheading">Статьи, заметки и мысли.</h2>
+          {% else %}
+            <h1>Blog</h1>
+            <span class="subheading">Articles, notes and thoughts.</span>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+{% endblock pageheader %}
+
+{% block pagecontent %}
+<main class="mb-4">
+  <div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        {% language LANGUAGE_CODE %}
+        {% if LANGUAGE_CODE == "ru" %}
+          <h3>Последние записи в блоге:</h3>
+          <!-- Post preview-->
+          <div class="post-preview">
+            <a href="{% url 'website:tms-review-2019' %}" class="text-primary-emphasis">
+              <h2 class="post-title">Выбор системы управления тестированием в 2019 году</h2>
+              <h3 class="post-subtitle">Обзорная статья со множеством скриншотов</h3>
+            </a>
+            <p class="post-meta">
+              Автор:
+              <a href="https://github.com/hotenov">Артём Хотенов</a>
+              | Опубликовано: 12 августа 2019
+            </p>
+          </div>
+        {% else %}
+          <h3>Recent posts in the blog:</h3>
+          <!-- Post preview-->
+          <div class="post-preview">
+            <a href="{% url 'website:tms-review-2019' %}" class="text-primary-emphasis">
+              <h2 class="post-title">Choosing a Test Management System in 2019</h2>
+              <h3 class="post-subtitle">Functions overview with many screenshots</h3>
+            </a>
+            <p class="post-meta">
+              Posted by
+              <a href="https://github.com/hotenov">Artem Hotenov</a>
+              on August 12, 2019
+            </p>
+          </div>
+        {% endif %}
+        {% endlanguage %}
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock pagecontent %}

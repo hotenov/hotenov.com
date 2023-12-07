@@ -1,0 +1,388 @@
+// 
+// JK Responsive Gallery
+// 
+
+// Global styling for Responsive Gallery
+
+// Icons for gallery
+// [class^="icon-"], [class*=" icon-"] {
+//     // font-family: 'icomoon';
+//     // font-family: 'Material+Symbols+Rounded';
+//     /*speak: none;*/
+//     font-style: normal;
+//     font-weight: normal;
+//     font-variant: normal;
+//     text-transform: none;
+//     line-height: 1;
+//     /* Better Font Rendering =========== */
+//     -webkit-font-smoothing: antialiased;
+//     -moz-osx-font-smoothing: grayscale;
+//     // color: #FB8C00;
+//     // background-color: aquamarine;
+    
+    
+//   }
+  
+//   .icon-spinner:before {
+//     content: "\e600";
+//   }
+.icon-spinner:before {
+    content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='48' width='48' fill='lightgrey'%3E%3Cpath d='M24.05 40.1q-6.55 0-11.275-4.725Q8.05 30.65 8.05 24.1v-2.25l-4 4L2.1 23.9l7.45-7.45L17 23.9l-1.95 1.95-4-4v2.25q0 5.35 3.825 9.175Q18.7 37.1 24.05 37.1q1.45 0 2.75-.25t2.45-.75l2.15 2.15q-1.8 1-3.625 1.425-1.825.425-3.725.425Zm14.45-8.45-7.45-7.45 2-2L37 26.15V24.1q0-5.35-3.825-9.175Q29.35 11.1 24 11.1q-1.45 0-2.75.275t-2.45.675L16.65 9.9q1.8-1 3.625-1.4Q22.1 8.1 24 8.1q6.55 0 11.275 4.725Q40 17.55 40 24.1v2.15l4-4 1.95 1.95Z'/%3E%3C/svg%3E");
+}
+
+//   .icon-cancel-circle:before {
+//     content: "\e604";
+//   }
+.icon-cancel-circle:before {
+    content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='48' width='48' fill='darkorange'%3E%3Cpath d='m16.5 33.6 7.5-7.5 7.5 7.5 2.1-2.1-7.5-7.5 7.5-7.5-2.1-2.1-7.5 7.5-7.5-7.5-2.1 2.1 7.5 7.5-7.5 7.5ZM24 44q-4.1 0-7.75-1.575-3.65-1.575-6.375-4.3-2.725-2.725-4.3-6.375Q4 28.1 4 24q0-4.15 1.575-7.8 1.575-3.65 4.3-6.35 2.725-2.7 6.375-4.275Q19.9 4 24 4q4.15 0 7.8 1.575 3.65 1.575 6.35 4.275 2.7 2.7 4.275 6.35Q44 19.85 44 24q0 4.1-1.575 7.75-1.575 3.65-4.275 6.375t-6.35 4.3Q28.15 44 24 44Zm0-3q7.1 0 12.05-4.975Q41 31.05 41 24q0-7.1-4.95-12.05Q31.1 7 24 7q-7.05 0-12.025 4.95Q7 16.9 7 24q0 7.05 4.975 12.025Q16.95 41 24 41Zm0-17Z'/%3E%3C/svg%3E");
+}
+
+// //   .icon-cross:before {
+// //     content: "\e601";
+// //   }
+// .icon-cross:before {
+//     content: "×";
+// }
+// // .icon-cross:before {
+// //     content: "\e5cd";
+// // }
+.icon-cross:before {
+    //  content: url(../assets/font-symbols/close_FILL0_wght400_GRAD0_opsz40.svg);
+     content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='40' width='40' fill='grey'%3E%3Cpath d='M20 21.958 11.458 30.5q-.416.417-.979.417-.562 0-.979-.417-.417-.417-.417-.979 0-.563.417-.979L18.042 20 9.5 11.458q-.417-.416-.417-.979 0-.562.417-.979.417-.417.979-.417.563 0 .979.417L20 18.042 28.542 9.5q.416-.417.979-.417.562 0 .979.417.417.417.417.979 0 .563-.417.979L21.958 20l8.542 8.542q.417.416.417.979 0 .562-.417.979-.417.417-.979.417-.563 0-.979-.417Z'/%3E%3C/svg%3E");
+}
+.icon-cross:hover {
+    //  content: url(../assets/font-symbols/close_FILL0_wght400_GRAD0_opsz40.svg);
+     content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='40' width='40' fill='white'%3E%3Cpath d='M20 21.958 11.458 30.5q-.416.417-.979.417-.562 0-.979-.417-.417-.417-.417-.979 0-.563.417-.979L18.042 20 9.5 11.458q-.417-.416-.417-.979 0-.562.417-.979.417-.417.979-.417.563 0 .979.417L20 18.042 28.542 9.5q.416-.417.979-.417.562 0 .979.417.417.417.417.979 0 .563-.417.979L21.958 20l8.542 8.542q.417.416.417.979 0 .562-.417.979-.417.417-.979.417-.563 0-.979-.417Z'/%3E%3C/svg%3E");
+}
+
+// //   .icon-arrow-left:before {
+// //     content: "\e602";
+// //   }
+// .icon-arrow-left:before {
+//     content: "<";
+// }
+.icon-arrow-left:before {
+    content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='40' width='40' fill='%230085A1'%3E%3Cpath d='M20 33.333 6.667 20 20 6.667l1.958 1.958-10 10h21.375v2.75H11.958l10 10Z'/%3E%3C/svg%3E");
+}
+
+// //   .icon-arrow-right:before {
+// //     content: "\e603";
+// //   }
+// .icon-arrow-right:before {
+//     content: ">";
+// }
+.icon-arrow-right:before {
+    content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='40' width='40' fill='%230085A1'%3E%3Cpath d='m20 33.333-1.958-1.958 9.958-10H6.667v-2.75H28l-9.958-10L20 6.667 33.333 20Z'/%3E%3C/svg%3E");
+}
+
+
+// .material-symbols-rounded {
+//   font-variation-settings:
+//   'FILL' 0,
+//   'wght' 400,
+//   'GRAD' 0,
+//   'opsz' 40
+// }
+
+
+
+/* ############ Start of responsive gallery CSS ############ */
+div.rthumbnail {
+    /* style for thumbsnail DIVs that appear initially on the page */
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+  }
+  
+  div.rthumbnail div.rcaption {
+    display: none;
+  }
+  
+  div.responsivegallery {
+    /* style for responsive gallery UI */
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: fixed;
+    display: none;
+    z-index: 1000;
+  }
+  
+  div.responsivegallery:before {
+    /* gallery overlay */
+    content: '';
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    cursor: -webkit-zoom-out;
+    cursor: zoom-out;
+    top: 0;
+    left: 0;
+    background: black;
+    opacity: 0.8;
+    z-index: -1;
+  }
+  
+  div.responsivegallery div.galleryinner {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+  
+  div.responsivegallery div.galleryinner:before {
+    /* technique to vertical align elements */
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+  }
+  
+  div.responsivegallery div.figurearea {
+    position: relative;
+    max-width: 100%;
+    vertical-align: middle;
+    display: inline-block;
+    z-index: 1000;
+  }
+  
+  div.responsivegallery div.figurearea.isvideo {
+    width: 90%;
+  }
+  
+  /* video container CSS */
+  .jkvideocontainer * {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+  }
+  
+  .jkvideowrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+    /* 16:9 ratio. See https://css-tricks.com/NetMag/FluidWidthVideo/Article-FluidWidthVideo.php */
+    height: 0;
+  }
+  
+  .jkvideowrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+  }
+  
+  /* figure CSS */
+  div.responsivegallery figure {
+    margin: 0;
+    padding: 0;
+    display: block;
+    -webkit-box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    -webkit-transition: opacity 0.5s;
+    transition: opacity 0.5s;
+  }
+  
+  div.responsivegallery figure img {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    border: 0;
+    line-height: 0;
+    display: block;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  /* Caption CSS */
+  div.responsivegallery div.figurearea .thecaption {
+    text-align: left;
+    position: absolute;
+    bottom: 0;
+    font-size: 1.1em;
+    padding: 5px;
+    width: 100%;
+    white-space: normal;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  
+  div.responsivegallery div.figurearea.isvideo .thecaption {
+    position: relative;
+  }
+  
+  div.responsivegallery div.figurearea .thecaption:before {
+    /* caption overlay */
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: block;
+    background: linear-gradient(45deg, rgba(20, 20, 20, 0.7) 8%, rgba(247, 247, 247, 0) 20%);
+    top: 0;
+    left: 0;
+    opacity: 0.9;
+  }
+  
+  div.responsivegallery div.figurearea .thecaption div.captioninner {
+    position: relative;
+    padding: 3px;
+    color: black;
+    overflow: hidden;
+  }
+  
+  div.responsivegallery div.figurearea .thecaption div.captioninner span.counter {
+    float: left;
+    font-size: 0.6em;
+    font-weight: bold;
+    display: block;
+    height: 100%;
+    line-height: 100%;
+    background: rgba(68, 68, 68, 0.9);
+    color: whitesmoke;
+    border-radius: 5%;
+    width: 52px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    -webkit-box-shadow: 0 0 3px white;
+    box-shadow: 0 0 3px white;
+  }
+  
+  div.responsivegallery div.close {
+    position: absolute;
+    right: 6px;
+    top: 60px;
+    padding: 5px;
+    width: 55px;
+    height: 55px;
+    border-radius: 55px;
+    background: black;
+    color: white;
+    font-size: 35px;
+    z-index: 1000;
+    -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
+    cursor: pointer;
+    -webkit-transition: background 0.3s;
+    transition: background 0.3s;
+  }
+  
+  div.responsivegallery div.close:hover {
+    background: darkred;
+  }
+  
+  div.responsivegallery div.close span {
+    line-height: 43px;
+  }
+  
+  div.responsivegallery div.leftnav,
+  div.responsivegallery div.rightnav {
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    width: 50px;
+    height: 50px;
+    color: black;
+    background: white;
+    border-radius: 50px;
+    text-align: center;
+    line-height: 55px;
+    margin-top: -25px;
+    cursor: pointer;
+    z-index: 1000;
+    font-size: 50px;
+  }
+  
+  div.responsivegallery div.rightnav {
+    right: 5px;
+    left: auto;
+  }
+  
+  div.responsivegallery div.loadingdiv,
+  div.responsivegallery div.errordiv {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+    position: absolute;
+    display: none;
+    top: 50%;
+    left: 50%;
+    margin-top: -50px;
+    margin-left: -50px;
+    opacity: 0.6;
+    text-align: center;
+    z-index: 1000;
+    background: black;
+  }
+  
+  div.responsivegallery div.loadingdiv span,
+  div.responsivegallery div.errordiv span {
+    vertical-align: middle;
+    color: red;
+    font-size: 3em;
+    line-height: 102px;
+  }
+  
+  div.responsivegallery div.loadingdiv span {
+    /* rotating loading DIV */
+    -webkit-animation: rotate 2s linear infinite;
+    animation: rotate 2s linear infinite;
+    font-size: 3.5em;
+    color: white;
+    display: inline-block;
+  }
+  
+  @-webkit-keyframes rotate {
+    0% {
+      -webkit-transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+    }
+  }
+  
+  @keyframes rotate {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  
+  div.responsivegallery div.leftnav:hover,
+  div.responsivegallery div.rightnav:hover {
+    background: white;
+    color: black;
+  }
+  
+  @media screen and (max-width: 480px) {
+    /* CSS when screen width is 480px or less */
+    div.responsivegallery div.leftnav,
+    div.responsivegallery div.rightnav {
+      width: 40px;
+      height: 40px;
+      color: black;
+      border-radius: 40px;
+      text-align: center;
+      line-height: 45px;
+      margin-top: -20px;
+      font-size: 40px;
+    }
+  }

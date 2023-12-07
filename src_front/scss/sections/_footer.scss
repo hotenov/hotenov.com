@@ -1,0 +1,22 @@
+// 
+// Footer
+// 
+
+footer {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+
+    // Set initial margin-right at `min-width: 0`
+    .list-inline-item:not(:last-child) {
+        margin-right: -0.1rem;
+    }
+
+    // Return to default value at the `sm` breakpoint
+    @include media-breakpoint-up(sm) {
+        .list-inline-item:not(:last-child) {
+            margin-right: 0.5rem;
+        }
+    }
+}
+
+

@@ -1,0 +1,157 @@
+# DJANGO WEB APP - HOTENOV.COM
+# Copyright (C) 2023 ARTEM HOTENOV @hotenov
+# This file is distributed under the same license as the HOTENOV_COM package.
+# ARTEM HOTENOV <QA@HOTENOV.COM>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-12-06 09:16+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: .\resume\models.py:24
+msgid "Open to work"
+msgstr "Ищу работу"
+
+#: .\resume\models.py:25
+msgid "Open to new opportunities"
+msgstr "Открыт к предложениям"
+
+#: .\resume\models.py:26
+msgid "Not available to be hired"
+msgstr "Не ищу работу"
+
+#: .\resume\models.py:27
+msgid "Work now, but ready to another part-time job"
+msgstr "Есть работа, но рассмотрю другую на part-time (неполный рабочий день)"
+
+#: .\resume\models.py:28
+msgid "Unknown"
+msgstr "Неизвестно"
+
+#: .\resume\templates\resume\index.html:172
+msgid "No resume has been published yet. Try later..."
+msgstr ""
+"Ни одно резюме ещё не опубликовано. Попробуйте вернуться на страницу позже..."
+
+#: .\resume\templates\resume\single.html:6
+msgid "resume"
+msgstr "резюме"
+
+#: .\resume\templates\resume\single.html:78
+#: .\resume\templates\resume\single.html:99
+msgid "Activity Widgets"
+msgstr "Виджеты активности"
+
+#: .\resume\templates\resume\single.html:89
+msgid "Most starred repositories"
+msgstr "Топ репозиториев по популярности"
+
+#: .\resume\templates\resume\single.html:125
+msgid "Contact info"
+msgstr "Контакты"
+
+#: .\resume\templates\resume\single.html:161
+msgid "Education"
+msgstr "Образование"
+
+#: .\resume\templates\resume\single.html:178
+msgid "Skills"
+msgstr "Навыки"
+
+#: .\resume\templates\resume\single.html:201
+msgid "Relevant skills"
+msgstr "Инструменты"
+
+#: .\resume\templates\resume\single.html:214
+msgid "Certificates"
+msgstr "Сертификаты"
+
+#: .\resume\templates\resume\single.html:222
+msgid "indefinite"
+msgstr "бессрочно"
+
+#: .\resume\templates\resume\single.html:226
+msgid "Open a certificate info"
+msgstr "Открыть информацию о сертификате"
+
+#: .\resume\templates\resume\single.html:236
+msgid "Show certificate"
+msgstr "Показать сертификат"
+
+#: .\resume\templates\resume\single.html:253
+msgid "Languages"
+msgstr "Языки"
+
+#: .\resume\templates\resume\single.html:266
+msgid "Interests"
+msgstr "Интересы"
+
+#: .\resume\templates\resume\single.html:286
+msgid "status"
+msgstr "статус"
+
+#: .\resume\templates\resume\single.html:292
+msgid "Personal Profile"
+msgstr "Профайл"
+
+#: .\resume\templates\resume\single.html:299
+msgid "Skills Summary"
+msgstr "Релевантные навыки"
+
+#: .\resume\templates\resume\single.html:307
+msgid "Experience"
+msgstr "Опыт работы"
+
+#: .\resume\templates\resume\single.html:314
+#: .\resume\templates\resume\single.html:322
+msgid "Visit"
+msgstr "Перейти на сайт"
+
+#: .\resume\templates\resume\single.html:315
+#: .\resume\templates\resume\single.html:318
+msgid "Logo of"
+msgstr "Логотип компании"
+
+#: .\resume\templates\resume\single.html:323
+#: .\resume\templates\resume\single.html:326
+msgid "Company logo placeholder"
+msgstr "Заполнитель для отсутствующего логотипа"
+
+#: .\resume\templates\resume\single.html:355
+msgid "Personal Projects"
+msgstr "Личные проекты"
+
+#: .\resume\templates\resume\single.html:373
+msgid "Print"
+msgstr "Распечатать"
+
+#: .\resume\templates\resume\single.html:377
+msgid "(click to print)"
+msgstr "(настройки печати)"
+
+#: .\resume\templates\resume\single.html:384
+msgid "Download CV"
+msgstr "Скачать"
+
+#: .\resume\templates\resume\single.html:398
+msgid "Resume was updated"
+msgstr "Резюме обновлено"
+
+#: .\resume\templates\resume\single.html:399
+msgid "Time"
+msgstr "Время"
+
+#~ msgid "Close"
+#~ msgstr "Закрыть"

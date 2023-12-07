@@ -1,0 +1,2974 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% load tags_helpers %}
+
+{% get_current_language as LANGUAGE_CODE %}
+
+{% block title %}{{ page_title }}{{ block.super }}{% endblock title %}
+{% block content_description %}{{ page_description }}{% endblock content_description %}
+{% block page_keywords %}{{ page_keywords }}{% endblock page_keywords %}
+{% block link_alternate %}{% alternate_lang_links 'website:tms-review-2019' %}{% endblock link_alternate %}
+
+{% block css_and_fonts %}
+{{ block.super }}
+{% endblock css_and_fonts %}
+
+{% block fb_app_id %}<meta property="fb:app_id" content="701679851658290" />{% endblock fb_app_id %}
+
+<!-- OG Tags-->
+{% block meta_open_graph %}
+    {% comment %} Not translated properties (common) {% endcomment %}
+    <meta property="og:site_name" content="hotenov.com" />
+    <meta property="og:type" content="article" />
+    <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'blog/sc/sc-post-0001-2.png' %}" />
+    <meta property="og:image:height" content="314" />
+    <meta property="og:image:width" content="600" />
+    <meta property="og:image:type" content="image/png" />
+    <meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'blog/sc/sc-post-0001-1.png' %}" />
+    <meta name="twitter:card" content="summary_large_image" />
+    {% comment %} Language dependent properties {% endcomment %}
+  {% if LANGUAGE_CODE == "ru" %}
+    <meta property="og:url" content="{{ request.build_absolute_uri }}" />
+    <meta property="og:title" content="Выбор системы управления тестированием в 2019" />
+    <meta property="og:description" content="Для многих команд разработки рано или поздно встает вопрос о внедрении специализированных инструментов для управления процессом тестирования в своих проектах. Какой же из них выбрать? Рассмотрим 11 таких систем." />
+    <meta property="og:image:alt" content="Название статьи на фоне кадра из фильма Матрица (выбор таблетки на открытых ладонях: красная или синяя)" />
+
+    <meta property="article:author" content="Артём Хотенов" />
+    <meta property="article:published_time" content="2019-08-12T09:10:10Z" />
+
+    {% comment %} Language dependent Twitter (X) properties {% endcomment %}
+    <meta name="twitter:url" content="{{ request.build_absolute_uri }}" />
+    <meta name="twitter:title" content="Выбор системы управления тестированием в 2019" />
+    <meta name="twitter:description" content="Для многих команд разработки рано или поздно встает вопрос о внедрении специализированных инструментов для управления процессом тестирования в своих проектах. Какой же из них выбрать?" />
+  {% else %}
+    <meta property="og:url" content="{{ request.build_absolute_uri }}" />
+    <meta property="og:title" content="Choosing a Test Management System in 2019" />
+    <meta property="og:description" content="Many development teams sooner or later face the question of implementing specialized tools (systems) to manage the testing process on their projects. Which one should you choose? Functions overview with many screenshots." />
+    <meta property="og:image:alt" content="Article title over a footage of Matrix movie in the background (choosing a capsule (red or blue) on open palms)." />
+
+    <meta property="article:author" content="Artem Hotenov" />
+    <!-- The English version (translation) was published after several years from Russian (original)-->
+    <meta property="article:published_time" content="2023-11-11T11:11:11Z" />
+
+    {% comment %} Language dependent Twitter (X) properties {% endcomment %}
+    <meta name="twitter:url" content="{{ request.build_absolute_uri }}" />
+    <meta name="twitter:title" content="Choosing a Test Management System in 2019" />
+    <meta name="twitter:description" content="Many development teams sooner or later face the question of implementing specialized tools (systems) to manage the testing process on their projects. Which one should you choose? Functions overview with many screenshots." />
+  {% endif %}
+{{ block.super }}
+{% endblock meta_open_graph %}
+
+
+{% block pageheader %}
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url('{% static 'blog/post-bg-0001-min.webp' %}')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="post-heading">
+                          {% if LANGUAGE_CODE == "ru" %}
+                            <h1>Выбор системы управления тестированием в 2019</h1>
+                            <h2 class="subheading">Обзорная статья со множеством скриншотов</h2>
+                            <span class="meta">
+                                Автор:
+                                <a href="https://github.com/hotenov">Artem Hotenov</a>
+                                | Опубликовано: 12 августа 2019
+                            </span>
+                          {% else %}
+                            <h1>Choosing a Test Management System in 2019</h1>
+                            <h2 class="subheading">Functions overview with many screenshots</h2>
+                            <span class="meta">
+                                Posted by
+                                <a href="https://github.com/hotenov">Artem Hotenov</a>
+                                on August 12, 2019
+                            </span>
+                          {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+{% endblock pageheader %}
+
+{% block pagecontent %}
+
+{% if LANGUAGE_CODE == "ru" %}
+
+        <!-- Post Content-->
+        <article class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <p>Несмотря на колоссальные возможности современных табличных редакторов, для многих команд разработки рано или поздно встает вопрос о внедрении специализированных инструментов (систем) для управления процессом тестирования в своих проектах. Какой же из них выбрать?</p>
+                        <p>
+                            Такой вопрос в моей практике задавался не раз. Это подтолкнуло меня на создание этой обзорной статьи, чтобы в будущем сэкономить немного времени себе и всем тем, кто также столкнется с этим вопросом. И пусть даже в конце статьи на него не будет ответа
+                            <i>(извините за спойлер),</i>
+                            но ваше подсознание, скорее всего, определится уже сейчас и в нужный момент на определенном проекте подскажет ответ.
+                        </p>
+                        <p>
+                            В своих поисках я натыкался на множество аналогичных статей (в
+                            <a href="https://geteasyqa.com/ru/blog/best-test-management-tools/" target="_blank">одной</a>
+                            из них я позаимствовал структуру сравнительной таблицы), но все они скупо перечисляют функции с сайтов этих систем и 1-2 скриншота интерфейса и зачастую содержат скрытую или открытую рекламу одного из таких инструментов. Мне же захотелось испытать каждую систему “на себе” и непредвзято поделиться увиденным, рассказать о своих ощущениях.
+                        </p>
+                        <blockquote class="blockquote">
+                            <b>
+                                Дисклеймер:
+                                <br />
+                            </b>
+                            В статье только моё субъективное мнение, некоторые моменты могли измениться (учитывая время, прошедшее от идеи до публикации, - 9 месяцев). Я не имею никакого отношения к перечисленным компаниям и продуктам, все скриншоты представлены в ознакомительных целях. В тексте очень много англицизмов. Положение в таблице или тексте это не положение в рейтинге, “лучший” и “худший” вы определяете для себя сами.
+                        </blockquote>
+                        <p>Ниже приведена итоговая сравнительная таблица, после неё читатель, не спешащий на встречу, найдет несколько слов о каждой системе.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Comparison Table-->
+            <div class="comparison">
+                <table id="firstComparisonTable">
+                    <thead>
+                        <tr>
+                            <th class="tl tl2"></th>
+                            <th class="bluemergedcells" colspan="8">Платные инструменты</th>
+                            <th class="greenmergedcells" colspan="3">Open Source инструменты</th>
+                        </tr>
+                        <tr>
+                            <th class="tl"></th>
+                            <!--  #1-->
+                            <th class="compare-heading">TestRail</th>
+                            <!--  #2 -->
+                            <th class="compare-heading">QA Touch</th>
+                            <!--  #3-->
+                            <th class="compare-heading">Test Collab</th>
+                            <!--  #4-->
+                            <th class="compare-heading">qTest Manager</th>
+                            <!--  #5-->
+                            <th class="compare-heading">PractiTest</th>
+                            <!--  #6 -->
+                            <th class="compare-heading">Zephyr Standalone</th>
+                            <!--  #7-->
+                            <th class="compare-heading">TestLodge</th>
+                            <!--  #8-->
+                            <th class="compare-heading">EasyQA</th>
+                            <!--  #9-->
+                            <th class="compare-heading">TestLink</th>
+                            <!--  #10-->
+                            <th class="compare-heading">Squash TM</th>
+                            <!--  #11-->
+                            <th class="compare-heading">Kiwi TCMS</th>
+                        </tr>
+                        <tr>
+                            <th>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\ Цена
+                                <br />
+                                Функция&nbsp;&nbsp;\
+                            </th>
+                            <!--  #1 -->
+                            <th class="price-info">
+                                <div class="screen_mobile"><p>TestRail</p></div>
+                                <div>
+                                    <div class="price-was">за 1 юзера</div>
+                                    <div class="price-now">
+                                        <span>$30</span>
+                                        /месяц
+                                    </div>
+                                    <div class="price-try">
+                                        <a href="https://www.gurock.com/testrail/pricing">
+                                            <span class="hide-mobile">все</span>
+                                            тарифы
+                                        </a>
+                                    </div>
+                                </div>
+                            </th>
+                            <!--  #2-->
+                            <th class="price-info">
+                                <div class="screen_mobile"><p>QA Touch</p></div>
+                                <div>
+                                    <div class="price-was">за 50 юзеров</div>
+                                    <div class="price-now">
+                                        <span>$69</span>
+                                        /месяц
+                                    </div>
+                                    <div class="price-try">
+                                        <a href="https://www.qatouch.com/pricing/">
+                                            <span class="hide-mobile">все</span>
+                                            тарифы
+                                        </a>
+                                    </div>
+                                </div>
+                            </th>
+                            <!--  #3-->
+                            <th class="price-info">
+                                <div class="screen_mobile"><p>Test Collab</p></div>
+                                <div>
+                                    <div class="price-was">за 1 юзера</div>
+                                    <div class="price-now">
+                                        <span>$25</span>
+                                        /месяц
+                                    </div>
+                                    <div class="price-try">
+                                        <a href="https://testcollab.com/pricing/">
+                                            <span class="hide-mobile">все</span>
+                                            тарифы
+                                        </a>
+                                    </div>
+                                </div>
+                            </th>
+                            <!--  #4 -->
+                            <th class="price-info">
+                                <div class="screen_mobile"><p>qTest Manager</p></div>
+                                <div>
+                                    <div class="price-was">за 1 юзера</div>
+                                    <div class="price-now">
+                                        <span>$99</span>
+                                        <span class="price-small">+</span>
+                                        /месяц
+                                    </div>
+                                    <div class="price-try">
+                                        <a href="https://www.tricentis.com/contact-us/">
+                                            <span class="hide-mobile">все</span>
+                                            тарифы
+                                        </a>
+                                    </div>
+                                </div>
+                            </th>
+                            <!--  #5-->
+                            <th class="price-info">
+                                <div class="screen_mobile"><p>PractiTest</p></div>
+                                <div>
+                                    <div class="price-was">за 1 юзера</div>
+                                    <div class="price-now">
+                                        <span>$49</span>
+                                        /месяц
+                                    </div>
+                                    <div class="price-try">
+                                        <a href="https://www.practitest.com/pricing/">
+                                            <span class="hide-mobile">все</span>
+                                            тарифы
+                                        </a>
+                                    </div>
+                                </div>
+                            </th>
+                            <!--  #6 -->
+                            <th class="price-info">
+                                <div class="screen_mobile"><p>Zephyr Standalone</p></div>
+                                <div>
+                                    <div class="price-was">за 1 юзера</div>
+                                    <div class="price-now">
+                                        <span>$50</span>
+                                        <span class="price-small">+</span>
+                                        /месяц
+                                    </div>
+                                    <div class="price-try">
+                                        <a href="https://www.getzephyr.com/products/zephyr-enterprise">
+                                            <span class="hide-mobile">все</span>
+                                            тарифы
+                                        </a>
+                                    </div>
+                                </div>
+                            </th>
+                            <!--  #7-->
+                            <th class="price-info">
+                                <div class="screen_mobile"><p>TestLodge</p></div>
+                                <div>
+                                    <div class="price-was">за 600 кейсов</div>
+                                    <div class="price-now">
+                                        <span>$49</span>
+                                        /месяц
+                                    </div>
+                                    <div class="price-try">
+                                        <a href="https://www.testlodge.com/pricing">
+                                            <span class="hide-mobile">все</span>
+                                            тарифы
+                                        </a>
+                                    </div>
+                                </div>
+                            </th>
+                            <!--  #8-->
+                            <th class="price-info">
+                                <div class="screen_mobile"><p>EasyQA</p></div>
+                                <div>
+                                    <div class="price-was">за 1 юзера</div>
+                                    <div class="price-now">
+                                        <span>$10</span>
+                                        /месяц
+                                    </div>
+                                    <div class="price-try">
+                                        <a href="https://geteasyqa.com/pricing/">
+                                            <span class="hide-mobile">все</span>
+                                            тарифы
+                                        </a>
+                                    </div>
+                                </div>
+                            </th>
+                            <!--  #9 -->
+                            <th class="price-info">
+                                <div class="screen_mobile"><p>TestLink</p></div>
+                                <div>
+                                    <div class="price-was">Язык</div>
+                                    <div class="price-now"><span>PHP</span></div>
+                                    <div class="price-try">
+                                        <a href="https://hub.docker.com/r/bitnami/testlink">
+                                            докер
+                                            <span class="hide-mobile">образ</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </th>
+                            <!--  #10 -->
+                            <th class="price-info">
+                                <div class="screen_mobile"><p>Squash TM</p></div>
+                                <div>
+                                    <div class="price-was">Язык</div>
+                                    <div class="price-now"><span>Java</span></div>
+                                    <div class="price-try">
+                                        <a href="https://hub.docker.com/r/squashtest/squash-tm">
+                                            докер
+                                            <span class="hide-mobile">образ</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </th>
+                            <!--  #11-->
+                            <th class="price-info">
+                                <div class="screen_mobile"><p>Kiwi TCMS</p></div>
+                                <div>
+                                    <div class="price-was">Язык</div>
+                                    <div class="price-now"><span>Python</span></div>
+                                    <div class="price-try">
+                                        <a href="https://hub.docker.com/r/kiwitcms/kiwi/">
+                                            докер
+                                            <span class="hide-mobile">образ</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td colspan="11">Ожидаемый результат для каждого шага кейса</td>
+                        </tr>
+                        <tr class="compare-row">
+                            <td class="feature">Ожидаемый результат для каждого шага кейса</td>
+                            <td>
+                                <div class="screen_mobile"><p>TestRail</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>QA Touch</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Test Collab</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>qTest Manager</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>PractiTest</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Zephyr Standalone</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>TestLodge</p></div>
+                                <div><span class="tickred">✘</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>EasyQA</p></div>
+                                <div><span class="tickred">✘</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>TestLink</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Squash TM</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Kiwi TCMS</p></div>
+                                <div><span class="tickred">✘</span></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td colspan="11">Форматирование текста (вставка изображений, ссылок, и т.д.)</td>
+                        </tr>
+                        <tr>
+                            <td class="feature">Форматирование текста</td>
+                            <td>
+                                <div class="screen_mobile"><p>TestRail</p></div>
+                                <div>
+                                    <span class="tickgreen">✔</span>
+                                    <div class="text"><span style="color: rgb(0, 0, 0); font-size: 12px">Markdown</span></div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>QA Touch</p></div>
+                                <div><span class="tickred">✘</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Test Collab</p></div>
+                                <div>
+                                    <span class="tickgreen">✔</span>
+                                    <div class="text"><span style="color: rgb(0, 0, 0); font-size: 12px">Markdown или HTML</span></div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>qTest Manager</p></div>
+                                <div>
+                                    <span class="tickgreen">✔</span>
+                                    <div class="text"><span style="color: rgb(0, 0, 0); font-size: 12px">HTML</span></div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>PractiTest</p></div>
+                                <div>
+                                    <span class="tickgreen">✔</span>
+                                    <div class="text">
+                                        <span style="color: rgb(0, 0, 0); font-size: 12px">
+                                            Markdown
+                                            <span class="text_mobile_right">, но картинки как вложения</span>
+                                        </span>
+                                        <span class="hide-mobile">
+                                            <span class="cn_tooltip">
+                                                <span class="cn_tooltip_qm">?</span>
+                                                <span class="cn_tooltip_content bottom">но картинки как вложения</span>
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Zephyr Standalone</p></div>
+                                <div>
+                                    <span class="tickgreen">✔</span>
+                                    <div class="text"><span style="color: rgb(0, 0, 0); font-size: 12px">HTML</span></div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>TestLodge</p></div>
+                                <div>
+                                    <span class="tickgreen">✔</span>
+                                    <div class="text">
+                                        <span style="color: rgb(0, 0, 0); font-size: 12px">
+                                            Markdown
+                                            <span class="text_mobile_right">, но картинки как вложения</span>
+                                        </span>
+                                        <span class="hide-mobile">
+                                            <span class="cn_tooltip">
+                                                <span class="cn_tooltip_qm">?</span>
+                                                <span class="cn_tooltip_content bottom">но картинки как вложения</span>
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>EasyQA</p></div>
+                                <div><span class="tickred">✘</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>TestLink</p></div>
+                                <div>
+                                    <span class="tickgreen">✔</span>
+                                    <div class="text"><span style="color: rgb(0, 0, 0); font-size: 12px">HTML</span></div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Squash TM</p></div>
+                                <div>
+                                    <span class="tickgreen">✔</span>
+                                    <div class="text"><span style="color: rgb(0, 0, 0); font-size: 12px">HTML</span></div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Kiwi TCMS</p></div>
+                                <div>
+                                    <span class="tickgreen">✔</span>
+                                    <div class="text"><span style="color: rgb(0, 0, 0); font-size: 12px">Markdown</span></div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td colspan="11">Создание проекта</td>
+                        </tr>
+                        <tr class="compare-row">
+                            <td class="feature">Создание проекта</td>
+                            <td>
+                                <div class="screen_mobile"><p>TestRail</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>QA Touch</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Test Collab</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>qTest Manager</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>PractiTest</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Zephyr Standalone</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>TestLodge</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>EasyQA</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>TestLink</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Squash TM</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Kiwi TCMS</p></div>
+                                <div><span class="tickred">✘</span></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td colspan="11">Роли пользователей</td>
+                        </tr>
+                        <tr>
+                            <td class="feature">Роли пользователей</td>
+                            <td>
+                                <div class="screen_mobile"><p>TestRail</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>QA Touch</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Test Collab</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>qTest Manager</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>PractiTest</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Zephyr Standalone</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>TestLodge</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>EasyQA</p></div>
+                                <div>
+                                    <span class="tickgreen">✔</span>
+                                    <div class="text"><span style="color: rgb(0, 0, 0); font-size: 12px">определенные</span></div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>TestLink</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Squash TM</p></div>
+                                <div>
+                                    <span class="tickgreen">✔</span>
+                                    <div class="text"><span style="color: rgb(0, 0, 0); font-size: 12px">определенные</span></div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Kiwi TCMS</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td colspan="11">Тестран</td>
+                        </tr>
+                        <tr class="compare-row">
+                            <td class="feature">Тестран</td>
+                            <td>
+                                <div class="screen_mobile"><p>TestRail</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>QA Touch</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Test Collab</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>qTest Manager</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>PractiTest</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Zephyr Standalone</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>TestLodge</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>EasyQA</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>TestLink</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Squash TM</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Kiwi TCMS</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td colspan="11">Отчеты</td>
+                        </tr>
+                        <tr>
+                            <td class="feature">Отчеты</td>
+                            <td>
+                                <div class="screen_mobile"><p>TestRail</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>QA Touch</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Test Collab</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>qTest Manager</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>PractiTest</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Zephyr Standalone</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>TestLodge</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>EasyQA</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>TestLink</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Squash TM</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Kiwi TCMS</p></div>
+                                <div>
+                                    <span class="tickred">✘</span>
+                                    <div class="text"><span style="color: rgb(0, 0, 0); font-size: 12px">в планах</span></div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td colspan="11">Импорт / Экспорт кейсов</td>
+                        </tr>
+                        <tr class="compare-row">
+                            <td class="feature">Импорт / Экспорт</td>
+                            <td>
+                                <div class="screen_mobile"><p>TestRail</p></div>
+                                <div>
+                                    <span class="tickgreen">✔</span>
+                                    <div class="text"><span style="color: rgb(0, 0, 0); font-size: 12px">XML, CSV</span></div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>QA Touch</p></div>
+                                <div>
+                                    <span class="tickgreen">✔</span>
+                                    <div class="text"><span style="color: rgb(0, 0, 0); font-size: 12px">CSV, Excel</span></div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Test Collab</p></div>
+                                <div>
+                                    <span class="tickgreen">✔</span>
+                                    <div class="text"><span style="color: rgb(0, 0, 0); font-size: 12px">XML, CSV</span></div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>qTest Manager</p></div>
+                                <div>
+                                    <span class="tickgreen">✔</span>
+                                    <div class="text"><span style="color: rgb(0, 0, 0); font-size: 12px">Excel</span></div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>PractiTest</p></div>
+                                <div>
+                                    <span class="tickgreen">✔</span>
+                                    <div class="text"><span style="color: rgb(0, 0, 0); font-size: 12px">CSV</span></div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Zephyr Standalone</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>TestLodge</p></div>
+                                <div>
+                                    <span class="tickgreen">✔</span>
+                                    <div class="text"><span style="color: rgb(0, 0, 0); font-size: 12px">XML, CSV</span></div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>EasyQA</p></div>
+                                <div>
+                                    <span class="tickgreen">✔</span>
+                                    <div class="text"><span style="color: rgb(0, 0, 0); font-size: 12px">CSV</span></div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>TestLink</p></div>
+                                <div>
+                                    <span class="tickgreen">✔</span>
+                                    <div class="text"><span style="color: rgb(0, 0, 0); font-size: 12px">XML</span></div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Squash TM</p></div>
+                                <div>
+                                    <span class="tickgreen">✔</span>
+                                    <div class="text"><span style="color: rgb(0, 0, 0); font-size: 12px">CSV, Excel</span></div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Kiwi TCMS</p></div>
+                                <div><span class="tickred">✘</span></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td colspan="11">API</td>
+                        </tr>
+                        <tr>
+                            <td class="feature">API</td>
+                            <td>
+                                <div class="screen_mobile"><p>TestRail</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>QA Touch</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Test Collab</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>qTest Manager</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>PractiTest</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Zephyr Standalone</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>TestLodge</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>EasyQA</p></div>
+                                <div><span class="tickred">✘</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>TestLink</p></div>
+                                <div><span class="tickred">✘</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Squash TM</p></div>
+                                <div><span class="tickred">✘</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Kiwi TCMS</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td colspan="11">Интеграция с багтрекерами</td>
+                        </tr>
+                        <tr class="compare-row">
+                            <td class="feature">Интеграция с багтрекерами</td>
+                            <td>
+                                <div class="screen_mobile"><p>TestRail</p></div>
+                                <div class="text"><span style="color: rgb(0, 0, 0); font-size: 12px">Все популярные</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>QA Touch</p></div>
+                                <div class="text">
+                                    <span style="color: rgb(0, 0, 0); font-size: 12px">
+                                        JIRA
+                                        <br />
+                                        GitLab
+                                        <br />
+                                        GitHub
+                                    </span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Test Collab</p></div>
+                                <div class="text"><span style="color: rgb(0, 0, 0); font-size: 12px">Все популярные</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>qTest Manager</p></div>
+                                <div class="text">
+                                    <span style="color: rgb(0, 0, 0); font-size: 12px">
+                                        Bugzilla
+                                        <br />
+                                        Fogbugz
+                                        <br />
+                                        JIRA
+                                        <br />
+                                        Rally
+                                        <br />
+                                        VersionOne
+                                        <br />
+                                        VERA
+                                    </span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>PractiTest</p></div>
+                                <div class="text">
+                                    <span style="color: rgb(0, 0, 0); font-size: 12px">
+                                        JIRA
+                                        <br />
+                                        Redmine
+                                        <br />
+                                        Bugzilla
+                                        <br />
+                                        YouTrack
+                                        <br />
+                                        и др.
+                                    </span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Zephyr Standalone</p></div>
+                                <div class="text"><span style="color: rgb(0, 0, 0); font-size: 12px">JIRA</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>TestLodge</p></div>
+                                <div class="text"><span style="color: rgb(0, 0, 0); font-size: 12px">Все популярные</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>EasyQA</p></div>
+                                <div class="text">
+                                    <span style="color: rgb(0, 0, 0); font-size: 12px">
+                                        GitHub
+                                        <br />
+                                        GitLab
+                                        <br />
+                                        YouTrack
+                                        <br />
+                                        JIRA
+                                        <br />
+                                        RedMine
+                                        <br />
+                                        Pivotal Tracker
+                                        <br />
+                                        Trello
+                                    </span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>TestLink</p></div>
+                                <div class="text">
+                                    <span style="color: rgb(0, 0, 0); font-size: 12px">
+                                        JIRA
+                                        <br />
+                                        YouTrack
+                                        <br />
+                                        JIRA
+                                        <br />
+                                        Bugzilla
+                                        <br />
+                                        Mantis
+                                        <br />
+                                        Fogbugz
+                                        <br />
+                                        RedMine
+                                        <br />
+                                        Trac
+                                        <br />
+                                        GitLab
+                                    </span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Squash TM</p></div>
+                                <div class="text">
+                                    <span style="color: rgb(0, 0, 0); font-size: 12px">
+                                        JIRA
+                                        <br />
+                                        Mantis
+                                    </span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Kiwi TCMS</p></div>
+                                <div class="text">
+                                    <span style="color: rgb(0, 0, 0); font-size: 12px"></span>
+                                    JIRA
+                                    <br />
+                                    Bugzilla
+                                    <br />
+                                    GitHub
+                                    <br />
+                                    GitLab
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td colspan="11">Встроенный багтрекер</td>
+                        </tr>
+                        <tr>
+                            <td class="feature">Багтрекер</td>
+                            <td>
+                                <div class="screen_mobile"><p>TestRail</p></div>
+                                <div><span class="tickred">✘</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>QA Touch</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Test Collab</p></div>
+                                <div><span class="tickred">✘</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>qTest Manager</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>PractiTest</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Zephyr Standalone</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>TestLodge</p></div>
+                                <div><span class="tickred">✘</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>EasyQA</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>TestLink</p></div>
+                                <div><span class="tickred">✘</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Squash TM</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Kiwi TCMS</p></div>
+                                <div><span class="tickred">✘</span></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td colspan="11">Встроенные требования</td>
+                        </tr>
+                        <tr class="compare-row">
+                            <td class="feature">Требования</td>
+                            <td>
+                                <div class="screen_mobile"><p>TestRail</p></div>
+                                <div><span class="tickred">✘</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>QA Touch</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Test Collab</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>qTest Manager</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>PractiTest</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Zephyr Standalone</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>TestLodge</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>EasyQA</p></div>
+                                <div><span class="tickred">✘</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>TestLink</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Squash TM</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Kiwi TCMS</p></div>
+                                <div><span class="tickred">✘</span></div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /Comparison Table-->
+            <br />
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <b>
+                            Платные инструменты:
+                            <br />
+                        </b>
+                        <a href="#testrail">
+                            TestRail
+                            <br />
+                        </a>
+                        <a href="#qa-touch">
+                            QA Touch
+                            <br />
+                        </a>
+                        <a href="#test-collab">
+                            Test Collab
+                            <br />
+                        </a>
+                        <a href="#qtest-manager">
+                            qTest Manager
+                            <br />
+                        </a>
+                        <a href="#practitest">
+                            PractiTest
+                            <br />
+                        </a>
+                        <a href="#zephyr-standalone">
+                            Zephyr Standalone
+                            <br />
+                        </a>
+                        <a href="#testlodge">
+                            TestLodge
+                            <br />
+                        </a>
+                        <a href="#easyqa">
+                            EasyQA
+                            <br />
+                        </a>
+                        <br />
+                        <b>
+                            Open Source инструменты:
+                            <br />
+                        </b>
+                        <a href="#testlink">
+                            TestLink
+                            <br />
+                        </a>
+                        <a href="#squash-tm">
+                            Squash TM
+                            <br />
+                        </a>
+                        <a href="#kiwi-tcms">
+                            Kiwi TCMS
+                            <br />
+                        </a>
+                        <!-- Divider-->
+                        <hr class="my-4" />
+                        <!-- TestRail-->
+                        <a name="testrail"></a>
+                        <h2 class="section-heading">TestRail</h2>
+                        <p>
+                            Сайт:
+                            <a href="https://www.gurock.com/testrail">
+                                www.gurock.com/testrail
+                                <br />
+                            </a>
+                            Разработчик:
+                            <i>
+                                Gurock Software GmbH
+                                <br />
+                            </i>
+                            <b>Цена:</b>
+                            TestRail Cloud $30 за юзера / месяц (1-20 пользователей)
+                        </p>
+                        <p class="lh-1 mb-2">Скриншоты интерфейса:</p>
+                        <div class="rthumbnail" id="gallery-testrail">
+                            <a href="{% static 'blog/201907/testrail-01.png' %}"><img class="img-fluid" src="{% static 'blog/201907/testrail-01.png' %}" loading="lazy" alt="Показать скриншоты TestRail" width="812" height="746" /></a>
+                            <span class="caption text-muted">Кликните на картинку, чтобы открыть всю галерею</span>
+                        </div>
+                        <p>
+                            <b>Радует:</b>
+                            удобный и понятный интерфейс; быстрая вставка изображений; Markdown разметка текста; добавление пользовательских полей; настройка порядка отображения полей кейса; возможность назначить каждый кейс (или тестран) на отдельного пользователя; быстрое копирование и перемещение кейсов; группировка нескольких тестранов в тестовый план; быстрая интеграция с багтрекерами (по URL трекера или используя плагины); экспорт как кейсов, так и отчетов в XML и CSV форматы; широкие возможности API для интеграции с вашими внутренними системами (синхронизация информации в кейсах, сохранение результатов автотестов и т.д); наглядные отчеты; аккуратные печатные формы; при создании проекта можно выбрать три типа структуры для хранения тест кейсов (одна из которых позволяет разделять кейсы на ветки, соответствующие разработке).
+                            <br />
+                            <br />
+                            <b>Не радует:</b>
+                            нет встроенных требований; нет своего багтрекера; цена довольно высокая (особенно для небольших компаний).
+                        </p>
+                        <!-- QA Touch-->
+                        <a name="qa-touch"></a>
+                        <h2 class="section-heading">QA Touch</h2>
+                        <p>
+                            Сайт:
+                            <a href="https://www.qatouch.com/">
+                                www.qatouch.com
+                                <br />
+                            </a>
+                            Разработчик:
+                            <i>
+                                DCKAP
+                                <br />
+                            </i>
+                            <b>Цена:</b>
+                            Professional $69 за 50 юзеров / месяц
+                        </p>
+                        <p class="lh-1 mb-2">Скриншоты интерфейса:</p>
+                        <div class="rthumbnail" id="gallery-qa-touch">
+                            <a href="{% static 'blog/201907/qa-touch-01.png' %}"><img class="img-fluid" src="{% static 'blog/201907/qa-touch-01.png' %}" loading="lazy" alt="Показать скриншоты QA Touch" width="1043" height="502" /></a>
+                            <span class="caption text-muted">Кликните на картинку, чтобы открыть всю галерею</span>
+                        </div>
+                        <p>
+                            <b>Радует:</b>
+                            широкие имеющиеся и планируемые возможности при адекватной цене; приятный UI; встроенные багтрекер и требования; интеграция с внешними багтрекерами JIRA, GitHub, GitLab; релизное планирование тестранов; есть возможность создания пере-прогона (re-run) с кейсами определенного статуса; голосовой набор и автодополнение текста заголовка кейса и бага; переиспользуемые шаги кейса.
+                            <br />
+                            <i>К сожалению, не смог опробовать и сделать скриншот некоторых компонентов продукта, т.к. они доступны только в платных планах.</i>
+                            <br />
+                            <br />
+                            <b>Не радует:</b>
+                            составляющие кейса (основные поля, шаги, вложения) разнесены на вкладки при редактировании; нет форматирования текста; картинку хоть и можно добавить к отдельному шагу, но только к одному и как скачиваемый файл; нет версионности кейса; текстовые области шагов и ожидаемых результатов, при изменении их размера вручную, сбиваются во время редактирования (не на одной линии); форма выбора кейсов для тестрана немного разная при создании и при редактировании его; список кейсов и багов включает только их название и ID (для быстрого обзора списка дополнительные настраиваемые поля были бы не лишними); отметка статуса при прогоне также вынесена на отдельную вкладку от общей информации кейса; есть небольшие косяки в отображаемых данных (общее количество кейсов на дашборде и странное поле "Assigned to" -
+                            <i>списываю это на то, что я зарегистрировался еще в том году, с тех пор вендор существенно его дополнил).</i>
+                        </p>
+                        <!-- Test Collab-->
+                        <a name="test-collab"></a>
+                        <h2 class="section-heading">Test Collab</h2>
+                        <p>
+                            Сайт:
+                            <a href="https://testcollab.com/">
+                                testcollab.com
+                                <br />
+                            </a>
+                            Разработчик:
+                            <i>
+                                Test Collab
+                                <br />
+                            </i>
+                            <b>Цена:</b>
+                            Startups от $25 за юзера / месяц (свыше 50 пользователей - $10)
+                        </p>
+                        <p class="lh-1 mb-2">Скриншоты интерфейса:</p>
+                        <div class="rthumbnail" id="gallery-test-collab">
+                            <a href="{% static 'blog/201907/test-collab-01.png' %}"><img class="img-fluid" src="{% static 'blog/201907/test-collab-01.png' %}" loading="lazy" alt="Показать скриншоты Test Collab" width="1330" height="789" /></a>
+                            <span class="caption text-muted">Кликните на картинку, чтобы открыть всю галерею</span>
+                        </div>
+                        <p>
+                            <b>Радует:</b>
+                            широкая настройка почтовых уведомлений (с возможностью редактировать шаблоны писем); объединение тестранов в тест-планы; приятный интерфейс с подсказками (которые можно отключить); функция повторного использования шагов (reusable steps); возможность комментирования кейса при редактировании; тэги; выбор типа форматирования текста (Markdown, HTML/WYSIWYG, Plain Text); добавление пользовательских полей; настраиваемые шаблоны для выборки кейсов в тестран; встроенные требования; цена (для небольших проектов есть бесплатный план с 200 кейсами и 400 выполненными кейсами).
+                            <br />
+                            <br />
+                            <b>Не радует:</b>
+                            нельзя редактировать системные поля (в частности Priority); нет возможности сохранить отображаемые поля в списках (при обновлении страницы сбрасываются по умолчанию); есть небольшие огрехи в отображении элементов UI; нет печатных форм ни для кейсов ни для отчётов
+                            <i>(наверное, сейчас их редко используют, но другие инструменты предлагают такую функцию);</i>
+                            данные на общем дашборде обновляются с задержкой; экспорт кейсов только для одного тестового набора (при этом вложенные наборы обрабатывает только экспорт в XML); неудобная вставка изображений в шаги кейса (через ссылку); нет своего багтрекера.
+                        </p>
+                        <!-- qTest Manager-->
+                        <a name="qtest-manager"></a>
+                        <h2 class="section-heading">qTest Manager</h2>
+                        <p>
+                            Сайт:
+                            <a href="https://www.tricentis.com/products/agile-dev-testing-qtest/agile-test-management-qtest-manager/">
+                                www.tricentis.com
+                                <br />
+                            </a>
+                            Разработчик:
+                            <i>
+                                Tricentis (приобрела QASymphony в 2018)
+                                <br />
+                            </i>
+                            <b>Цена:</b>
+                            от $99 за юзера / месяц (цена приблизительна и зависит от количества пользователей)
+                        </p>
+                        <p class="lh-1 mb-2">Скриншоты интерфейса:</p>
+                        <div class="rthumbnail" id="gallery-qtest-manager">
+                            <a href="{% static 'blog/201907/qtest-manager-01.png' %}"><img class="img-fluid" src="{% static 'blog/201907/qtest-manager-01.png' %}" loading="lazy" alt="Показать скриншоты qTest Manager" width="950" height="539" /></a>
+                            <span class="caption text-muted">Кликните на картинку, чтобы открыть всю галерею</span>
+                        </div>
+                        <p>
+                            <b>Радует:</b>
+                            настройка системных и добавление пользовательских полей к различным объектам (с возможностью предпросмотра этого объекта и даже изменения цвета для статуса прогона); информативная история изменения кейса; встроенный HTML-редактор в текстовых полях кейса; комментирование отдельного кейса; можно подписаться на отдельный кейс и получать уведомления на почту об изменениях; интересная реализация авто-версионирования кейса (с мажорной и минорной составляющей); функция быстрого прогона кейса (без выставления статуса каждому шагу); встроенные требования с привязкой кейсов и указанием целевой сборки, также имеется встроенный багтрекинг; переиспользуемые кейсы; настраиваемые конфигурации тестранов; широкие возможности по интеграции как с багтрекерами, так и CI/CD сервисами; API для еще более гибкого взаимодействия; хранимые запросы поиска по кейсам, требованиям и т.д.; разнообразные отчеты; гибкая настройка на стороне администратора (пользователи, уведомления, права,
+                            группы и т.д.); встроенный проект со всеми данными для ознакомления с возможностями продукта; планы тестирования.
+                            <br />
+                            <br />
+                            <b>Не радует:</b>
+                            нет печатных форм кейсов; экспорт кейсов только в Excel формате (но зато он имеет читаемый вид); немного неудобный просмотр картинок в шагах кейса при прогоне; на сайте нет информации о цене продукта (нужно делать отдельный запрос) и она внушительная.
+                        </p>
+                        <!-- PractiTest-->
+                        <a name="practitest"></a>
+                        <h2 class="section-heading">PractiTest</h2>
+                        <p>
+                            Сайт:
+                            <a href="https://www.practitest.com">
+                                www.practitest.com
+                                <br />
+                            </a>
+                            Разработчик:
+                            <i>
+                                PractiTest
+                                <br />
+                            </i>
+                            <b>Цена:</b>
+                            ENTERPRISE $49 за юзера / месяц (минимум от 3 пользователей)
+                        </p>
+                        <p class="lh-1 mb-2">Скриншоты интерфейса:</p>
+                        <div class="rthumbnail" id="gallery-practitest">
+                            <a href="{% static 'blog/201907/practitest-01.png' %}"><img class="img-fluid" src="{% static 'blog/201907/practitest-01.png' %}" loading="lazy" alt="Показать скриншоты PractiTest" width="1308" height="560" /></a>
+                            <span class="caption text-muted">Кликните на картинку, чтобы открыть всю галерею</span>
+                        </div>
+                        <p>
+                            <b>Радует:</b>
+                            возможность комментирования кейса (теста); теги (ключевые слова) для теста; быстрый переход по номеру теста; генерация перестановок тестранов (для разных тестировщиков, версий); использование параметров в шагах кейса (с возможностью изменить значение при каждом прогоне); включение шагов (call to test) одного кейса в другой
+                            <i>(иногда это действительно нужно и не надо прыгать по ссылкам на другие кейсы);</i>
+                            двусторонняя интеграция с Jira и YouTrack (с помощью создания API токена); добавление пользовательских полей; канбан доска по статусам для кейсов; свои багтрекер и требования
+                            <i>(но не сделал скриншоты с ними).</i>
+                            <br />
+                            <br />
+                            <b>Не радует:</b>
+                            сложный UI/UX в целом (в частности разделение структуры кейса на вкладки: описание и шаги на разных вкладках); скудная, непрезентабильная печатная версия как самих кейсов так и отчетов; хоть и есть поддержка markdown разметки, но картинки к шагам добавляются только как вложения; нельзя изменить статус всего кейса, если какой-то шаг не прошёл
+                            <i>(это и правильно, но иногда нужно "озеленить" весь тест);</i>
+                            пользовательскому списку нельзя задать приоритет сортировки (сортирует по алфавиту); цена (завышена, даже учитывая уникальные функции); виджет чата поддержки на каждой странице.
+                            <br />
+                            <i>Сайт компании на момент публикации был недоступен с российского IP, при этом веб-платформа открывалась.</i>
+                        </p>
+                        <!-- Zephyr Standalone-->
+                        <a name="zephyr-standalone"></a>
+                        <h2 class="section-heading">Zephyr Standalone</h2>
+                        <p>
+                            Сайт:
+                            <a href="https://www.getzephyr.com/products/zephyr-enterprise">
+                                www.getzephyr.com
+                                <br />
+                            </a>
+                            Разработчик:
+                            <i>
+                                SmartBear Software
+                                <br />
+                            </i>
+                            <b>Цена:</b>
+                            от $50 за юзера / месяц (цена взята из прошлого, сейчас не указана на сайте)
+                        </p>
+                        <p class="lh-1 mb-2">Скриншоты интерфейса:</p>
+                        <div class="rthumbnail" id="gallery-zephyr-standalone">
+                            <a href="{% static 'blog/201907/zephyr-standalone-01.png' %}"><img class="img-fluid" src="{% static 'blog/201907/zephyr-standalone-01.png' %}" loading="lazy" alt="Показать скриншоты Zephyr Standalone" width="1180" height="425" /></a>
+                            <span class="caption text-muted">Кликните на картинку, чтобы открыть всю галерею</span>
+                        </div>
+                        <p>
+                            <b>Радует:</b>
+                            привлекательное планирование стадий тестирования (на подобии диаграммы Ганта) с добавлением и настройкой различных работ по тестированию; встроенные требования и багтрекинг, которые при наличии JIRA бесшовно интегрируются с ней (с возможностью поиска и просмотра тикетов напрямую из Zephyr); есть возможность добавлять пользовательские поля к объектам (проекту, кейсам, требованиям), изменять название и цвет статусам прогона (всего кейса и отдельного шага); можно добавить виджеты для проекта с различными характеристиками (диаграммами), которые будут обновляться через заданное время; экспорт кейсов в HTML и PDF формат с указанием необходимых полей.
+                            <br />
+                            <br />
+                            <b>Не радует:</b>
+                            непривычный интерфейс, к UX/UI надо привыкать какое-то время; нет прямой ссылки на отдельный кейс (только через поисковый запрос можно сформировать URL для него); плашка с виджетом помощи внизу не убирается; нельзя менять системные поля; картинки к шагам кейса можно добавить только как вложения ко всему кейсу; заточенность только под JIRA; цену нужно узнавать по запросу
+                            <i>(и только по телефону, в электронном сообщении эту информацию не предоставляют).</i>
+                        </p>
+                        <!-- TestLodge-->
+                        <a name="testlodge"></a>
+                        <h2 class="section-heading">TestLodge</h2>
+                        <p>
+                            Сайт:
+                            <a href="https://www.testlodge.com">
+                                www.testlodge.com
+                                <br />
+                            </a>
+                            Разработчик:
+                            <i>
+                                TestLodge Limited
+                                <br />
+                            </i>
+                            <b>Цена:</b>
+                            Basic $49 за 600 кейсов / месяц (подписка по количеству данных)
+                        </p>
+                        <p class="lh-1 mb-2">Скриншоты интерфейса:</p>
+                        <div class="rthumbnail" id="gallery-testlodge">
+                            <a href="{% static 'blog/201907/testlodge-01.png' %}"><img class="img-fluid" src="{% static 'blog/201907/testlodge-01.png' %}" loading="lazy" alt="Показать скриншоты TestLodge" width="730" height="851" /></a>
+                            <span class="caption text-muted">Кликните на картинку, чтобы открыть всю галерею</span>
+                        </div>
+                        <p>
+                            <b>Радует:</b>
+                            лаконичный интерфейс; создание и выбор конфигурации при создании тестрана; быстрая интеграция с популярными баг-трекерами; создание тест-плана (с шаблоном по умолчанию); матрица покрытия (если требования вести внутри продукта); модель подписки по количеству данных
+                            <i>(для некоторых проектов это плюс);</i>
+                            экспорт набора в HTML (она же печатная форма).
+                            <br />
+                            <br />
+                            <b>Не радует:</b>
+                            нет разделения кейса на отдельные шаги; пользовательские поля нельзя переместить выше системных; картинку можно вставить только как вложение или ссылку на нее; экспорт кейсов только каждый набор в отдельности; тестовый набор можно указать только для одного тест-плана; нет своего багтрекера.
+                        </p>
+                        <!-- EasyQA-->
+                        <a name="easyqa"></a>
+                        <h2 class="section-heading">EasyQA</h2>
+                        <p>
+                            Сайт:
+                            <a href="https://geteasyqa.com/">
+                                geteasyqa.com
+                                <br />
+                            </a>
+                            Разработчик:
+                            <i>
+                                ThinkMobiles
+                                <br />
+                            </i>
+                            <b>Цена:</b>
+                            $10 за юзера / месяц
+                        </p>
+                        <p class="lh-1 mb-2">Скриншоты интерфейса:</p>
+                        <div class="rthumbnail" id="gallery-easyqa">
+                            <a href="{% static 'blog/201907/easyqa-01.png' %}"><img class="img-fluid" src="{% static 'blog/201907/easyqa-01.png' %}" loading="lazy" alt="Показать скриншоты EasyQA" width="1220" height="828" /></a>
+                            <span class="caption text-muted">Кликните на картинку, чтобы открыть всю галерею</span>
+                        </div>
+                        <p>
+                            <b>Радует:</b>
+                            возможности для мониторинга и тестирования мобильных сборок (APK и IPA файлы), интегрируясь с GitHub или GitLab репозиториями; свой багтрекер с возможностью добавить плагин для интеграции с другими системами (GitHub, GitLab, YouTrack, JIRA, RedMine, Pivotal Tracker, Trello); простота в обращении
+                            <i>(иногда это плюс)</i>
+                            с тестовыми объектами (планы, тестраны, тест-кейсы, отчеты); наглядное сопоставление полей при экспорте кейсов из CSV файла (но требует внимания, можно уйти в бесконечный цикл экспорта).
+                            <br />
+                            <br />
+                            <b>Не радует:</b>
+                            нет возможности хоть как-то кастомизировать объекты; нет ожидаемого результата для каждого шага кейса; в кейсах нельзя форматировать текст и прикладывать картинки; есть вопросы к UI в некоторых местах (особенно при отображении таблиц); не получил письма с приглашением для второго участника на почту с личного домена; нельзя менять права для ролей (+ не смог сменить роль проекта для неподтверждённого пользователя).
+                            <br />
+                            <i>Судя по активности в социальных сетях и блоге на сайте, они приостановили разработку.</i>
+                        </p>
+                        <!-- Divider-->
+                        <hr class="my-4" />
+                        <p>
+                            Бесплатные системы многих привлекают отсутствием ежемесячной платы. Но определенных затрат они, безусловно, потребуют. Во-первых, аренда хостинга (вычислительные ресурсы). Во-вторых, трудозатраты системного администратора по установке, настройке и поддержке работоспособности системы. Но сервер (или небольшая виртуальная машина) у вас уже может быть, а наличие готовых Docker-образов упрощает развертывание, поэтому запуск бесплатной системы “с нуля” может оказаться проще регистрации в платной системе
+                            <i>(утрирую, конечно, но в каждой шутке есть доля шутки).</i>
+                            Добавим к этому тенденцию “полного контроля” над данными, и продукты с открытым исходным кодом становятся всё более привлекательными для внедрения. Я взял на обзор три таких системы: TestLink, Squash TM и Kiwi TCMS.
+                        </p>
+                        <!-- TestLink-->
+                        <a name="testlink"></a>
+                        <h2 class="section-heading">TestLink</h2>
+                        <p>
+                            Сайт:
+                            <a href="http://testlink.org/">
+                                testlink.org
+                                <br />
+                            </a>
+                            <b>Язык разработки:</b>
+                            PHP
+                        </p>
+                        <p class="lh-1 mb-2">Скриншоты интерфейса:</p>
+                        <div class="rthumbnail" id="gallery-testlink">
+                            <a href="{% static 'blog/201907/testlink-01.png' %}"><img class="img-fluid" src="{% static 'blog/201907/testlink-01.png' %}" loading="lazy" alt="Показать скриншоты TestLink" width="1210" height="884" /></a>
+                            <span class="caption text-muted">Кликните на картинку, чтобы открыть всю галерею</span>
+                        </div>
+                        <p>
+                            <b>Радует:</b>
+                            встроенные требования и отслеживание их через кейсы; разнообразные текстовые отчеты; возможность добавить пользовательские поля; гибкая настройка ролей пользователей; интеграция с багтрекерами (JIRA, YouTrack, GitLab, Bugzilla и др.); тестлид может дополнительно установить срочность (urgency) для каждого кейса в тестране, что повлияет на порядок выполнения кейсов; управление списком тестируемых платформ; инвентарный список хостов
+                            <i>(мелочь, но приятно);</i>
+                            HTML-редактор с возможностью вставлять картинки, ссылки, таблицы, списки; по-моему, самый популярный Open Source инструмент со множеством инструкций и статей по настройке и использованию; наличие ресурса разработки на языке PHP позволяет изменить продукт под свои потребности (если стандартных функций покажется недостаточно или они окажутся не такими удобными).
+                            <br />
+                            <br />
+                            <b>Не радует:</b>
+                            интерфейс, требующий небольшого привыкания; придется повозиться с настройкой некоторых компонентов для полноценной работы (точечная настройка конфигурационных файлов, отправка почты, интеграция с багтрекером); в текстовых окнах HTML-редактора не работает стандартная проверка орфографии браузера; нельзя редактировать системные поля и порядок их отображения на форме кейса; ручная смена порядка шагов (приходится вводить цифры, вместо перетаскивания); назначение кейсов для тестрана (билда) после платных инструментов покажется неудобным.
+                        </p>
+                        <!-- Squash TM-->
+                        <a name="squash-tm"></a>
+                        <h2 class="section-heading">Squash TM</h2>
+                        <p>
+                            Сайт:
+                            <a href="https://www.squashtest.org/en">
+                                www.squashtest.org
+                                <br />
+                            </a>
+                            <b>Язык разработки:</b>
+                            Java
+                        </p>
+                        <p class="lh-1 mb-2">Скриншоты интерфейса:</p>
+                        <div class="rthumbnail" id="gallery-squash-tm">
+                            <a href="{% static 'blog/201907/squash-tm-01.png' %}"><img class="img-fluid" src="{% static 'blog/201907/squash-tm-01.png' %}" loading="lazy" alt="Показать скриншоты Squash TM" width="1135" height="902" /></a>
+                            <span class="caption text-muted">Кликните на картинку, чтобы открыть всю галерею</span>
+                        </div>
+                        <p>
+                            <b>Радует:</b>
+                            управление требованиями с привязкой к тест-кейсам; HTML-редактор; использование параметров в шагах кейса и предусловиях; возможность создать тест кейс с Gherkin сценарием (BDD); UI функция сворачивания содержания шагов кейса; есть режим прогона кейсов с отображением во фрейме тестируемого веб-сайта
+                            <i>(в большинстве случаев уже не актуально, но возможность такая есть);</i>
+                            использование существующего кейса (Call a test case); добавление пользовательских полей к объектам; цветовое разграничение компонентов продукта, также показался удобным цветовой индикатор статуса в библиотеке кейсов; плагины для интеграции с багтрекерами JIRA и Mantis; есть подробная документация
+                            <i>(правда, некоторые разделы не в том порядке).</i>
+                            <br />
+                            <br />
+                            <b>Не радует:</b>
+                            чтобы прикрепить картинку во вложении, нужно сначала добавить расширения для таких файлов в белый список системных настроек (по умолчанию png и jpg отсутствуют); нельзя редактировать системные поля (категория и приоритет); нельзя редактировать имеющиеся семь ролей прав доступа (однако, 7 уровней этого зачастую достаточно); не смог сгенерировать некоторые отчеты (из логов узнал, что проблема с инициализацией класса); необычная терминология для тест-планов и тест-ранов (тут они названы Campaign и Iteration); разбиение UI на вкладки.
+                        </p>
+                        <!-- Kiwi TCMS-->
+                        <a name="kiwi-tcms"></a>
+                        <h2 class="section-heading">Kiwi TCMS</h2>
+                        <p>
+                            Сайт:
+                            <a href="http://kiwitcms.org">
+                                kiwitcms.org
+                                <br />
+                            </a>
+                            <b>Язык разработки:</b>
+                            Python
+                        </p>
+                        <p class="lh-1 mb-2">Скриншоты интерфейса:</p>
+                        <div class="rthumbnail" id="gallery-kiwi-tcms">
+                            <a href="{% static 'blog/201907/kiwi-tcms-01.png' %}"><img class="img-fluid" src="{% static 'blog/201907/kiwi-tcms-01.png' %}" loading="lazy" alt="Показать скриншоты Kiwi TCMS" width="1078" height="583" /></a>
+                            <span class="caption text-muted">Кликните на картинку, чтобы открыть всю галерею</span>
+                        </div>
+                        <p>
+                            <b>Радует:</b>
+                            гибкая настройка прав групп пользователей; интеграция с багтрекерами JIRA, Bugzilla, GitHub and GitLab; быстрая работа системы; Markdown разметка текста с возможностью быстрого предпросмотра; возможность подключить плагины (некоторые, правда, только в планах на разработку) для сбора результатов автотестов; есть API для использования во внешних инструментах; подробная документация по продукту; активная разработка новых фич и планы на будущее.
+                            <br />
+                            <br />
+                            <b>Не радует:</b>
+                            в тесте нет деления на отдельные шаги; некоторые счетчики в UI не обновляются, после совершения действия (необходимо обновлять страницу); своя подсветка орфографии в текстовом редакторе; один отчет по созданным кейсам (но
+                            <a href="http://kiwitcms.org/blog/kiwi-tcms-team/2019/03/03/legacy-reports-become-telemetry/" target="_blank">в планах</a>
+                            добавить еще несколько); нет деления на проекты внутри системы.
+                        </p>
+                        <!-- Divider-->
+                        <hr class="my-4" />
+                        <!-- conclusions-->
+                        <a name="conclusion"></a>
+                        <h2 class="section-heading">Заключение</h2>
+                        <p>
+                            Это лишь малая часть доступных на рынке систем. Однако, обзор уже получается довольно длинным. Не вошли в него плагины для JIRA (
+                            <a href="https://marketplace.atlassian.com/apps/1213259/tm4j-test-management-for-jira?hosting=server&amp;tab=overview" target="_blank">TM4J</a>
+                            ,
+                            <a href="https://marketplace.atlassian.com/apps/1014681/zephyr-for-jira-test-management?hosting=cloud&amp;tab=overview" target="_blank">Zephyr</a>
+                            ,
+                            <a href="https://marketplace.atlassian.com/apps/1211769/xray-test-management-for-jira?hosting=cloud&amp;tab=overview" target="_blank">Xray</a>
+                            ,
+                            <a href="https://marketplace.atlassian.com/apps/1211393/testflo-test-management-for-jira?hosting=server&amp;tab=overview" target="_blank">TestFLO</a>
+                            и др.), т.к. это птицы разного полёта. JIRA хоть и используется сейчас на многих проектах, но всё-таки она не панацея. Поэтому это тема для отдельной, не меньшей статьи. Также под прицел не попали
+                            <a href="https://testit.software/" target="_blank">Test IT</a>
+                            и
+                            <a href="https://qase.io/" target="_blank">Qase</a>
+                            , но они вышли совсем недавно, когда основная часть этой статьи уже была написана. Возможно, за это время “родились” еще системы или есть уже существующие, достойные обзора - напишите в комментариях. Кажется, люди любят сериалы - напишем продолжение!
+                        </p>
+                        <p>
+                            А пока предлагаю поучаствовать в
+                            <a href="https://habr.com/ru/post/463333/#poll" target="_blank">голосовании на Хабре</a>
+                            “Какая система управления тестированием у вас на проекте?”.
+                            <br />
+                            <i>(Понимаю, что не всегда это есть “желаемая” система, тогда поделитесь вашей болью: с какой работаете, и с какой хотели бы работать.)</i>
+                        </p>
+                        <a href="https://habr.com/ru/post/463333/#poll" target="_blank"><img class="img-fluid" src="{% static 'blog/matrix-glasses-only-opt.jpg' %}" loading="lazy" alt="Перейти к опросу на Хабре" width="870" height="418" /></a>
+                        <span class="caption text-muted">Кликните на картинку, чтобы перейти к голосованию на Хабре</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+
+{% else %}
+
+        <!-- Post Content-->
+        <article class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <p>Despite the enormous capabilities of modern spreadsheet editors, many development teams sooner or later face the question of implementing specialized tools (systems) to manage the testing process on their projects. Which one should you choose?</p>
+                        <p>
+                            This question has been raised more than once in my practice. it's encouraged me to write this overview article, also in order to save some time for myself and all those who face this issue in the future. And even if there is no concrete answer in this article
+                            <i>(sorry for the spoiler),</i>
+                            your subconscious mind will tell you what to pick for your team or project at the right moment.
+                        </p>
+                        <p>
+                            While searching the Web, I came across many similar articles (in
+                            <a href="https://geteasyqa.com/ru/blog/best-test-management-tools/" target="_blank">one</a>
+                            of which I borrowed the structure of the comparison table), but they all listed briefly main features from the websites of these systems and 1-2 screenshots of the user interface and often contain subtle or direct advertisement of one of these tools. Therefore I wanted to test them to get a firsthand knowledge of each system and share my impartial experience.
+                        </p>
+                        <blockquote class="blockquote">
+                            <b>
+                                Disclaimer:
+                                <br />
+                            </b>
+                            The article contains only my subjective opinion, some things might have changed (considering the time that passed from idea to publication - 9 months). I have no relation to the listed companies and products, all screenshots are presented for informational purposes. The position in the table or text is not the position in the ranking; you determine “best” and “worst” tool by yourself. For "test case", I will omit "test" and write only "case", also I prefer to write "testrun" as one word.
+                        </blockquote>
+                        <p>Below is the final comparison table, and I if you are interested in and have a bit time you can read more details about each tool after the table.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Comparison Table-->
+            <div class="comparison">
+                <table id="firstComparisonTable">
+                    <thead>
+                        <tr>
+                            <th class="tl tl2"></th>
+                            <th class="bluemergedcells" colspan="8">Paid Tools</th>
+                            <th class="greenmergedcells" colspan="3">Open Source Tools</th>
+                        </tr>
+                        <tr>
+                            <th class="tl"></th>
+                            <!--  #1-->
+                            <th class="compare-heading">TestRail</th>
+                            <!--  #2 -->
+                            <th class="compare-heading">QA Touch</th>
+                            <!--  #3-->
+                            <th class="compare-heading">Test Collab</th>
+                            <!--  #4-->
+                            <th class="compare-heading">qTest Manager</th>
+                            <!--  #5-->
+                            <th class="compare-heading">PractiTest</th>
+                            <!--  #6 -->
+                            <th class="compare-heading">Zephyr Standalone</th>
+                            <!--  #7-->
+                            <th class="compare-heading">TestLodge</th>
+                            <!--  #8-->
+                            <th class="compare-heading">EasyQA</th>
+                            <!--  #9-->
+                            <th class="compare-heading">TestLink</th>
+                            <!--  #10-->
+                            <th class="compare-heading">Squash TM</th>
+                            <!--  #11-->
+                            <th class="compare-heading">Kiwi TCMS</th>
+                        </tr>
+                        <tr>
+                            <th>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\ Price
+                                <br />
+                                Feature&nbsp;&nbsp;\
+                            </th>
+                            <!--  #1 -->
+                            <th class="price-info">
+                                <div class="screen_mobile"><p>TestRail</p></div>
+                                <div>
+                                    <div class="price-was">for 1 user</div>
+                                    <div class="price-now">
+                                        <span>$30</span>
+                                        /month
+                                    </div>
+                                    <div class="price-try">
+                                        <a href="https://www.gurock.com/testrail/pricing">
+                                            <span class="hide-mobile">all</span>
+                                            plans
+                                        </a>
+                                    </div>
+                                </div>
+                            </th>
+                            <!--  #2-->
+                            <th class="price-info">
+                                <div class="screen_mobile"><p>QA Touch</p></div>
+                                <div>
+                                    <div class="price-was">for 50 users</div>
+                                    <div class="price-now">
+                                        <span>$69</span>
+                                        /month
+                                    </div>
+                                    <div class="price-try">
+                                        <a href="https://www.qatouch.com/pricing/">
+                                            <span class="hide-mobile">all</span>
+                                            plans
+                                        </a>
+                                    </div>
+                                </div>
+                            </th>
+                            <!--  #3-->
+                            <th class="price-info">
+                                <div class="screen_mobile"><p>Test Collab</p></div>
+                                <div>
+                                    <div class="price-was">for 1 user</div>
+                                    <div class="price-now">
+                                        <span>$25</span>
+                                        /month
+                                    </div>
+                                    <div class="price-try">
+                                        <a href="https://testcollab.com/pricing/">
+                                            <span class="hide-mobile">all</span>
+                                            plans
+                                        </a>
+                                    </div>
+                                </div>
+                            </th>
+                            <!--  #4 -->
+                            <th class="price-info">
+                                <div class="screen_mobile"><p>qTest Manager</p></div>
+                                <div>
+                                    <div class="price-was">for 1 user</div>
+                                    <div class="price-now">
+                                        <span>$99</span>
+                                        <span class="price-small">+</span>
+                                        /month
+                                    </div>
+                                    <div class="price-try">
+                                        <a href="https://www.tricentis.com/contact-us/">
+                                            <span class="hide-mobile">all</span>
+                                            plans
+                                        </a>
+                                    </div>
+                                </div>
+                            </th>
+                            <!--  #5-->
+                            <th class="price-info">
+                                <div class="screen_mobile"><p>PractiTest</p></div>
+                                <div>
+                                    <div class="price-was">for 1 user</div>
+                                    <div class="price-now">
+                                        <span>$49</span>
+                                        /month
+                                    </div>
+                                    <div class="price-try">
+                                        <a href="https://www.practitest.com/pricing/">
+                                            <span class="hide-mobile">all</span>
+                                            plans
+                                        </a>
+                                    </div>
+                                </div>
+                            </th>
+                            <!--  #6 -->
+                            <th class="price-info">
+                                <div class="screen_mobile"><p>Zephyr Standalone</p></div>
+                                <div>
+                                    <div class="price-was">for 1 user</div>
+                                    <div class="price-now">
+                                        <span>$50</span>
+                                        <span class="price-small">+</span>
+                                        /month
+                                    </div>
+                                    <div class="price-try">
+                                        <a href="https://www.getzephyr.com/products/zephyr-enterprise">
+                                            <span class="hide-mobile">all</span>
+                                            plans
+                                        </a>
+                                    </div>
+                                </div>
+                            </th>
+                            <!--  #7-->
+                            <th class="price-info">
+                                <div class="screen_mobile"><p>TestLodge</p></div>
+                                <div>
+                                    <div class="price-was">for 600 cases</div>
+                                    <div class="price-now">
+                                        <span>$49</span>
+                                        /month
+                                    </div>
+                                    <div class="price-try">
+                                        <a href="https://www.testlodge.com/pricing">
+                                            <span class="hide-mobile">all</span>
+                                            plans
+                                        </a>
+                                    </div>
+                                </div>
+                            </th>
+                            <!--  #8-->
+                            <th class="price-info">
+                                <div class="screen_mobile"><p>EasyQA</p></div>
+                                <div>
+                                    <div class="price-was">for 1 user</div>
+                                    <div class="price-now">
+                                        <span>$10</span>
+                                        /month
+                                    </div>
+                                    <div class="price-try">
+                                        <a href="https://geteasyqa.com/pricing/">
+                                            <span class="hide-mobile">all</span>
+                                            plans
+                                        </a>
+                                    </div>
+                                </div>
+                            </th>
+                            <!--  #9 -->
+                            <th class="price-info">
+                                <div class="screen_mobile"><p>TestLink</p></div>
+                                <div>
+                                    <div class="price-was">Language</div>
+                                    <div class="price-now"><span>PHP</span></div>
+                                    <div class="price-try">
+                                        <a href="https://hub.docker.com/r/bitnami/testlink">
+                                            Docker
+                                            <span class="hide-mobile">image</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </th>
+                            <!--  #10 -->
+                            <th class="price-info">
+                                <div class="screen_mobile"><p>Squash TM</p></div>
+                                <div>
+                                    <div class="price-was">Language</div>
+                                    <div class="price-now"><span>Java</span></div>
+                                    <div class="price-try">
+                                        <a href="https://hub.docker.com/r/squashtest/squash-tm">
+                                            Docker
+                                            <span class="hide-mobile">image</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </th>
+                            <!--  #11-->
+                            <th class="price-info">
+                                <div class="screen_mobile"><p>Kiwi TCMS</p></div>
+                                <div>
+                                    <div class="price-was">Language</div>
+                                    <div class="price-now"><span>Python</span></div>
+                                    <div class="price-try">
+                                        <a href="https://hub.docker.com/r/kiwitcms/kiwi/">
+                                            Docker
+                                            <span class="hide-mobile">image</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td colspan="11">Expected result for each step of a test case</td>
+                        </tr>
+                        <tr class="compare-row">
+                            <td class="feature">Expected result for each step of a test case</td>
+                            <td>
+                                <div class="screen_mobile"><p>TestRail</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>QA Touch</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Test Collab</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>qTest Manager</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>PractiTest</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Zephyr Standalone</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>TestLodge</p></div>
+                                <div><span class="tickred">✘</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>EasyQA</p></div>
+                                <div><span class="tickred">✘</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>TestLink</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Squash TM</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Kiwi TCMS</p></div>
+                                <div><span class="tickred">✘</span></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td colspan="11">Text formatting (pasting of images, links, etc.)</td>
+                        </tr>
+                        <tr>
+                            <td class="feature">Text formatting</td>
+                            <td>
+                                <div class="screen_mobile"><p>TestRail</p></div>
+                                <div>
+                                    <span class="tickgreen">✔</span>
+                                    <div class="text"><span style="color: rgb(0, 0, 0); font-size: 12px">Markdown</span></div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>QA Touch</p></div>
+                                <div><span class="tickred">✘</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Test Collab</p></div>
+                                <div>
+                                    <span class="tickgreen">✔</span>
+                                    <div class="text"><span style="color: rgb(0, 0, 0); font-size: 12px">Markdown or HTML</span></div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>qTest Manager</p></div>
+                                <div>
+                                    <span class="tickgreen">✔</span>
+                                    <div class="text"><span style="color: rgb(0, 0, 0); font-size: 12px">HTML</span></div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>PractiTest</p></div>
+                                <div>
+                                    <span class="tickgreen">✔</span>
+                                    <div class="text">
+                                        <span style="color: rgb(0, 0, 0); font-size: 12px">
+                                            Markdown
+                                            <span class="text_mobile_right">, but pictures as attachment</span>
+                                        </span>
+                                        <span class="hide-mobile">
+                                            <span class="cn_tooltip">
+                                                <span class="cn_tooltip_qm">?</span>
+                                                <span class="cn_tooltip_content bottom">but pictures as attachment</span>
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Zephyr Standalone</p></div>
+                                <div>
+                                    <span class="tickgreen">✔</span>
+                                    <div class="text"><span style="color: rgb(0, 0, 0); font-size: 12px">HTML</span></div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>TestLodge</p></div>
+                                <div>
+                                    <span class="tickgreen">✔</span>
+                                    <div class="text">
+                                        <span style="color: rgb(0, 0, 0); font-size: 12px">
+                                            Markdown
+                                            <span class="text_mobile_right">, but pictures as attachment</span>
+                                        </span>
+                                        <span class="hide-mobile">
+                                            <span class="cn_tooltip">
+                                                <span class="cn_tooltip_qm">?</span>
+                                                <span class="cn_tooltip_content bottom">but pictures as attachment</span>
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>EasyQA</p></div>
+                                <div><span class="tickred">✘</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>TestLink</p></div>
+                                <div>
+                                    <span class="tickgreen">✔</span>
+                                    <div class="text"><span style="color: rgb(0, 0, 0); font-size: 12px">HTML</span></div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Squash TM</p></div>
+                                <div>
+                                    <span class="tickgreen">✔</span>
+                                    <div class="text"><span style="color: rgb(0, 0, 0); font-size: 12px">HTML</span></div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Kiwi TCMS</p></div>
+                                <div>
+                                    <span class="tickgreen">✔</span>
+                                    <div class="text"><span style="color: rgb(0, 0, 0); font-size: 12px">Markdown</span></div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td colspan="11">Project creation</td>
+                        </tr>
+                        <tr class="compare-row">
+                            <td class="feature">Project creation</td>
+                            <td>
+                                <div class="screen_mobile"><p>TestRail</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>QA Touch</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Test Collab</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>qTest Manager</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>PractiTest</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Zephyr Standalone</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>TestLodge</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>EasyQA</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>TestLink</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Squash TM</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Kiwi TCMS</p></div>
+                                <div><span class="tickred">✘</span></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td colspan="11">User roles</td>
+                        </tr>
+                        <tr>
+                            <td class="feature">User roles</td>
+                            <td>
+                                <div class="screen_mobile"><p>TestRail</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>QA Touch</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Test Collab</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>qTest Manager</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>PractiTest</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Zephyr Standalone</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>TestLodge</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>EasyQA</p></div>
+                                <div>
+                                    <span class="tickgreen">✔</span>
+                                    <div class="text"><span style="color: rgb(0, 0, 0); font-size: 12px">pre-defined</span></div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>TestLink</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Squash TM</p></div>
+                                <div>
+                                    <span class="tickgreen">✔</span>
+                                    <div class="text"><span style="color: rgb(0, 0, 0); font-size: 12px">pre-defined</span></div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Kiwi TCMS</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td colspan="11">Test run</td>
+                        </tr>
+                        <tr class="compare-row">
+                            <td class="feature">Test run</td>
+                            <td>
+                                <div class="screen_mobile"><p>TestRail</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>QA Touch</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Test Collab</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>qTest Manager</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>PractiTest</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Zephyr Standalone</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>TestLodge</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>EasyQA</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>TestLink</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Squash TM</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Kiwi TCMS</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td colspan="11">Reports</td>
+                        </tr>
+                        <tr>
+                            <td class="feature">Reports</td>
+                            <td>
+                                <div class="screen_mobile"><p>TestRail</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>QA Touch</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Test Collab</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>qTest Manager</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>PractiTest</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Zephyr Standalone</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>TestLodge</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>EasyQA</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>TestLink</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Squash TM</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Kiwi TCMS</p></div>
+                                <div>
+                                    <span class="tickred">✘</span>
+                                    <div class="text"><span style="color: rgb(0, 0, 0); font-size: 12px">TBD</span></div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td colspan="11">Case import / export</td>
+                        </tr>
+                        <tr class="compare-row">
+                            <td class="feature">Case import / export</td>
+                            <td>
+                                <div class="screen_mobile"><p>TestRail</p></div>
+                                <div>
+                                    <span class="tickgreen">✔</span>
+                                    <div class="text"><span style="color: rgb(0, 0, 0); font-size: 12px">XML, CSV</span></div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>QA Touch</p></div>
+                                <div>
+                                    <span class="tickgreen">✔</span>
+                                    <div class="text"><span style="color: rgb(0, 0, 0); font-size: 12px">CSV, Excel</span></div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Test Collab</p></div>
+                                <div>
+                                    <span class="tickgreen">✔</span>
+                                    <div class="text"><span style="color: rgb(0, 0, 0); font-size: 12px">XML, CSV</span></div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>qTest Manager</p></div>
+                                <div>
+                                    <span class="tickgreen">✔</span>
+                                    <div class="text"><span style="color: rgb(0, 0, 0); font-size: 12px">Excel</span></div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>PractiTest</p></div>
+                                <div>
+                                    <span class="tickgreen">✔</span>
+                                    <div class="text"><span style="color: rgb(0, 0, 0); font-size: 12px">CSV</span></div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Zephyr Standalone</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>TestLodge</p></div>
+                                <div>
+                                    <span class="tickgreen">✔</span>
+                                    <div class="text"><span style="color: rgb(0, 0, 0); font-size: 12px">XML, CSV</span></div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>EasyQA</p></div>
+                                <div>
+                                    <span class="tickgreen">✔</span>
+                                    <div class="text"><span style="color: rgb(0, 0, 0); font-size: 12px">CSV</span></div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>TestLink</p></div>
+                                <div>
+                                    <span class="tickgreen">✔</span>
+                                    <div class="text"><span style="color: rgb(0, 0, 0); font-size: 12px">XML</span></div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Squash TM</p></div>
+                                <div>
+                                    <span class="tickgreen">✔</span>
+                                    <div class="text"><span style="color: rgb(0, 0, 0); font-size: 12px">CSV, Excel</span></div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Kiwi TCMS</p></div>
+                                <div><span class="tickred">✘</span></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td colspan="11">API</td>
+                        </tr>
+                        <tr>
+                            <td class="feature">API</td>
+                            <td>
+                                <div class="screen_mobile"><p>TestRail</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>QA Touch</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Test Collab</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>qTest Manager</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>PractiTest</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Zephyr Standalone</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>TestLodge</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>EasyQA</p></div>
+                                <div><span class="tickred">✘</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>TestLink</p></div>
+                                <div><span class="tickred">✘</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Squash TM</p></div>
+                                <div><span class="tickred">✘</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Kiwi TCMS</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td colspan="11">Integration with bugtrackers</td>
+                        </tr>
+                        <tr class="compare-row">
+                            <td class="feature">Integration with bugtrackers</td>
+                            <td>
+                                <div class="screen_mobile"><p>TestRail</p></div>
+                                <div class="text"><span style="color: rgb(0, 0, 0); font-size: 12px">All popular</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>QA Touch</p></div>
+                                <div class="text">
+                                    <span style="color: rgb(0, 0, 0); font-size: 12px">
+                                        JIRA
+                                        <br />
+                                        GitLab
+                                        <br />
+                                        GitHub
+                                    </span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Test Collab</p></div>
+                                <div class="text"><span style="color: rgb(0, 0, 0); font-size: 12px">All popular</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>qTest Manager</p></div>
+                                <div class="text">
+                                    <span style="color: rgb(0, 0, 0); font-size: 12px">
+                                        Bugzilla
+                                        <br />
+                                        Fogbugz
+                                        <br />
+                                        JIRA
+                                        <br />
+                                        Rally
+                                        <br />
+                                        VersionOne
+                                        <br />
+                                        VERA
+                                    </span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>PractiTest</p></div>
+                                <div class="text">
+                                    <span style="color: rgb(0, 0, 0); font-size: 12px">
+                                        JIRA
+                                        <br />
+                                        Redmine
+                                        <br />
+                                        Bugzilla
+                                        <br />
+                                        YouTrack
+                                        <br />
+                                        and others
+                                    </span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Zephyr Standalone</p></div>
+                                <div class="text"><span style="color: rgb(0, 0, 0); font-size: 12px">JIRA</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>TestLodge</p></div>
+                                <div class="text"><span style="color: rgb(0, 0, 0); font-size: 12px">All popular</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>EasyQA</p></div>
+                                <div class="text">
+                                    <span style="color: rgb(0, 0, 0); font-size: 12px">
+                                        GitHub
+                                        <br />
+                                        GitLab
+                                        <br />
+                                        YouTrack
+                                        <br />
+                                        JIRA
+                                        <br />
+                                        RedMine
+                                        <br />
+                                        Pivotal Tracker
+                                        <br />
+                                        Trello
+                                    </span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>TestLink</p></div>
+                                <div class="text">
+                                    <span style="color: rgb(0, 0, 0); font-size: 12px">
+                                        JIRA
+                                        <br />
+                                        YouTrack
+                                        <br />
+                                        JIRA
+                                        <br />
+                                        Bugzilla
+                                        <br />
+                                        Mantis
+                                        <br />
+                                        Fogbugz
+                                        <br />
+                                        RedMine
+                                        <br />
+                                        Trac
+                                        <br />
+                                        GitLab
+                                    </span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Squash TM</p></div>
+                                <div class="text">
+                                    <span style="color: rgb(0, 0, 0); font-size: 12px">
+                                        JIRA
+                                        <br />
+                                        Mantis
+                                    </span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Kiwi TCMS</p></div>
+                                <div class="text">
+                                    <span style="color: rgb(0, 0, 0); font-size: 12px"></span>
+                                    JIRA
+                                    <br />
+                                    Bugzilla
+                                    <br />
+                                    GitHub
+                                    <br />
+                                    GitLab
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td colspan="11">Built-in bugtracker</td>
+                        </tr>
+                        <tr>
+                            <td class="feature">Bugtracker</td>
+                            <td>
+                                <div class="screen_mobile"><p>TestRail</p></div>
+                                <div><span class="tickred">✘</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>QA Touch</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Test Collab</p></div>
+                                <div><span class="tickred">✘</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>qTest Manager</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>PractiTest</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Zephyr Standalone</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>TestLodge</p></div>
+                                <div><span class="tickred">✘</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>EasyQA</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>TestLink</p></div>
+                                <div><span class="tickred">✘</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Squash TM</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Kiwi TCMS</p></div>
+                                <div><span class="tickred">✘</span></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td colspan="11">Built-in requirements</td>
+                        </tr>
+                        <tr class="compare-row">
+                            <td class="feature">Requirements</td>
+                            <td>
+                                <div class="screen_mobile"><p>TestRail</p></div>
+                                <div><span class="tickred">✘</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>QA Touch</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Test Collab</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>qTest Manager</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>PractiTest</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Zephyr Standalone</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>TestLodge</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>EasyQA</p></div>
+                                <div><span class="tickred">✘</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>TestLink</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Squash TM</p></div>
+                                <div><span class="tickgreen">✔</span></div>
+                            </td>
+                            <td>
+                                <div class="screen_mobile"><p>Kiwi TCMS</p></div>
+                                <div><span class="tickred">✘</span></div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- /Comparison Table-->
+            <br />
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <b>
+                            Paid Tools:
+                            <br />
+                        </b>
+                        <a href="#testrail">
+                            TestRail
+                            <br />
+                        </a>
+                        <a href="#qa-touch">
+                            QA Touch
+                            <br />
+                        </a>
+                        <a href="#test-collab">
+                            Test Collab
+                            <br />
+                        </a>
+                        <a href="#qtest-manager">
+                            qTest Manager
+                            <br />
+                        </a>
+                        <a href="#practitest">
+                            PractiTest
+                            <br />
+                        </a>
+                        <a href="#zephyr-standalone">
+                            Zephyr Standalone
+                            <br />
+                        </a>
+                        <a href="#testlodge">
+                            TestLodge
+                            <br />
+                        </a>
+                        <a href="#easyqa">
+                            EasyQA
+                            <br />
+                        </a>
+                        <br />
+                        <b>
+                            Open Source Tools:
+                            <br />
+                        </b>
+                        <a href="#testlink">
+                            TestLink
+                            <br />
+                        </a>
+                        <a href="#squash-tm">
+                            Squash TM
+                            <br />
+                        </a>
+                        <a href="#kiwi-tcms">
+                            Kiwi TCMS
+                            <br />
+                        </a>
+                        <!-- Divider-->
+                        <hr class="my-4" />
+                        <!-- TestRail-->
+                        <a name="testrail"></a>
+                        <h2 class="section-heading">TestRail</h2>
+                        <p>
+                            Website:
+                            <a href="https://www.gurock.com/testrail">
+                                www.gurock.com/testrail
+                                <br />
+                            </a>
+                            Developer:
+                            <i>
+                                Gurock Software GmbH
+                                <br />
+                            </i>
+                            <b>Price:</b>
+                            TestRail Cloud $30 for user per month (1-20 users)
+                        </p>
+                        <p class="lh-1 mb-2">UI screenshots:</p>
+                        <div class="rthumbnail" id="gallery-testrail">
+                            <a href="{% static 'blog/201907/testrail-01.png' %}"><img class="img-fluid" src="{% static 'blog/201907/testrail-01.png' %}" loading="lazy" alt="Show screenshots of TestRail" width="812" height="746" /></a>
+                            <span class="caption text-muted">Click on picture to see the gallery</span>
+                        </div>
+                        <p>
+                            <b>Like:</b>
+                            convenient and understandable UI; quick pasting of images; Markdown support; adding custom fields; setting the display order of case fields; the ability to assign each case (or testrun) to an individual user; quick copying and arrangement of cases; grouping several testruns into a test plan; quick integration with bug trackers (via tracker URL or using plugins); export of both cases and reports to XML and CSV formats; extensive API capabilities for integration with your internal systems (synchronizing information in cases, saving autotest results, etc.); visual reports; neat print forms; when creating a project, you can choose three types of structure for storing test cases (one of which allows you to divide cases into branches corresponding to development).
+                            <br />
+                            <br />
+                            <b>Dislike:</b>
+                            there are no built-in requirements; there is no bug tracker; the price is quite high (especially for small companies).
+                        </p>
+                        <!-- QA Touch-->
+                        <a name="qa-touch"></a>
+                        <h2 class="section-heading">QA Touch</h2>
+                        <p>
+                            Website:
+                            <a href="https://www.qatouch.com/">
+                                www.qatouch.com
+                                <br />
+                            </a>
+                            Developer:
+                            <i>
+                                DCKAP
+                                <br />
+                            </i>
+                            <b>Price:</b>
+                            Professional $69 for 50 users per month
+                        </p>
+                        <p class="lh-1 mb-2">UI screenshots:</p>
+                        <div class="rthumbnail" id="gallery-qa-touch">
+                            <a href="{% static 'blog/201907/qa-touch-01.png' %}"><img class="img-fluid" src="{% static 'blog/201907/qa-touch-01.png' %}" loading="lazy" alt="Show screenshots of QA Touch" width="1043" height="502" /></a>
+                            <span class="caption text-muted">Click on picture to see the gallery</span>
+                        </div>
+                        <p>
+                            <b>Like:</b>
+                            extensive features both available and planned at an adequate price; nice UI; built-in bug tracker and requirements; integration with external bug trackers JIRA, GitHub, GitLab; testrun planning by release version; it is possible to create a re-run with cases of a certain status; voice typing and auto-completion of case and bug title; reusable case steps.
+                            <br />
+                            <i>Unfortunately, I was not able to try and take a screenshot of some components of the product, because they are only available with subscription plan.</i>
+                            <br />
+                            <br />
+                            <b>Dislike:</b>
+                            the parts of a case (main fields, steps, attachments) are divided into tabs when editing; no text formatting; although a picture can be added to a separate step, but only to one and as a downloadable file; no case versioning; text areas of steps and expected results become shifted during editing (not on the same line), when resizing them manually; the form for selecting cases for testrun is slightly different when creating and editing it; the list of cases and bugs includes only their name and ID (additional custom fields would be useful for a quick overview of the list); the status mark during a run is also placed on a separate tab from the general information of the case; there are small mistakes in the displayed data (the total number of cases on the dashboard and the strange “Assigned to” field -
+                            <i>I attribute this to the fact that I registered back in past year (2018), since then the vendor has significantly improved the product).</i>
+                        </p>
+                        <!-- Test Collab-->
+                        <a name="test-collab"></a>
+                        <h2 class="section-heading">Test Collab</h2>
+                        <p>
+                            Website:
+                            <a href="https://testcollab.com/">
+                                testcollab.com
+                                <br />
+                            </a>
+                            Developer:
+                            <i>
+                                Test Collab
+                                <br />
+                            </i>
+                            <b>Price:</b>
+                            Startups от $25 for user per month (over 50 users - $10)
+                        </p>
+                        <p class="lh-1 mb-2">UI screenshots:</p>
+                        <div class="rthumbnail" id="gallery-test-collab">
+                            <a href="{% static 'blog/201907/test-collab-01.png' %}"><img class="img-fluid" src="{% static 'blog/201907/test-collab-01.png' %}" loading="lazy" alt="Show screenshots of Test Collab" width="1330" height="789" /></a>
+                            <span class="caption text-muted">Click on picture to see the gallery</span>
+                        </div>
+                        <p>
+                            <b>Like:</b>
+                            extensive customization of email notifications (with the ability to edit email templates); combining testruns into test plans; nice user interface with hints (which can be disabled); reusable steps; the ability to comment on a case while editing; tags; selecting the type of text formatting (Markdown, HTML/WYSIWYG, Plain Text); adding custom fields; customizable templates for selecting cases in testrun; built-in requirements; price (for small projects there is a free plan with 200 cases and 400 executed cases).
+                            <br />
+                            <br />
+                            <b>Dislike:</b>
+                            you cannot edit system fields (in particular Priority); there is no way to save displayed fields in filtered lists (pages are reset to default when refreshed); there are minor flaws in the display of UI elements; there are no printed forms for either cases or reports
+                            <i>(probably, they are rarely used now, but other tools offer this function);</i>
+                            data on the general dashboard is updated with a little delay; export of cases only for one test suite (at the same time, nested suites are processed only by export to XML); inconvenient pasting of images into case steps (via a link); there is no bug tracker.
+                        </p>
+                        <!-- qTest Manager-->
+                        <a name="qtest-manager"></a>
+                        <h2 class="section-heading">qTest Manager</h2>
+                        <p>
+                            Website:
+                            <a href="https://www.tricentis.com/products/agile-dev-testing-qtest/agile-test-management-qtest-manager/">
+                                www.tricentis.com
+                                <br />
+                            </a>
+                            Developer:
+                            <i>
+                                Tricentis (acquired QASymphony in 2018)
+                                <br />
+                            </i>
+                            <b>Price:</b>
+                            от $99 for user per month (price is approximate and depends on the number of users)
+                        </p>
+                        <p class="lh-1 mb-2">UI screenshots:</p>
+                        <div class="rthumbnail" id="gallery-qtest-manager">
+                            <a href="{% static 'blog/201907/qtest-manager-01.png' %}"><img class="img-fluid" src="{% static 'blog/201907/qtest-manager-01.png' %}" loading="lazy" alt="Show screenshots of qTest Manager" width="950" height="539" /></a>
+                            <span class="caption text-muted">Click on picture to see the gallery</span>
+                        </div>
+                        <p>
+                            <b>Like:</b>
+                            customization of system fields and addition of custom fields to various objects (with the ability to preview each object and even change the color for the run status); informative history of case changes; built-in HTML editor in the text fields of a case; commenting on a specific case; you can subscribe to a separate case and receive email notifications about changes; interesting implementation of case auto-versioning (with major and minor components); case quick run function (without setting the status for each step); built-in requirements with case binding and target build tag, there is also built-in bug tracking; reusable cases; custom testrun configurations; rich integration with bug trackers and CI/CD services; API for even more flexible interaction and integration; you can save search queries for cases, requirements, etc.; various reports; flexible configuration on the administrator side (users, notifications, rights, groups, etc.); built-in demo project with all the data to familiarize yourself with the capabilities of the product; test plans.
+                            <br />
+                            <br />
+                            <b>Dislike:</b>
+                            there are no printed forms for cases; export of cases only in Excel format (but it's readable for humans); slightly inconvenient viewing of pictures in the steps of a case during testrun; there is no information on the website about the price of the product (you need to make a separate request) and it is high relative to other tools in this overview.
+                        </p>
+                        <!-- PractiTest-->
+                        <a name="practitest"></a>
+                        <h2 class="section-heading">PractiTest</h2>
+                        <p>
+                            Website:
+                            <a href="https://www.practitest.com">
+                                www.practitest.com
+                                <br />
+                            </a>
+                            Developer:
+                            <i>
+                                PractiTest
+                                <br />
+                            </i>
+                            <b>Price:</b>
+                            ENTERPRISE $49 for user per month (minimum 3 users)
+                        </p>
+                        <p class="lh-1 mb-2">UI screenshots:</p>
+                        <div class="rthumbnail" id="gallery-practitest">
+                            <a href="{% static 'blog/201907/practitest-01.png' %}"><img class="img-fluid" src="{% static 'blog/201907/practitest-01.png' %}" loading="lazy" alt="Show screenshots of PractiTest" width="1308" height="560" /></a>
+                            <span class="caption text-muted">Click on picture to see the gallery</span>
+                        </div>
+                        <p>
+                            <b>Like:</b>
+                            the ability to comment on a test case; tags (keywords) for a test; quick jump to a test by its number; generation of testrun permutations of different testers, versions, etc.; using parameters in case steps (with the ability to change the value on each run); inclusion of steps (call to test) of one case into another
+                            <i>(sometimes this is really necessary and there is no need to jump on links to other cases);</i>
+                            two-way integration with Jira and YouTrack (by creating an API token); addition of custom fields; Kanban board for cases by their statuses; own bug tracker and requirements
+                            <i>(but I didn’t take screenshots of them).</i>
+                            <br />
+                            <br />
+                            <b>Dislike:</b>
+                            complex UI/UX in general (in particular, the division of the case structure into tabs: description and steps on different tabs); scant, unpresentable printed version of both the cases themselves and the reports; although there is Markdown support, pictures are added to the steps only as attachments; you cannot change the status of the entire case if some step has failed
+                            <i>(this is correct, but sometimes you need to "green" the entire test);</i>
+                            you cannot save the sorting order in the cases list (sorting is alphabetical); price (overpriced, even considering the unique features); support chat widget on every page.
+                            <br />
+                            <i>At the time of publication, the company’s website was not accessible from a Russian IP, but the web platform was accessible.</i>
+                        </p>
+                        <!-- Zephyr Standalone-->
+                        <a name="zephyr-standalone"></a>
+                        <h2 class="section-heading">Zephyr Standalone</h2>
+                        <p>
+                            Website:
+                            <a href="https://www.getzephyr.com/products/zephyr-enterprise">
+                                www.getzephyr.com
+                                <br />
+                            </a>
+                            Developer:
+                            <i>
+                                SmartBear Software
+                                <br />
+                            </i>
+                            <b>Price:</b>
+                            от $50 for user per month (price taken from the past, not currently listed on the website)
+                        </p>
+                        <p class="lh-1 mb-2">UI screenshots:</p>
+                        <div class="rthumbnail" id="gallery-zephyr-standalone">
+                            <a href="{% static 'blog/201907/zephyr-standalone-01.png' %}"><img class="img-fluid" src="{% static 'blog/201907/zephyr-standalone-01.png' %}" loading="lazy" alt="Show screenshots of Zephyr Standalone" width="1180" height="425" /></a>
+                            <span class="caption text-muted">Click on picture to see the gallery</span>
+                        </div>
+                        <p>
+                            <b>Like:</b>
+                            attractive planning of testing stages (similar to a Gantt chart) with the addition and configuration of various testing activities; built-in requirements and bug tracker, which seamlessly integrates with JIRA (with the ability to search and view tickets (issues) directly from Zephyr); it is possible to add custom fields to objects (project, cases, requirements), change the name and color of execution statuses (the entire case and an individual step); you can add widgets for the project with various characteristics (diagrams), which will be updated after a specified time; export of cases to HTML and PDF format with selecting the required fields.
+                            <br />
+                            <br />
+                            <b>Dislike:</b>
+                            unusual user interface, it takes some time to get used to the UX/UI; there is no direct link to a separate case (you can only generate a URL for it through a search query); the block with the help widget at the bottom cannot be removed; you cannot change system fields; pictures to the steps of a case can only be added as attachments to the entire case; focused only on JIRA; the price must be found out upon request
+                            <i>(and only by phone; this information is not provided by email).</i>
+                        </p>
+                        <!-- TestLodge-->
+                        <a name="testlodge"></a>
+                        <h2 class="section-heading">TestLodge</h2>
+                        <p>
+                            Website:
+                            <a href="https://www.testlodge.com">
+                                www.testlodge.com
+                                <br />
+                            </a>
+                            Developer:
+                            <i>
+                                TestLodge Limited
+                                <br />
+                            </i>
+                            <b>Price:</b>
+                            Basic $49 for 600 cases per month (data subscription)
+                        </p>
+                        <p class="lh-1 mb-2">UI screenshots:</p>
+                        <div class="rthumbnail" id="gallery-testlodge">
+                            <a href="{% static 'blog/201907/testlodge-01.png' %}"><img class="img-fluid" src="{% static 'blog/201907/testlodge-01.png' %}" loading="lazy" alt="Show screenshots of TestLodge" width="730" height="851" /></a>
+                            <span class="caption text-muted">Click on picture to see the gallery</span>
+                        </div>
+                        <p>
+                            <b>Like:</b>
+                            uncluttered user interface; creation and selection a configuration when adding a testrun; quick integration with popular bug trackers; creating a test plan (with a default template); coverage matrix (if requirements are written using built-in feature); subscription plan based on the amount of data
+                            <i>(for some projects this is a pros);</i>
+                            export of test suite to HTML (aka print form).
+                            <br />
+                            <br />
+                            <b>Dislike:</b>
+                            there is no division of the case into separate steps; user fields cannot be moved above system fields; a picture can only be inserted as an attachment or a link to it; cases export only each set separately; a test suite can be specified for only one test plan; there is no bug tracker.
+                        </p>
+                        <!-- EasyQA-->
+                        <a name="easyqa"></a>
+                        <h2 class="section-heading">EasyQA</h2>
+                        <p>
+                            Website:
+                            <a href="https://geteasyqa.com/">
+                                geteasyqa.com
+                                <br />
+                            </a>
+                            Developer:
+                            <i>
+                                ThinkMobiles
+                                <br />
+                            </i>
+                            <b>Price:</b>
+                            $10 for user per month
+                        </p>
+                        <p class="lh-1 mb-2">UI screenshots:</p>
+                        <div class="rthumbnail" id="gallery-easyqa">
+                            <a href="{% static 'blog/201907/easyqa-01.png' %}"><img class="img-fluid" src="{% static 'blog/201907/easyqa-01.png' %}" loading="lazy" alt="Show screenshots of EasyQA" width="1220" height="828" /></a>
+                            <span class="caption text-muted">Click on picture to see the gallery</span>
+                        </div>
+                        <p>
+                            <b>Like:</b>
+                            a feature for monitoring and testing mobile builds (APK and IPA files), integration with GitHub or GitLab repositories; own bug tracker with the ability to add a plugin for integration with other systems (GitHub, GitLab, YouTrack, JIRA, RedMine, Pivotal Tracker, Trello); ease of use
+                            <i>(sometimes this is a pros)</i>
+                            of test objects (plans, testruns, test cases, reports); visual comparison of fields when exporting cases from a CSV file (but it requires attention, you can end up in an endless export loop).
+                            <br />
+                            <br />
+                            <b>Dislike:</b>
+                            there is no way to customize objects in any way; there is no expected result for each step of a case; you cannot format text or attach pictures in cases; there are questions about the UI in some places (especially when displaying tables); I did not receive an invitation link for the second participant via email with personal domain; you cannot change rights for roles (+ I could not change the project role for an unverified user).
+                            <br />
+                            <i>Judging by the activity on social media and their blog on the website, they have suspended development.</i>
+                        </p>
+                        <!-- Divider-->
+                        <hr class="my-4" />
+                        <br>
+                        <p>
+                            Free (open source) systems attract many people because there are no monthly fees. But they will certainly require certain costs. First, hosting rental (computing resources). Secondly, the labor costs of the system administrator to install, configure and maintain the system. But you may already have a server (or a small virtual machine), furthermore, the availability of production-ready Docker images simplifies deployment, so launching a free system from scratch may be easier than a registration in a paid system
+                            <i>(of course I'm exaggerating, but there's a grain of joke in every joke).</i>
+                            And on top of that, a trend of “total control” over corporate data. So, open source tools become increasingly attractive for adoption. I took three such systems for review: TestLink, Squash TM and Kiwi TCMS.
+                        </p>
+                        <!-- TestLink-->
+                        <a name="testlink"></a>
+                        <h2 class="section-heading">TestLink</h2>
+                        <p>
+                            Website:
+                            <a href="http://testlink.org/">
+                                testlink.org
+                                <br />
+                            </a>
+                            <b>Development language:</b>
+                            PHP
+                        </p>
+                        <p class="lh-1 mb-2">UI screenshots:</p>
+                        <div class="rthumbnail" id="gallery-testlink">
+                            <a href="{% static 'blog/201907/testlink-01.png' %}"><img class="img-fluid" src="{% static 'blog/201907/testlink-01.png' %}" loading="lazy" alt="Show screenshots of TestLink" width="1210" height="884" /></a>
+                            <span class="caption text-muted">Click on picture to see the gallery</span>
+                        </div>
+                        <p>
+                            <b>Like:</b>
+                            built-in requirements and tracking them through cases; various text reports; ability to add custom fields; flexible configuration of user roles; integration with bug trackers (JIRA, YouTrack, GitLab, Bugzilla, etc.); a test lead can additionally set urgency for each case in a testrun, that will affect the order of cases; managing the list of platforms being tested; inventory list of hosts
+                            <i>(a small, but nice, thing);</i>
+                            HTML editor with the ability to paste pictures, links, tables, lists; in my opinion, it's the most popular open-source tool with many tutorials and articles about setup and use; having a PHP-developer in a team allows you to change the product to suit your needs (if the standard functions seem insufficient or they are not so convenient).
+                            <br />
+                            <br />
+                            <b>Dislike:</b>
+                            the user interface requires a little getting used to; you will have to tinker with setting up some components for full operation (fine-tuning of configuration files, emails setup, integration with a bug tracker); browser spell checking function does not work in text windows of the HTML editor; you cannot edit system fields and the order in which they are displayed on the case form; manually changing the order of steps (you have to enter numbers instead of drag'n'dropping); after paid tools, assigning cases for certain build will seem inconvenient.
+                        </p>
+                        <!-- Squash TM-->
+                        <a name="squash-tm"></a>
+                        <h2 class="section-heading">Squash TM</h2>
+                        <p>
+                            Website:
+                            <a href="https://www.squashtest.org/en">
+                                www.squashtest.org
+                                <br />
+                            </a>
+                            <b>Development language:</b>
+                            Java
+                        </p>
+                        <p class="lh-1 mb-2">UI screenshots:</p>
+                        <div class="rthumbnail" id="gallery-squash-tm">
+                            <a href="{% static 'blog/201907/squash-tm-01.png' %}"><img class="img-fluid" src="{% static 'blog/201907/squash-tm-01.png' %}" loading="lazy" alt="Show screenshots of Squash TM" width="1135" height="902" /></a>
+                            <span class="caption text-muted">Click on picture to see the gallery</span>
+                        </div>
+                        <p>
+                            <b>Like:</b>
+                            requirements management with linking to test cases; HTML editor; using of parameters in case steps and preconditions; the ability to create a test case with a Gherkin script (BDD); UI function for collapsing the contents of case steps; there is the mode for running cases with displaying the website being tested in a frame
+                            <i>(in most cases this is no longer relevant, but here it is);</i>
+                            re-using an existing case ("Call a test case"); adding custom fields to objects; color differentiation of product components; the color status indicator in the case library also seemed convenient; plugins for integration with JIRA and Mantis bug trackers; there is detailed documentation
+                            <i>(though some sections are not in the right order) .</i>
+                            <br />
+                            <br />
+                            <b>Dislike:</b>
+                            in order to paste a picture as an attachment, you must first add extensions for such formats to the white list of system settings (by default, PNG and JPG are absent); you cannot edit system fields (category and priority); you cannot edit the existing seven roles with access permissions (however, 7 levels are often enough); I could not generate some reports (I found out from  logs that there was a problem with class initialization); unusual terminology for test plans and testruns (here, they are called Campaign and Iteration); splitting the UI into tabs.
+                        </p>
+                        <!-- Kiwi TCMS-->
+                        <a name="kiwi-tcms"></a>
+                        <h2 class="section-heading">Kiwi TCMS</h2>
+                        <p>
+                            Website:
+                            <a href="http://kiwitcms.org">
+                                kiwitcms.org
+                                <br />
+                            </a>
+                            <b>Development language:</b>
+                            Python
+                        </p>
+                        <p class="lh-1 mb-2">UI screenshots:</p>
+                        <div class="rthumbnail" id="gallery-kiwi-tcms">
+                            <a href="{% static 'blog/201907/kiwi-tcms-01.png' %}"><img class="img-fluid" src="{% static 'blog/201907/kiwi-tcms-01.png' %}" loading="lazy" alt="Show screenshots of Kiwi TCMS" width="1078" height="583" /></a>
+                            <span class="caption text-muted">Click on picture to see the gallery</span>
+                        </div>
+                        <p>
+                            <b>Like:</b>
+                            flexible configuration of user groups (permissions); integration with bug trackers like JIRA, Bugzilla, GitHub and GitLab; website performance; Markdown support with quick preview option; the ability to connect plugins (some, however, only in development plans) to collect autotest results; API for external tools; detailed product documentation; active development of new features and plans for the future.
+                            <br />
+                            <br />
+                            <b>Dislike:</b>
+                            there is no expected result for each step of test case (scenario); some counters in the UI are not updated after an action is completed (a page needs to be refreshed); own spelling highlighting in the text editor; only one report - by created cases (but there are
+                            <a href="http://kiwitcms.org/blog/kiwi-tcms-team/2019/03/03/legacy-reports-become-telemetry/" target="_blank">plans</a>
+                            to add several more); there is no division into projects within the system.
+                        </p>
+                        <!-- Divider-->
+                        <hr class="my-4" />
+                        <!-- conclusions-->
+                        <a name="conclusion"></a>
+                        <h2 class="section-heading">Conclusion</h2>
+                        <p>
+                            This is only a small part of the systems available on the market. However, the review is already getting quite long. It does not include plugins for JIRA (
+                            <a href="https://marketplace.atlassian.com/apps/1213259/tm4j-test-management-for-jira?hosting=server&amp;tab=overview" target="_blank">TM4J</a>
+                            ,
+                            <a href="https://marketplace.atlassian.com/apps/1014681/zephyr-for-jira-test-management?hosting=cloud&amp;tab=overview" target="_blank">Zephyr</a>
+                            ,
+                            <a href="https://marketplace.atlassian.com/apps/1211769/xray-test-management-for-jira?hosting=cloud&amp;tab=overview" target="_blank">Xray</a>
+                            ,
+                            <a href="https://marketplace.atlassian.com/apps/1211393/testflo-test-management-for-jira?hosting=server&amp;tab=overview" target="_blank">TestFLO</a>
+                            , etc.), because they are in a different league. Although JIRA is now used on many projects, it is still not a panacea. Therefore, this is a topic for a new longread.
+                            <a href="https://testit.software/" target="_blank">Test IT</a>
+                            and
+                            <a href="https://qase.io/" target="_blank">Qase</a>
+                            were also not mentioned, but they came out quite recently, when the main part of this article had been written already. Perhaps more systems were “born” during this time or there are existing ones which are worthy to review - write in the comments. People seem to love the series - let's write a sequel!
+                        </p>
+                        <p>
+                            In the meantime, I encourage you to take part in the discussion
+                            <a href="https://habr.com/ru/post/463333/#poll" target="_blank">“What test management system do you use on your project?”</a>
+                            and state your choice in the poll on Habr.com page (in Russian).
+                            <br />
+                            <i>(I understand that this is not always the “desired” system, then share your pain: which one you work with, and which one you would like to work with.)</i>
+                        </p>
+                        <a href="https://habr.com/ru/post/463333/#poll" target="_blank"><img class="img-fluid" src="{% static 'blog/matrix-glasses-only-opt.jpg' %}" loading="lazy" alt="Перейти к опросу на Хабре" width="870" height="418" /></a>
+                        <span class="caption text-muted">Click on picture to open the article (in Russian) on Habr.com (with a poll)</span>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+{% endif %}
+
+{% endblock pagecontent %}
+
+{% block pagescripts %}
+{{ block.super }}
+<!-- Scripts for image gallery-->
+<script src="{% static 'js/jquery-1.11.1-min.js' %}"></script>
+<script src="{% static 'js/jquery.touchSwipe.min.js' %}"></script>
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+<!-- * *                     JK Responsive Gallery Script                            * *-->
+<!-- * * Copyright JavaScript Kit (www.javascriptkit.com)                            * *-->
+<!-- * * Visit JavaScript Kit at http://www.javascriptkit.com/ for full source code  * *-->
+<!-- * * http://www.javascriptkit.com/script/script2/jkresponsivegallery/index.shtml * *-->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+<script src="{% static 'js/jkresponsivegallery-v2-no-youtube.min.js' %}"></script>
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+<script src="{% static 'js/gallery-img-lists.min.js' %}"></script>
+{% endblock pagescripts %}

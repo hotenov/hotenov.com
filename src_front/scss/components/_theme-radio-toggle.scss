@@ -1,0 +1,435 @@
+/*
+Copyright (c) 2023 by The Internet's Own Kiddo (https://codepen.io/jackyiakovenko/pen/KKGRVwX)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
+
+
+// @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+:root[data-bs-theme="light"] {
+	// --body-bg-color: 0 0% 98%;
+	// --title-color: 0 0% 0%;
+	// --text-color: 0 0% 40%;
+	
+	--switcher-border-color: 0 0% 92%;
+	--switcher-svg-color: 0 0% 53%;
+	--switcher-hover-color: 0 0% 0%;
+	--switcher-active-theme-btn-color: 0 0% 92%;
+	--switcher-active-theme-btn-svg-color: 0 0% 0%;
+}
+
+:root[data-bs-theme="dark"] {
+	// --body-bg-color: 0 0% 7%;
+	// --title-color: 0 0% 100%;
+	// --text-color: 0 0% 53%;
+	
+	--switcher-border-color: 0 0% 20%;
+	--switcher-svg-color: 0 0% 40%;
+	--switcher-hover-color: 0, 0%, 100%;
+	--switcher-active-theme-btn-color: 0 0% 20%;
+	--switcher-active-theme-btn-svg-color: 0 0% 100%;
+}
+
+// :root {
+// 	/* ------------------------------ */
+// 	/* ------  Base Variables ------ */
+// 	/* ------------------------------ */
+// 	--content-width: 76.875rem;
+//   --content-fluid-width: 116.25rem;
+//   --container-offset: .9375rem;
+//   --container-width: calc(var(--content-width) + (var(--container-offset) * 2));
+//   --container-fluid-width: calc(var(--content-fluid-width) + (var(--container-offset) * 2));
+// }
+
+
+/* -------------------------------- */
+/* ----------- R e s et ----------- */
+/* -------------------------------- */
+
+/* Box sizing rules */
+// html {
+//   box-sizing: border-box;
+// }
+
+// /* Set core root defaults */
+// html:focus-within {
+//   scroll-behavior: smooth;
+// }
+
+// *, *:before, *:after {
+//   box-sizing: inherit;
+// }
+
+// /* Remove default margin */
+// body,
+// p,
+// h1,
+// h2,
+// h3,
+// h4,
+// h5,
+// h6,
+// figure,
+// picture,
+// blockquote {
+//   margin: 0;
+//   padding: 0;
+// }
+// /* Percentage based heights */
+// html, body {
+//   height: 100%;
+// }
+
+/* make image easier to work with */
+// img, picture, video, canvas, svg {
+//   display: block;
+//   max-width: 100%;
+// 	height: auto;
+// 	object-fit: cover;
+// }
+
+/* make svg hover easier */
+svg {
+  fill: currentColor;
+}
+
+// /* make form easier to work with */
+// input, button, textarea, select {
+//   letter-spacing: inherit;
+//   word-spacing: inherit;
+//   font: inherit;
+// }
+
+// /* More sensible line-wrapping */
+// p, h1, h2, h3, h4, h5, h6 {
+//   overflow-wrap: break-word;
+//   hyphens: auto;
+// }
+
+// /* reset link default syles */
+// a {
+//   color: inherit;
+//   text-decoration: none;
+// }
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+   scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+// /* React Framework Specific */
+// #root, #__next {
+//   isolation: isolate;
+// }
+
+// /* Set core body defaults */
+// body {
+//   min-height: 100vh;
+//   min-height: 100dvh;
+// 	display: grid;
+// 	place-content: center;
+//   font-family: 'Lato', sans-serif;
+//   text-rendering: optimizeSpeed;
+//   line-height: 1.5;
+// 	text-transform: capitalize;
+//   -webkit-font-smoothing: antialiased;
+// 	background-color: hsl(var(--body-bg-color));
+// }
+
+
+
+/* -------------------------------- */
+/* ------- Utility Classes ------- */
+/* -------------------------------- */
+
+
+/* set up containers */
+// .site-container {
+//   overflow: hidden;
+// }
+
+// .container {
+//   margin-inline: auto;
+//   padding-inline: 2rem;
+//   max-width: 76.875rem;
+// }
+
+// .container-fluid {
+//   margin-inline: auto;
+//   padding-inline: var(--container-offset);
+//   max-width: var(--container-fluid-width);
+// }
+
+
+/* display utility classes */
+.flex {
+  display: flex;
+}
+
+.grid {
+  display: grid;
+}
+
+.d-block {
+  display: block;
+}
+
+.is-hidden {
+  display: none !important; /* stylelint-disable-line declaration-no-important */
+}
+
+
+/* utility classes for resetting some default styles*/
+.btn-reset {
+  border: none;
+  padding: 0;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.list-reset {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.input-reset {
+  -webkit-appearance: none;
+  appearance: none;
+  border: none;
+  outline: none;
+  border-radius: 0;
+  background-color: var(--color-white);
+
+  &::-webkit-search-decoration,
+  &::-webkit-search-cancel-button,
+  &::-webkit-search-results-button,
+  &::-webkit-search-results-decoration {
+    display: none;
+  }
+
+  &::-ms-reveal,
+  &::-ms-clear {
+    display: none;
+  }
+
+  &::-webkit-file-upload-button {
+    visibility: hidden;
+  }
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+/* sr only utility class */
+.visually-hidden {
+  position: absolute;
+  overflow: hidden;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  width: 1px;
+  height: 1px;
+  clip: rect(0 0 0 0);
+}
+
+/* focus visible class */
+.js-focus-visible :focus:not(.focus-visible) {
+  outline: none;
+}
+
+
+/* Disable scroll */
+.dis-scroll {
+  position: fixed;
+  left: 0;
+  top: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  overscroll-behavior: none;
+}
+
+/* Disable scroll on ios devaices */
+.page--ios .dis-scroll {
+  position: relative;
+}
+
+/* Align elements to center */
+.centered {
+  text-align: center;
+}
+
+/* Inherit Box sizing to swiper js swiper wrapper class */
+.swiper-wrapper {
+  box-sizing: inherit;
+}
+
+/* --------------------------------- */
+/* --------- Color Classes --------- */
+/* -------------------------------- */
+
+/* Backgorund colors */
+.bg-dark {
+  background-color: hsl(var(--color-dark));
+}
+.bg-accent {
+  background-color: hsl(var(--color-light));
+}
+.bg-white {
+  background-color: hsl(var(--color-white));
+}
+
+/* Text colors */
+.text-dark {
+  color: hsl(var(--color-dark));
+}
+.text-accent {
+  color: hsl(var(--color-light));
+}
+.text-white {
+  color: hsl(var(--color-white));
+}
+
+/* Colors with Alpha channel*/
+.alpha {
+  background-color: hsl(var(--color-light) / .2);
+}
+
+/* -------------------------------- */
+/* ------ Typography Classes ------ */
+/* -------------------------------- */
+
+/* Font Sizes */
+.fs-200 {
+  font-size: var(--font-size-200);
+}
+.fs-300 {
+  font-size: var(--font-size-300);
+}
+.fs-400 {
+  font-size: var(--font-size-400);
+}
+.fs-500 {
+  font-size: var(--font-size-500);
+}
+.fs-600 {
+  font-size: var(--font-size-600);
+}
+.fs-700 {
+  font-size: var(--font-size-700);
+}
+.fs-800 {
+  font-size: var(--font-size-800);
+}
+.fs-900 {
+  font-size: var(--font-size-900);
+}
+
+/* Text Transform Class */
+.uppercase {
+  text-transform: uppercase;
+}
+
+fieldset {
+	border: none;
+}
+
+.section {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	gap: 60px;
+	&__text {
+		text-align: center;
+	}
+	
+	&__title {
+		font-weight: 900;
+		color: hsl(var(--title-color))
+	}
+	&__subtitle {
+		font-weight: 700;
+		color: hsl(var(--text-color))
+	}
+}
+
+
+/* ---------------------------------------- */
+/* --------- Color Theme Switcher --------- */
+/* --------------------------------------- */
+.color-scheme {
+	display: inline-flex;
+	align-items: center;
+	padding: 4px;
+	height: 40px;
+  background-color: rgba(255,255,255,0.05);  // to distinguish a little for dark theme
+	border: 1px solid hsl(var(--switcher-border-color));
+	border-radius: 100vw;
+	box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 15px, rgba(255, 255, 255, 0.15) 0px 0px 3px 1px;
+	
+	&__field {
+		position: relative;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 50%;
+		width: 32px;
+		height: 32px;
+		color: hsl(var(--switcher-svg-color));
+		cursor: pointer;
+		transition: color 250ms ease-in-out;
+		
+		&:hover {
+			color: hsl(var(--switcher-hover-color));
+		}
+		
+		
+	}
+	
+	&__icon {
+		position: absolute;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 50%;
+		width: 100%;
+		height: 100%;
+		svg {
+			width: 16px;
+			height: 16px;
+			fill: none;
+			stroke: currentcolor;
+		}
+	}
+	
+	&__input:checked + .color-scheme__icon {
+		background-color: hsl(var(--switcher-active-theme-btn-color));
+		color: hsl(var(--switcher-active-theme-btn-svg-color));
+	}
+}

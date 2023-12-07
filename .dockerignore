@@ -1,0 +1,6 @@
+# Ignore every file in the entire build context
+*
+
+# Re-include the file or directory after wild (*) ignore
+!pyproject.toml
+!poetry.lock

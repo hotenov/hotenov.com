@@ -1,0 +1,168 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="Резюме - Хотенов Артём. Python (Django) разработка программного обеспечения (Разработчик ПО, Software Engineer, Web Developer)" />
+        <meta name="author" content="Artem Hotenov" />
+        <title>Хотенов Артём - Резюме | Web (Python) Developer, Руководитель команды разработки</title>
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link rel="stylesheet" href="{% static 'css/styles.min.css' %}" type="text/css" />
+        <!-- Separate css file for resume-->
+        <link rel="stylesheet" href="{% static 'assets/css/resume.css' %}" type="text/css" />
+        <!-- Self-Hosted Google and Fontawesome fonts-->
+        <link href="{% static 'assets/webfonts/all-fonts-opt.css' %}" rel="stylesheet" type="text/css" />
+        <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
+
+    </head>
+    <body id="top">
+        <!-- Navigation-->
+        {% include 'includes/_navbar.html' %}
+        <!-- Resume Content-->
+        <div class="instaFade" id="cv">
+            <div class="mainDetails">
+                <div class="quickFade" id="headshot"><img src="{% static 'assets/img/photo-for-resume.jpg' %}" alt="Артём Хотенов" /></div>
+                <div id="name">
+                    <h1 class="quickFade delayTwo">Артём Хотенов</h1>
+                    <h2 class="quickFade delayThree">
+                        Python Developer,
+                        <br />
+                        Руководитель команды разработки
+                    </h2>
+                </div>
+                <div class="quickFade delayFour" id="contactDetails">
+                    <ul>
+                        <li><a href="mailto:qa@hotenov.com" target="_blank">qa@hotenov.com</a></li>
+                        <li><a href="https://hotenov.com">www.hotenov.com</a></li>
+                        <br />
+                        <li><a href="https://www.linkedin.com/in/hotenov/">LinkedIn</a></li>
+                        <li><a href="https://career.habr.com/1-hotenov">Хабр.Карьера</a></li>
+                        <br />
+                        <li>
+                            Обновлено:
+                            <br />
+                            07.01.2021
+                        </li>
+                    </ul>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="quickFade delayFive" id="mainArea">
+                <section>
+                    <article>
+                        <div class="sectionTitle"><h1>Обо мне</h1></div>
+                        <div class="sectionContent">
+                            <p></p>
+                            <h2>Актуальный профиль (резюме) смотрите на Хабр.Карьере и LinkedIn (ссылки выше)</h2>
+                            <p></p>
+                            <p>
+                                Родился в 1988 году, холост. Профессиональный опыт в IT более 6 лет.
+                                <br />
+                                Открыт к предложениям.
+                                <br />
+                                Сейчас в приоритете full time удалённые позиции (простите, но шумные опен-спейсы, коронавирусы - не моё).
+                            </p>
+                        </div>
+                    </article>
+                    <div class="clear"></div>
+                </section>
+                <section>
+                    <div class="sectionTitle"><h1>Опыт работы</h1></div>
+                    <div class="sectionContent">
+                        <article>
+                            <h2>Fornex</h2>
+                            <p class="subDetails">Ноябрь 2019 — Октябрь 2020 (удалённая работа)</p>
+                            <p>
+                                - ручное функциональное тестирование сайта компании https://fornex.com/ и личного кабинета клиента;
+                                <br />
+                                - тестирование административной части сайта (Django);
+                                <br />
+                                - баг-трекинг в GitLab.
+                            </p>
+                        </article>
+                        <article>
+                            <h2>Максилект</h2>
+                            <p class="subDetails">Декабрь 2017 — Март 2019 (удалённая работа)</p>
+                            <p>
+                                - ручное тестирование веб-сайта и улучшений внутренней CMS финансовой компании (NDA), ведение задач в Jira;
+                                <br />
+                                - ручное тестирование веб-платформы для создания и управления рекламными кампаниями, разработка и ведение тесткейсов в TestRail, регрессионное тестирование, тестирование интеграции с внешней рекламной биржей;
+                                <br />
+                                - ручное тестирование компонента решения в области AdTech, разработка и ведение тесткейсов в TestLink, ведение задач в YouTrack, участие в обсуждении требований к продукту.
+                            </p>
+                        </article>
+                        <article>
+                            <h2>Exilion Technologies</h2>
+                            <p class="subDetails">Июнь 2016 — Апрель 2017 (удалённая работа)</p>
+                            <p>Ручное функциональное тестирование веб-приложения по управлению рисками торговых счетов (forex); составление тестовых сценариев, тестранов; ведение задач в системе отслеживания ошибок (Jira).</p>
+                        </article>
+                        <article>
+                            <h2>IT Expert</h2>
+                            <p class="subDetails">Август 2015 — Март 2016</p>
+                            <p>Анализ требований, написание документации по проектам, постановка задач разработчикам. Ручное тестирование программных продуктов.</p>
+                        </article>
+                        <article>
+                            <h2>Балтийская технологическая компания</h2>
+                            <p class="subDetails">Сентябрь 2014 — Август 2015</p>
+                            <p>
+                                Исполнял обязанности:
+                                <br />
+                                - системного аналитика (общение с заказчиками, выявление потребностей Заказчика, составление ТЗ для разработки ПО);
+                                <br />
+                                - тест-инженера (ручное тестирование мобильных приложений, разработка тесткейсов, составление тестранов);
+                                <br />
+                                - менеджера проектов ( управление проектами, формулирование и постановка задач, контроль сроков исполнения).
+                            </p>
+                        </article>
+                        <article>
+                            <h2>С(А)ФУ им. М.В. Ломоносова</h2>
+                            <p class="subDetails">Февраль 2013 — Июнь 2014 (частичная занятость)</p>
+                            <p>Разработка интеграционного модуля для Abbyy Form Reader 6.5 (сканирование и распознавание документов, по разработанным шаблонам) и его внедрение (обучение персонала), разработка интерактивных отчетов на основе данных СУОП (Tandem University).</p>
+                        </article>
+                    </div>
+                    <div class="clear"></div>
+                </section>
+                <section>
+                    <div class="sectionTitle"><h1>Проф. навыки</h1></div>
+                    <div class="sectionContent">
+                        <ul class="keySkills">
+                            <li>Python</li>
+                            <li>Git</li>
+                            <li>Unit testing (pytest)</li>
+                            <li>OOP</li>
+                            <li>Agile</li>
+                            <li>Team management</li>
+                            <li>Project management</li>
+                        </ul>
+                    </div>
+                    <div class="clear"></div>
+                </section>
+                <section>
+                    <div class="sectionTitle"><h1>Образование</h1></div>
+                    <div class="sectionContent">
+                        <article>
+                            <h2>С(А)ФУ им. М.В. Ломоносова</h2>
+                            <p class="subDetails">Инженер. Информационные системы и технологии</p>
+                            <p>Сентябрь 2009 - Июнь 2014</p>
+                        </article>
+                    </div>
+                    <div class="clear"></div>
+                </section>
+            </div>
+        </div>
+    {% block pagescripts %}
+    <!-- Bootstrap core JS-->
+    <script src="{% static 'js/bootstrap-5.3.2.bundle.min.js' %}"></script>
+    {% comment %} <!-- Core theme JS-->
+    <script src="{% static 'js/scripts.js' %}"></script> {% endcomment %}
+    {% endblock pagescripts %}
+    </body>
+</html>
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+<!-- * *                                  CREDITS                                    * *-->
+<!-- * * Original resume page:                                                       * *-->
+<!-- * * http://www.thomashardy.me.uk/free-responsive-html-css3-cv-template          * *-->
+<!-- * *                                                                             * *-->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->

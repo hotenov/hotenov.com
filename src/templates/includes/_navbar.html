@@ -1,0 +1,131 @@
+{% load i18n %}
+{% load tags_helpers %}
+<nav class="navbar navbar-expand-lg navbar-light" id="mainNav" data-bs-theme="light">
+  <div class="container px-4 px-lg-5">
+      <a class="navbar-brand" href="{% url 'website:index' %}">▮hotenov</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          {% translate "Menu" %}
+          <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+
+
+        {% comment %} 
+        <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+          {% if "/en/" not in request.build_absolute_uri %}
+            <input name="next" type="hidden" value="{% get_default_lang_url LANGUAGE_CODE %}">
+          {% else %}
+            <input name="next" type="hidden" value="{{ redirect_to }}">
+          {% endif %}
+          <select name="language">
+              {% get_available_languages as LANGUAGES %}
+              {% get_language_info_list for LANGUAGES as languages %}
+              {% for language in languages %}
+                  <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                      {{ language.name_local }} ({{ language.code }})
+                  </option>
+              {% endfor %}
+          </select>
+          <input type="submit" value="Go">
+        </form>
+        {% endcomment %}
+
+          <ul class="navbar-nav ms-auto py-4 py-lg-0">
+
+            <div class="language-picker language-picker--flags js-language-picker" data-trigger-class="li4-btn li4-btn--subtle js-tab-focus">
+              {% get_current_language as LANGUAGE_CODE %}
+              <form action="{% url 'set_language' %}" class="language-picker__form" method="post">{% csrf_token %}
+                <label for="language-picker-select">Select your language</label>
+    
+                {% if "/en/" not in request.build_absolute_uri %}
+                  <input name="next" type="hidden" value="{% get_default_lang_url LANGUAGE_CODE %}">
+                {% else %}
+                  <input name="next" type="hidden" value="{{ redirect_to }}">
+                {% endif %}
+            
+                <select name="language-picker-select" id="language-picker-select">
+                  {% get_available_languages as LANGUAGES %}
+                  {% get_language_info_list for LANGUAGES as languages %}
+                  {% for language in languages %}
+                      <option
+                          lang="{{ language.code }}"
+                          {% if language.code == "ru"%}
+                            value="ruskii"
+                          {% else %}
+                            value="{{ language.name_local|lower }}"
+                          {% endif %}
+                          {% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                          {{ language.name_local }}
+                      </option>
+                  {% endfor %}
+                </select>
+              </form>
+            </div>
+
+
+              {% comment %}Translators: Home (site navigation, main page){% endcomment %}
+              {% translate "Home" as home_nav_translated %}
+              {% comment %}Translators: About (site navigation, about me page){% endcomment %}
+              {% translate "About" as about_nav_translated %}
+              {% comment %}Translators: Blog (site navigation, blog index page){% endcomment %}
+              {% translate "Blog" as blog_nav_translated %}
+              {% comment %}Translators: CV (site navigation, resume index page){% endcomment %}
+              {% translate "Resume" as resume_nav_translated %}
+              {% comment %}Translators: Contact (site navigation, contact page){% endcomment %}
+              {% translate "Contact" as contact_nav_translated %}
+
+              <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'website:index' %}">{{ home_nav_translated }}</a></li>
+              <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'website:about' %}">{{ about_nav_translated }}</a></li>
+              <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'website:blog' %}">{{ blog_nav_translated }}</a></li>
+              <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'resume:index' %}">{{ resume_nav_translated }}</a></li>
+              <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'website:contact' %}">{{ contact_nav_translated }}</a></li>
+
+          </ul>
+
+          {% translate "Enable dark mode" as the_dark_mode_button %}
+          {% translate "Enable light mode" as the_light_mode_button %}
+          {% translate "Color mode from OS" as the_auto_mode_button %}
+
+          <form action="/" class="form" id="theme-switcher">
+            <fieldset class="color-scheme">
+              <legend class="visually-hidden">Color Theme Switcher</legend>
+              <label for="dark-mode-scheme" class="color-scheme__field">
+                <input id="dark-mode-scheme" class=" input-reset color-scheme__input" type="radio" name="color-scheme" value="dark">
+                <span class="color-scheme__icon">
+                  <svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" data-testid="geist-icon" height="16" shape-rendering="geometricPrecision" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="16">
+                    <title>{{ the_dark_mode_button }}</title>
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" stroke-width="1.5px"></path>
+                  </svg>
+                </span>
+              </label>
+              <label for="light-mode-scheme" class="color-scheme__field">
+                <input id="light-mode-scheme" class=" input-reset color-scheme__input" type="radio" name="color-scheme" value="light">
+                <span class="color-scheme__icon">
+                  <svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" data-testid="geist-icon" height="16" shape-rendering="geometricPrecision" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="16">
+                    <title>{{ the_light_mode_button }}</title>
+                    <circle cx="12" cy="12" r="5" stroke-width="1.5px"></circle>
+                    <path d="M12 1v2" stroke-width="1.5px"></path><path d="M12 21v2" stroke-width="1.5px"></path>
+                    <path d="M4.22 4.22l1.42 1.42" stroke-width="1.5px"></path>
+                    <path d="M18.36 18.36l1.42 1.42" stroke-width="1.5px"></path>
+                    <path d="M1 12h2" stroke-width="1.5px"></path>
+                    <path d="M21 12h2" stroke-width="1.5px"></path><path d="M4.22 19.78l1.42-1.42" stroke-width="1.5px"></path><path d="M18.36 5.64l1.42-1.42" stroke-width="1.5px"></path>
+                  </svg>
+                </span>
+              </label>
+              <label for="auto-mode-scheme" class="color-scheme__field">
+                <input id="auto-mode-scheme" class=" input-reset color-scheme__input" type="radio" name="color-scheme" value="auto" checked>
+                <span class="color-scheme__icon">
+                  <svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" data-testid="geist-icon" height="16" shape-rendering="geometricPrecision" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="16">
+                    <title>{{ the_auto_mode_button }}</title>
+                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2" stroke-width="1.5px"></rect>
+                    <path d="M8 21h8" stroke-width="1.5px"></path>
+                    <path d="M12 17v4" stroke-width="1.5px"></path>
+                  </svg>
+                </span>
+              </label>
+            </fieldset>
+          </form>
+
+      </div>
+  </div>
+</nav>

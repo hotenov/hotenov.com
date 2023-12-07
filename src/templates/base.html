@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+{% load static %}
+{% load i18n %}
+
+{% get_current_language as LANGUAGE_CODE %}
+<html lang="{{ LANGUAGE_CODE }}" data-bs-theme="auto">
+  <head>
+    <title>{% block title %}&#20;▮hotenov{% endblock %}</title>
+    {% block meta_yandex_verification %}{% endblock meta_yandex_verification %}
+    <meta charset="utf-8" />
+    <meta content="text/html; charset=UTF-8" name="Content-Type" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="{% block content_description %}Web Developer Хотенов А.В. Python (Django) разработка. Руководство командой разработки. Software Engineer{% endblock content_description %}" />
+    <meta name="author" content="{% block page_author %}Hotenov Artem{% endblock page_author %}" />
+    <meta name="keywords" content="{% block page_keywords %}personal website, blog, projects, about, web development{% endblock page_keywords %}" />
+
+    {% block link_alternate %}{% endblock link_alternate %}
+    {% block fb_app_id %}{% endblock fb_app_id %}
+
+    {% block css_and_fonts %}
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link rel="stylesheet" href="{% static 'css/styles.min.css' %}" type="text/css" />
+    <!-- Bootstrap JS script for switching color mode-->
+    <script type="module" src="{% static 'js/color-modes.js' %}"></script>
+    <!-- Self-Hosted Google and Fontawesome fonts-->
+    <link rel="preload" href="{% static 'assets/webfonts/open-sans-v29-latin_cyrillic-800.woff2' %}" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="{% static 'assets/webfonts/lora-v24-latin_cyrillic-regular.woff2' %}" as="font" type="font/woff2" crossorigin />
+    <link href="{% static 'assets/webfonts/all-fonts-opt.css' %}" rel="stylesheet" type="text/css" />
+    {% endblock css_and_fonts %}
+
+    <!-- Browser and App Icons-->
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'assets/app-icons/apple-touch-icon.png' %}" />
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'assets/app-icons/favicon-32x32.png' %}" />
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'assets/app-icons/favicon-16x16.png' %}" />
+    <link rel="manifest" href="{% static 'assets/app-icons/site.webmanifest' %}" />
+    <link rel="mask-icon" href="{% static 'assets/app-icons/safari-pinned-tab.svg' %}" color="#5bbad5" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="msapplication-config" content="{% static 'assets/app-icons/ie-stuff/browserconfig.xml' %}" />
+
+    {% block meta_open_graph %}
+    <!-- Common OG tags -->
+    <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'assets/img/default-og-preview-1200x628.jpg' %}" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:height" content="628" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:alt" content="In the center, a circle avatar of the website owner under the website name (domain) on a dark blue background (this is the default image for social preview)" />
+    {% endblock meta_open_graph %}
+
+    {% block meta_optional_og %}
+    {% if LANGUAGE_CODE == "ru" %}
+    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:locale:alternate" content="en_US" />
+    {% else %}
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="ru_RU" />
+    {% endif %}
+    {% endblock meta_optional_og %}
+
+    {% if not debug_flag %}
+      <!-- Yandex.Metrika counter-->
+      <script type="text/javascript">
+        (function (d, w, c) {
+            (w[c] = w[c] || []).push(function() {
+                try {
+                    w.yaCounter54322542 = new Ya.Metrika({
+                        id:54322542,
+                        clickmap:false,
+                        trackLinks:true,
+                        accurateTrackBounce:true
+                    });
+                } catch(e) { }
+            });
+
+            var n = d.getElementsByTagName("script")[0],
+                x = "https://mc.yandex.ru/metrika/watch.js",
+                s = d.createElement("script"),
+                f = function () { n.parentNode.insertBefore(s, n); };
+            for (var i = 0; i < document.scripts.length; i++) {
+                if (document.scripts[i].src === x) { return; }
+            }
+            s.type = "text/javascript";
+            s.async = true;
+            s.src = x;
+
+            if (w.opera == "[object Opera]") {
+                d.addEventListener("DOMContentLoaded", f, false);
+            } else { f(); }
+        })(document, window, "yandex_metrika_callbacks");
+      </script>
+      <noscript><div><img src="https://mc.yandex.ru/watch/54322542" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+      <!-- /Yandex.Metrika counter-->
+    {% endif %}
+  </head>
+
+  <body>
+    {% include 'includes/_navbar.html' %}
+
+    {% block pageheader %}{% endblock pageheader %}
+    {% block pagecontent %}{% endblock pagecontent %}
+
+    {% include 'includes/_footer.html' %}
+
+
+    {% block pagescripts %}
+    <!-- Bootstrap core JS-->
+    <script src="{% static 'js/bootstrap-5.3.2.bundle.min.js' %}"></script>
+    <!-- Core theme JS-->
+    <script src="{% static 'js/scripts.js' %}"></script>
+    {% endblock pagescripts %}
+  </body>
+</html>

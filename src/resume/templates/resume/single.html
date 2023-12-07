@@ -1,0 +1,422 @@
+{% load static %}
+{% load i18n %}
+{% load resume_tags_and_filters %}
+{% load tags_helpers %}
+
+{% translate "resume" as resume_word %}
+
+<!DOCTYPE html>
+{% get_current_language as LANGUAGE_CODE %}
+<html lang="{{ LANGUAGE_CODE }}" data-bs-theme="auto">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="{{ resume_word|title  }} (CV) - {{ resume.person_name }} - {{ resume.role }}" />
+        <meta name="author" content="Artem Hotenov" />
+        <title>{{ resume_word|title }} - {{ resume.person_name }} - {{ resume.role }}</title>
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link rel="stylesheet" href="{% static 'css/styles.min.css' %}" type="text/css" />
+        <!-- Bootstrap JS script for switching color mode-->
+        <script type="module" src="{% static 'js/color-modes.js' %}"></script>
+        <!-- Self-Hosted Google and Fontawesome Fonts-->
+        <link rel="stylesheet" href="{% static 'assets/webfonts/all-fonts-opt.css' %}" type="text/css" />
+          {% comment %} If you use 'resume' app without common CSS (optimized) files, link CDN full version {% endcomment %}
+        {% comment %} <link rel="stylesheet" href="https://libs.cdnjs.net/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"> {% endcomment %}
+        <!-- Separate css file for resume-->
+        <link rel="stylesheet" href="{% static 'resume/css/styles.css' %}" type="text/css" />
+        
+        <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
+
+      {% if not debug_flag %}
+        <!-- Yandex.Metrika counter-->
+        <script type="text/javascript">
+          (function (d, w, c) {
+              (w[c] = w[c] || []).push(function() {
+                  try {
+                      w.yaCounter54322542 = new Ya.Metrika({
+                          id:54322542,
+                          clickmap:false,
+                          trackLinks:true,
+                          accurateTrackBounce:true
+                      });
+                  } catch(e) { }
+              });
+
+              var n = d.getElementsByTagName("script")[0],
+                  x = "https://mc.yandex.ru/metrika/watch.js",
+                  s = d.createElement("script"),
+                  f = function () { n.parentNode.insertBefore(s, n); };
+              for (var i = 0; i < document.scripts.length; i++) {
+                  if (document.scripts[i].src === x) { return; }
+              }
+              s.type = "text/javascript";
+              s.async = true;
+              s.src = x;
+
+              if (w.opera == "[object Opera]") {
+                  d.addEventListener("DOMContentLoaded", f, false);
+              } else { f(); }
+          })(document, window, "yandex_metrika_callbacks");
+        </script>
+        <noscript><div><img src="https://mc.yandex.ru/watch/54322542" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+        <!-- /Yandex.Metrika counter-->
+      {% endif %}
+
+    </head>
+    <body>
+        <!-- Navigation-->
+        {% include 'includes/_navbar.html' %}
+
+        <div class="main_wrapper">
+
+          <div class="left-side-panel">
+
+            <div class="spoiler-body">
+              <div class="left-widgets-container">
+                <div class="activity-title">{% trans "Activity Widgets" %}</div>
+                <ul>
+                  <li class="widget-item">
+                    <a href="https://stackoverflow.com/users/3366563/hotenov"><img src="https://stackoverflow.com/users/flair/3366563.png?theme=clean" width="208" height="58" alt="profile for hotenov at Stack Overflow, Q&amp;A for professional and enthusiast programmers" title="profile for hotenov at Stack Overflow, Q&amp;A for professional and enthusiast programmers"></a>
+                  </li>
+                  {% comment %} <li class="widget-item"><img src="{% static 'resume/images/github-widget-example.png' %}" width="256" height="390" alt="hotenov on GitHub"></li> {% endcomment %}
+                  <li class="widget-item">
+                    <div id="github-card"
+                      data-username="hotenov"
+                      data-sort-by="stars"
+                      data-header-text="{% trans "Most starred repositories" %}"
+                      data-max-repos="3">
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="show-widgets spoiler-btn spoiler-btn-bottom">
+              <div class="button-text-large">
+                <div class="activity-button" title="{% trans "Activity Widgets" %}">
+                  <span>A</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        
+          
+            <!-- Resume Content-->
+            <div class="resume_wrapper">
+              <div class="resume_left">
+                <div class="resume_image">
+                  {% if resume.photo %}
+                  <img src="{{ resume.photo.url }}" alt="{{ resume.role }}" >
+                {% else %}
+                  <img src="https://picsum.photos/200/300/?blur=2" alt="{{ resume.role }}" width="300" height="201">
+                {% endif %}
+                </div>
+                <div class="resume_bottom">
+                  <div class="resume_item name_and_role">
+                    <div class="name">{{ resume.person_name }}</div>
+                    <div class="role">{{ resume.role }}</div>
+                  </div>
+                  <div class="resume_item resume_contact" id="contacts">
+                    <div class="contactInfo">
+                      <h3 class="resume_title">{% translate "Contact info" %}</h3>
+                      <ul class="contacts_screen">
+                        {% define resume.social_links|splitlines|parse_contacts as social_links %}
+                        {% with contacts=resume.contact_info|splitlines|parse_contacts|add:social_links %}
+                          {% for contact_list in contacts %}
+                            <li>
+                              <span class="icon"><i class="{{ contact_list.2 }}"></i></span>
+                              {% if contact_list.1 == "-" %}
+                                <span class="text">{{ contact_list.0 }}</span>
+                              {% else %}
+                                <span class="text"><a href="{{ contact_list.1 }}" target="_blank">{{ contact_list.0 }}</a></span>
+                              {% endif %}
+                            </li>
+                          {% endfor %}
+                        </ul>
+                        {% comment %} Print only {% endcomment %}
+                        <ul class="contacts_print">
+                          {% for contact_list in contacts %}
+                            <li>
+                              <span class="icon"><i class="{{ contact_list.2 }}"></i></span>
+                              {% if contact_list.1 == "-" %}
+                                <span class="text">{{ contact_list.0 }}</span>
+                              {% else %}
+                                <span class="text">{{ contact_list.1|cut_regex:"https?://(www.)?" }}</span>
+                              {% endif %}
+                            </li>
+                          {% endfor %}
+                        {% endwith %}
+                      </ul>
+                    </div>
+                  </div>
+          
+          
+                  <div class="resume_item resume_contact">
+                    <div class="contactInfo education">
+                      <h3 class="resume_title">{% translate "Education" %}</h3>
+                      <ul>
+                        {% for edu in resume.educations.all %}
+                        <li>
+                          <p>{{ edu.start_date|date:"Y" }} - {{ edu.end_date|date:"Y" }}</p>
+                          <h4>{{ edu.degree }}</h4>
+                          <p>{{ edu.title }}</p>
+                          {% if edu.description %}
+                            {{ edu.description|linebreaks }}
+                          {% endif %}
+                        </li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+                  </div>
+          
+                  <div class="resume_item resume_skills">
+                    <div class="resume_title">{% translate "Skills" %}</div>
+                    <div class="resume_info">
+                      {% with skills=resume.skills|splitlines|parse_skills %}
+                        {% for key,value in skills.items %}
+                        <div class="skills_print">
+                          <ul>
+                            <li>{{ key }} - {{ value }}%</li>
+                          </ul>
+                        </div>
+                        <div class="skills_list">
+                          <div class="skills_left">{{ key }}</div>
+                          <div class="skills_bar">
+                            <p>
+                              <span style="width: {{ value }}%"></span>
+                            </p>
+                          </div>
+                        </div>
+                        {% endfor %}
+                      {% endwith %}
+                    </div>
+                  </div>
+                  <div class="resume_item resume_contact">
+                    <div class="contactInfo education">
+                      <h3 class="resume_title">{% translate "Relevant skills" %}</h3>
+                      {% with relevant_skills=resume.relevant_skills|splitlines|parse_instruments %}
+                        {% for category, text in relevant_skills.items %}
+                          <div class="resume_info">
+                            <div class="resume_subtitle">{{ category }}</div>
+                            <div class="resume_subinfo">{{ text }}</div>
+                          </div>
+                        {% endfor %}
+                      {% endwith %}
+                    </div>
+                  </div>
+                  <div class="resume_item resume_certificate">
+                    <div class="contactInfo education">
+                      <h3 class="resume_title">{% translate "Certificates" %}</h3>
+                      <ul>
+                        {% for cert in resume.certifications.all %}
+                        <li>
+                          <p>{{ cert.issue_date|date:"Y" }} -
+                              {% if cert.is_expired %}
+                                {{ cert.expiration_date|date:"Y" }}
+                              {% else %}
+                              {% translate "indefinite" %}
+                              {% endif %}
+                          </p>
+                          {% if cert.credential_url %}
+                          {% translate "Open a certificate info" as certificate_info_translated %}
+                            <a href="{{ cert.credential_url }}" target="_blank" title="{{ certificate_info_translated }}">
+                              <h6>{{ cert.title }}</h6>
+                            </a>
+                          {% else %}
+                            <h4>{{ cert.title }}</h4>
+                          {% endif %}
+                          <p>{{ cert.organization }}</p>
+                          <p>ID: {{ cert.credential_id }}</p>
+                          {% if cert.picture %}
+                              {% translate "Show certificate" as show_certificate_translated %}
+                              <div class="img-certificate-box" title="{{ show_certificate_translated }}"
+                                    data-img-url="{{ cert.picture.url }}"
+                                    data-img-alt="{{ cert.title }}">
+                                <img src="{% static 'resume/images/certificate-placeholder-opt.svg' %}" alt="certificate icon">
+                              </div>
+                          {% endif %}
+                          {% if cert.commentary %}
+                            <p>{{ cert.commentary }}</p>
+                          {% endif %}
+                        </li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="resume_item resume_contact">
+                    <div class="contactInfo education">
+                      <h3 class="resume_title">{% translate "Languages" %}</h3>
+                      <ul>
+                        {% with languages=resume.languages|split:";" %}
+                          {% for language in languages %}
+                          <li><p>{{ language }}</p></li>
+                          {% endfor %}
+                        {% endwith %}
+                      </ul>
+                    </div>
+                  </div>
+          
+                  <div class="resume_item resume_contact">
+                    <div class="contactInfo education">
+                      <h3 class="resume_title">{% translate "Interests" %}</h3>
+                      <ul>
+                        {% with interests=resume.hobby|splitlines %}
+                          {% for interest in interests %}
+                          <li><p>{{ interest }}</p></li>
+                          {% endfor %}
+                        {% endwith %}
+                      </ul>
+                    </div>
+                  </div>
+          
+          
+                </div>
+              </div>
+              <div class="resume_right">
+                <div class="resume_item name_and_role">
+                  <div class="name">{{ resume.person_name }}</div>
+                  <div class="role">{{ resume.role }}</div>
+                  {% if not resume.search_status == 4 %}
+                    <div class="resume_status">
+                      <div class="status_word">{% translate "status" %}:</div>
+                      <div class="status_value">{{ resume.get_search_status_display }}</div>
+                    </div>
+                  {% endif %}
+                </div>
+                <div class="resume_item resume_education" id="profile">
+                  <div class="resume_title">{% translate "Personal Profile" %}</div>
+                  <div class="resume_info">
+                    {{ resume.personal_profile|linebreaks }}
+                  </div>
+                </div>
+                {% if resume.skills_summary %}
+                  <div class="resume_item resume_interests" id="skills-summary">
+                    <div class="resume_title">{% translate "Skills Summary" %}</div>
+                    <div class="resume_info">
+                      {{ resume.skills_summary|safe|linebreaksbr }}
+                    </div>
+                  </div>
+                {% endif %}
+          
+                <div class="resume_item resume_experience" id="experience">
+                  <div class="resume_title">{% translate "Experience" %}</div>
+                  <div class="resume_info">
+                    {% for job in jobs %}
+                    <div class="resume_data">
+                      <div class="company_left">
+                        {% if job.logo %}
+                          {% if job.website %}
+                          <a href="{{ job.website }}" target="_blank" title="{% translate "Visit" %} {{ job.website }}">
+                            <img src="{{ job.logo.url }}" alt="{% translate "Logo of" %} {{ job.company }}" width="80">
+                          </a>
+                          {% else %}
+                            <img src="{{ job.logo.url }}" alt="{% translate "Logo of" %} {{ job.company }}" width="80">
+                          {% endif %}
+                        {% else %}
+                          {% if job.website %}
+                          <a href="{{ job.website }}" target="_blank" title="{% translate "Visit" %} {{ job.website }}">
+                            <img src="{% static 'resume/images/no-company-logo-placeholder-opt.svg' %}" alt="{% translate "Company logo placeholder" %}" width="80">
+                          </a>
+                          {% else %}
+                            <img src="{% static 'resume/images/no-company-logo-placeholder-opt.svg' %}" alt="{% translate "Company logo placeholder" %}" width="80">
+                          {% endif %}
+                        {% endif %}
+          
+                        <div class="company_tags">
+                          <div class="tag__item">{{ job.get_workplace_display }}</div>
+                          <div class="tag__item">{{ job.get_employment_type_display }}</div>
+                        </div>
+                      </div>
+                      <div class="content">
+                        <p>{{ job.role }}</p>
+                        <p>{{ job.company }}</p>
+                        <p>
+                          {{ job.start_date|date:"F Y" }} -
+                                  {% if not job.is_current %}
+                                    {{ job.quit_date|date:"F Y" }}
+                                  {% else %}
+                                    present days
+                                  {% endif %}
+                        </p>
+                        {{ job.description|linebreaks }}
+                      </div>
+                    </div>
+                    {% endfor %}
+          
+                  </div>
+                </div>
+                {% if resume.personal_projects %}
+                  <div class="resume_item resume_interests" id="personal-projects">
+                    <div class="resume_title">{% translate "Personal Projects" %}</div>
+                    <div class="resume_info">
+                      {{ resume.personal_projects|safe|linebreaksbr }}
+                    </div>
+                  </div>
+                {% endif %}
+                {% comment %} <div class="updated_text">
+                  {% translate "Resume was updated" %}: {{ resume.updated_at|date:"d.m.Y H:i (\G\M\T+03:00)" }}
+                </div> {% endcomment %}
+          
+              </div>
+          
+            </div>
+            
+            <div class="right-side-panel">
+              <div class="download">
+                <p>
+                  <a class="action-print">{% translate "Print" %}</a>
+                </p>
+                <p class="download__instructions">
+                  <!-- <small>Typically takes 1&ndash;3 minutes.</small> -->
+                  <small class="download__properties">{% translate "(click to print)" %}</small>
+                </p>
+              </div>
+          
+              {% if resume.file_pdf %}
+              <div class="download">
+                <p>
+                  <a download href="{{ resume.file_pdf.url }}" hreflang="{{ LANGUAGE_CODE }}">{% trans "Download CV" %}</a>
+                </p>
+                <p class="download__instructions">
+                  {% define resume.file_pdf.size|filesize_for_humans as file_size_attrs %}
+                  <small class="download__properties">({{ file_size_attrs.0 }} <abbr title="{{ file_size_attrs.2 }}">{{ file_size_attrs.1 }}</abbr>, pdf)</small>
+                </p>
+              </div>
+              {% endif %}
+              <div class="cv-info-container" id="cv-info-box">
+                <div class="circle"></div>
+                <div id="cv-info-box-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336h24V272H216c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24H216c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></svg>
+                </div>
+                <div class="updated_text" id="cv-info-text">
+                  <p>{% translate "Resume was updated" %}:</p>
+                  <p><abbr title="{% translate "Time"  %}: {{ resume.updated_at|date:'H:i (\G\M\T+03:00)' }}">{{ resume.updated_at|date:"d.m.Y" }}</abbr></p>
+                </div>
+              </div>
+              {% comment %} <div class="updated_text">
+                <p>{% translate "Resume was updated" %}:</p>
+                <p><abbr title="Time: {{ resume.updated_at|date:'H:i (\G\M\T+03:00)' }}">{{ resume.updated_at|date:"d.m.Y" }}</abbr></p>
+              </div> {% endcomment %}
+            </div>
+          
+        </div>
+
+
+    {% block pagescripts %}
+    <!-- Bootstrap core JS-->
+    <script src="{% static 'js/bootstrap-5.3.2.bundle.min.js' %}"></script>
+    <!-- Resume scripts -->
+    <script src="{% static 'resume/js/js-resume.js' %}"></script>
+    <script src="{% static 'resume/js/gh-profile-card-v3.1.0.min.js' %}"></script>
+    <!-- Common site JS-->
+    <script src="{% static 'js/scripts.js' %}"></script>
+    {% endblock pagescripts %}
+    </body>
+</html>
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+<!-- * *                                  CREDITS                                    * *-->
+<!-- * * This Resume page was composed and modified from two video tutorials:        * *-->
+<!-- * * https://www.youtube.com/watch?v=c9Yn20h2Jxw                                 * *-->
+<!-- * * https://www.youtube.com/watch?v=hnjHCmaUVPg                                 * *-->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->

@@ -1,0 +1,188 @@
+{% load static %}
+{% load i18n %}
+
+<!DOCTYPE html>
+{% get_current_language as LANGUAGE_CODE %}
+<html lang="{{ LANGUAGE_CODE }}" data-bs-theme="auto">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="Резюме - Хотенов Артём. Python (Django) разработка программного обеспечения (Разработчик ПО, Software Engineer, Web Developer)" />
+        <meta name="author" content="Artem Hotenov" />
+        <title>Хотенов Артём - Резюме | Web (Python) Developer, Руководитель команды разработки</title>
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link rel="stylesheet" href="{% static 'css/styles.min.css' %}" type="text/css" />
+        <!-- Bootstrap JS script for switching color mode-->
+        <script type="module" src="{% static 'js/color-modes.js' %}"></script>
+        <!-- Self-Hosted Google and Fontawesome Fonts-->
+        <link rel="stylesheet" href="{% static 'assets/webfonts/all-fonts-opt.css' %}" type="text/css" />
+          {% comment %} If you use 'resume' app without common CSS (optimized) files, link CDN full version {% endcomment %}
+        {% comment %} <link rel="stylesheet" href="https://libs.cdnjs.net/font-awesome/6.4.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer"> {% endcomment %}
+        <!-- Separate css file for resume-->
+        <link rel="stylesheet" href="{% static 'assets/css/resume.css' %}" type="text/css" />
+        <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
+
+    </head>
+    <body id="top">
+        <!-- Navigation-->
+        {% include 'includes/_navbar.html' %}
+
+        {% if resumes|length == 1 %}
+        <!-- Single Resume Content-->
+        <div class="instaFade" id="cv">
+          <div class="mainDetails">
+              <div class="quickFade" id="headshot">
+                  {% if resume.photo %}
+                    <img src="{{ resume.photo.url }}" alt="{{ resume.role }}" >
+                  {% else %}
+                    <img src="https://picsum.photos/200/300/?blur=2" alt="{{ resume.role }}" width="300" height="201">
+                  {% endif %}
+              </div>
+              <div id="name">
+                  <h1 class="quickFade delayTwo">{{ resume.person_name }}</h1>
+                  <h2 class="quickFade delayThree">
+                      {{ resume.role }}
+                  </h2>
+              </div>
+              <div class="quickFade delayFour" id="contactDetails">
+                  <ul>
+                      <li><a href="mailto:qa@hotenov.com" target="_blank">qa@hotenov.com</a></li>
+                      <li><a href="https://hotenov.com">www.hotenov.com</a></li>
+                      <br />
+                      <li><a href="https://www.linkedin.com/in/hotenov/">LinkedIn</a></li>
+                      <li><a href="https://career.habr.com/1-hotenov">Хабр.Карьера</a></li>
+                      <br />
+                      <li>
+                          Обновлено:
+                          <br />
+                          {{ resume.updated_at|date:"d.m.Y" }}
+                      </li>
+                  </ul>
+              </div>
+              <div class="clear"></div>
+          </div>
+          <div class="quickFade delayFive" id="mainArea">
+              <section>
+                  <article>
+                      <div class="sectionTitle"><h1>Обо мне</h1></div>
+                      <div class="sectionContent">
+                          {{ resume.personal_profile|linebreaks }}
+                      </div>
+                  </article>
+                  <div class="clear"></div>
+              </section>
+              <section>
+                  <div class="sectionTitle"><h1>Опыт работы</h1></div>
+                  <div class="sectionContent">
+                    {% for job in jobs %}
+                      <article>
+                          <h2>{{ job.company }}</h2>
+                          <p class="subDetails">
+                            {{ job.start_date|date:"F Y" }} - 
+                            {% if not job.is_current %}
+                              {{ job.quit_date|date:"F Y" }} (удалённая работа)</p>
+                            {% else %}
+                              present days (remote job)
+                            {% endif %}
+                          {{ job.description|linebreaks }}
+                      </article>
+                    {% endfor %}
+                  </div>
+                  <div class="clear"></div>
+              </section>
+              <section>
+                  <div class="sectionTitle"><h1>Проф. навыки</h1></div>
+                  <div class="sectionContent">
+                    {{ resume.skills|linebreaks }}
+                      <ul class="keySkills">
+                          <li>Python</li>
+                          <li>Git</li>
+                          <li>Unit testing (pytest)</li>
+                          <li>OOP</li>
+                          <li>Agile</li>
+                          <li>Team management</li>
+                          <li>Project management</li>
+                      </ul>
+                  </div>
+                  <div class="clear"></div>
+              </section>
+              <section>
+                  <div class="sectionTitle"><h1>Образование</h1></div>
+                  <div class="sectionContent">
+                      <article>
+                          {% comment %}
+                          <h2>С(А)ФУ им. М.В. Ломоносова</h2>
+                          <p class="subDetails">Инженер. Информационные системы и технологии</p>
+                          <p>Сентябрь 2009 - Июнь 2014</p>
+                          {% endcomment %}
+                          {{ resume.education|linebreaks }}
+                      </article>
+                  </div>
+                  <div class="clear"></div>
+              </section>
+          </div>
+      </div>
+
+        {% else %}
+
+
+
+        {% for resume in resumes %}
+          <!-- Resume List Content-->
+          <div class="instaFade" id="cv">
+            <div class="mainDetails">
+                <div class="quickFade" id="headshot">
+                    {% if resume.photo %}
+                      <img src="{{ resume.photo.url }}" alt="{{ resume.role }}" >
+                    {% else %}
+                      <img src="https://picsum.photos/200/300/?blur=2" alt="{{ resume.role }}" width="300" height="201">
+                    {% endif %}
+                </div>
+                <div id="name">
+                    <h1 class="quickFade delayTwo">{{ resume.person_name }}</h1>
+                    <h2 class="quickFade delayThree">
+                        <a href="{{ resume.get_absolute_url }}">{{ resume.role }}</a>
+                    </h2>
+                </div>
+                <div class="quickFade delayFour" id="contactDetails">
+                    <ul>
+                        <li><a href="mailto:qa@hotenov.com" target="_blank">qa@hotenov.com</a></li>
+                        <li><a href="https://hotenov.com">www.hotenov.com</a></li>
+                        <br />
+                        <li><a href="https://www.linkedin.com/in/hotenov/">LinkedIn</a></li>
+                        <li><a href="https://career.habr.com/1-hotenov">Хабр.Карьера</a></li>
+                        <br />
+                        <li>
+                            Обновлено:
+                            <br />
+                            {{ resume.updated_at|date:"d.m.Y" }}
+                        </li>
+                    </ul>
+                </div>
+                <div class="clear"></div>
+            </div>
+            </div>
+        </div>
+      {% empty %}
+      <div class="instaFade" id="cv">
+        <div class="mainDetails">
+          {% translate "No resume has been published yet. Try later..." %}
+        </div>
+      </div>
+      {% endfor %}
+    {% endif %}
+
+  {% block pagescripts %}
+    <!-- Bootstrap core JS-->
+    <script src="{% static 'js/bootstrap-5.3.2.bundle.min.js' %}"></script>
+    <!-- Common site JS-->
+    <script src="{% static 'js/scripts.js' %}"></script>
+    {% endblock pagescripts %}
+    </body>
+</html>
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+<!-- * *                                  CREDITS                                    * *-->
+<!-- * * Original resume page:                                                       * *-->
+<!-- * * http://www.thomashardy.me.uk/free-responsive-html-css3-cv-template          * *-->
+<!-- * *                                                                             * *-->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
