@@ -141,7 +141,7 @@ src/*.egg-info
 # Frontend stuff
 node_modules
 .DS_Store
-# Commom static (can be rebuiled from src_front)
+# Common static (can be rebuilt from src_front)
 src/static
 # Media and static root folders for DEV container and local debug server
 src/mediafiles
