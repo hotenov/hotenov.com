@@ -304,26 +304,26 @@ class TestTMSReview2019Page:
     def test_tms2019_og_image_url(self, client, settings):
         """Check a generation of URL for image in Open Graph meta tags."""
         settings.STATIC_URL = "st/"
-        og_image = '<meta property="og:image" content="https://testserver/st/blog/sc/sc-post-0001-2.png"'  # noqa: B950
+        og_image = '<meta property="og:image" content="https://testserver/st/blog/sc/sc-post-0002-en.jpg"'  # noqa: B950
         response = client.get("/blog/tms-review-2019/", secure=True)
         assertContains(response, og_image)
 
-    def test_tms2019_og_image_properties(self, client):
-        """Check Open Graph meta tags for image properties."""
+    def test_tms2019_og_image_ru_properties(self, client):
+        """Check Open Graph meta tags for RU image properties."""
         width = '<meta property="og:image:width" content="600" />'
         height = '<meta property="og:image:height" content="314" />'
         image_type = '<meta property="og:image:type" content="image/png" />'
-        response = client.get("/blog/tms-review-2019/", secure=True)
+        response = client.get("/ru/blog/tms-review-2019/", secure=True)
         assertContains(response, width)
         assertContains(response, height)
         assertContains(response, image_type)
 
     def test_tms2019_alternate_urls(self, client):
         """Check alternate URLs for 'TMS Review 2019' page."""
-        ru = '<link rel="alternate" hreflang="ru" href="https://testserver/ru/blog/tms-review-2019/">'  # noqa: B950
-        en = '<link rel="alternate" hreflang="en" href="https://testserver/blog/tms-review-2019/">'  # noqa: B950
-        default = '<link rel="alternate" hreflang="x-default" href="https://testserver/" />'  # noqa: B950
-        response = client.get("/blog/tms-review-2019/", secure=True)
+        ru = '<link rel="alternate" hreflang="ru" href="https://testserver/ru/blog/tms-review-2019/" />'  # noqa: B950
+        en = '<link rel="alternate" hreflang="en" href="https://testserver/blog/tms-review-2019/" />'  # noqa: B950
+        default = '<link rel="alternate" hreflang="x-default" href="https://testserver/blog/tms-review-2019/" />'  # noqa: B950
+        response = client.get("/blog/tms-review-2019/?param=value", secure=True)
         assertContains(response, ru)
         assertContains(response, en)
         assertContains(response, default)
@@ -354,7 +354,7 @@ class TestTMSReview2019Page:
         og_title = '<meta property="og:title" content="Choosing a Test Management System in 2019" />'  # noqa: B950
         og_description = '<meta property="og:description" content="Many development teams sooner or later face the question of implementing specialized tools (systems) to manage the testing process on their projects. Which one should you choose? Functions overview with many screenshots." />'  # noqa: B950
         og_image_alt = '<meta property="og:image:alt" content="Article title over a footage of Matrix movie in the background (choosing a capsule (red or blue) on open palms)." />'  # noqa: B950
-        response = client.get("/blog/tms-review-2019/", secure=True)
+        response = client.get("/blog/tms-review-2019/?param=value", secure=True)
         assertContains(response, og_url)
         assertContains(response, og_title)
         assertContains(response, og_description)
@@ -366,7 +366,7 @@ class TestTMSReview2019Page:
         og_title = '<meta property="og:title" content="Выбор системы управления тестированием в 2019" />'  # noqa: B950
         og_description = '<meta property="og:description" content="Для многих команд разработки рано или поздно встает вопрос о внедрении специализированных инструментов для управления процессом тестирования в своих проектах. Какой же из них выбрать? Рассмотрим 11 таких систем." />'  # noqa: B950
         og_image_alt = '<meta property="og:image:alt" content="Название статьи на фоне кадра из фильма Матрица (выбор таблетки на открытых ладонях: красная или синяя)" />'  # noqa: B950
-        response = client.get("/ru/blog/tms-review-2019/", secure=True)
+        response = client.get("/ru/blog/tms-review-2019/?param=value", secure=True)
         assertContains(response, og_url)
         assertContains(response, og_title)
         assertContains(response, og_description)

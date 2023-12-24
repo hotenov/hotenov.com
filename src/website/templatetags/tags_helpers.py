@@ -23,11 +23,10 @@ def get_default_lang_url(context, lang="ru"):
 
 @register.inclusion_tag("website/customtags/link_alternate.html", takes_context=True)
 def alternate_lang_links(context, route_name):
-    """Paste <link> meta HTML tag for 'ru' and 'en' alternate URLs."""
+    """Paste <link> HTML tag for alternate URLs in available languages."""
     return {
         "request": context["request"],
-        "reversed_url_ru": reverse_for_language(route_name, "ru"),
-        "reversed_url_en": reverse_for_language(route_name, "en"),
+        "route_name": route_name,
     }
 
 
