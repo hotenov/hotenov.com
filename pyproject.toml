@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "hotenov_com"
-version = "2023.12.24"
+version = "2023.12.24.post1"
 description = "My personal website hotenov.com"
 authors = ["Artem Hotenov <qa@hotenov.com>"]
 license = "MIT"

@@ -3,4 +3,5 @@
 {% for lang_code, lang_name in available_languages %}
     {% language lang_code %}<link rel="alternate" hreflang="{{ lang_code }}" href="{{ request.scheme }}://{{ request.get_host }}{% url route_name  %}" />{% endlanguage %}
 {% endfor %}
-    {% language "en" %}<link rel="alternate" hreflang="x-default" href="{{ request.scheme }}://{{ request.get_host }}{% url route_name  %}" />{% endlanguage %}
+    {% language "en" %}<link rel="alternate" hreflang="x-default" href="{{ request.scheme }}://{{ request.get_host }}{% url route_name  %}" />
+    <link rel="canonical" href="{{ request.scheme }}://{{ request.get_host }}{% url route_name  %}" />{% endlanguage %}
