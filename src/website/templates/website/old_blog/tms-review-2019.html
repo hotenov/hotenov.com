@@ -22,17 +22,17 @@
     {% comment %} Not translated properties (common) {% endcomment %}
     <meta property="og:site_name" content="hotenov.com" />
     <meta property="og:type" content="article" />
-    <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'blog/sc/sc-post-0001-2.png' %}" />
-    <meta property="og:image:height" content="314" />
-    <meta property="og:image:width" content="600" />
-    <meta property="og:image:type" content="image/png" />
+    <meta property="og:url" content="{{ request.scheme }}://{{ request.get_host }}{{ request.path }}" />
     <meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'blog/sc/sc-post-0001-1.png' %}" />
     <meta name="twitter:card" content="summary_large_image" />
     {% comment %} Language dependent properties {% endcomment %}
   {% if LANGUAGE_CODE == "ru" %}
-    <meta property="og:url" content="{{ request.scheme }}://{{ request.get_host }}{{ request.path }}" />
     <meta property="og:title" content="Выбор системы управления тестированием в 2019" />
     <meta property="og:description" content="Для многих команд разработки рано или поздно встает вопрос о внедрении специализированных инструментов для управления процессом тестирования в своих проектах. Какой же из них выбрать? Рассмотрим 11 таких систем." />
+    <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'blog/sc/sc-post-0001-2.png' %}" />
+    <meta property="og:image:width" content="600" />
+    <meta property="og:image:height" content="314" />
+    <meta property="og:image:type" content="image/png" />
     <meta property="og:image:alt" content="Название статьи на фоне кадра из фильма Матрица (выбор таблетки на открытых ладонях: красная или синяя)" />
 
     <meta property="article:author" content="Артём Хотенов" />
@@ -43,9 +43,12 @@
     <meta name="twitter:title" content="Выбор системы управления тестированием в 2019" />
     <meta name="twitter:description" content="Для многих команд разработки рано или поздно встает вопрос о внедрении специализированных инструментов для управления процессом тестирования в своих проектах. Какой же из них выбрать?" />
   {% else %}
-    <meta property="og:url" content="{{ request.scheme }}://{{ request.get_host }}{{ request.path }}" />
     <meta property="og:title" content="Choosing a Test Management System in 2019" />
     <meta property="og:description" content="Many development teams sooner or later face the question of implementing specialized tools (systems) to manage the testing process on their projects. Which one should you choose? Functions overview with many screenshots." />
+    <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{% static 'blog/sc/sc-post-0002-en.jpg' %}" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="628" />
+    <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:alt" content="Article title over a footage of Matrix movie in the background (choosing a capsule (red or blue) on open palms)." />
 
     <meta property="article:author" content="Artem Hotenov" />
