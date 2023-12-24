@@ -30,7 +30,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     {% comment %} Language dependent properties {% endcomment %}
   {% if LANGUAGE_CODE == "ru" %}
-    <meta property="og:url" content="{{ request.build_absolute_uri }}" />
+    <meta property="og:url" content="{{ request.scheme }}://{{ request.get_host }}{{ request.path }}" />
     <meta property="og:title" content="Выбор системы управления тестированием в 2019" />
     <meta property="og:description" content="Для многих команд разработки рано или поздно встает вопрос о внедрении специализированных инструментов для управления процессом тестирования в своих проектах. Какой же из них выбрать? Рассмотрим 11 таких систем." />
     <meta property="og:image:alt" content="Название статьи на фоне кадра из фильма Матрица (выбор таблетки на открытых ладонях: красная или синяя)" />
@@ -39,11 +39,11 @@
     <meta property="article:published_time" content="2019-08-12T09:10:10Z" />
 
     {% comment %} Language dependent Twitter (X) properties {% endcomment %}
-    <meta name="twitter:url" content="{{ request.build_absolute_uri }}" />
+    <meta name="twitter:url" content="{{ request.scheme }}://{{ request.get_host }}{{ request.path }}" />
     <meta name="twitter:title" content="Выбор системы управления тестированием в 2019" />
     <meta name="twitter:description" content="Для многих команд разработки рано или поздно встает вопрос о внедрении специализированных инструментов для управления процессом тестирования в своих проектах. Какой же из них выбрать?" />
   {% else %}
-    <meta property="og:url" content="{{ request.build_absolute_uri }}" />
+    <meta property="og:url" content="{{ request.scheme }}://{{ request.get_host }}{{ request.path }}" />
     <meta property="og:title" content="Choosing a Test Management System in 2019" />
     <meta property="og:description" content="Many development teams sooner or later face the question of implementing specialized tools (systems) to manage the testing process on their projects. Which one should you choose? Functions overview with many screenshots." />
     <meta property="og:image:alt" content="Article title over a footage of Matrix movie in the background (choosing a capsule (red or blue) on open palms)." />
@@ -53,7 +53,7 @@
     <meta property="article:published_time" content="2023-11-11T11:11:11Z" />
 
     {% comment %} Language dependent Twitter (X) properties {% endcomment %}
-    <meta name="twitter:url" content="{{ request.build_absolute_uri }}" />
+    <meta name="twitter:url" content="{{ request.scheme }}://{{ request.get_host }}{{ request.path }}" />
     <meta name="twitter:title" content="Choosing a Test Management System in 2019" />
     <meta name="twitter:description" content="Many development teams sooner or later face the question of implementing specialized tools (systems) to manage the testing process on their projects. Which one should you choose? Functions overview with many screenshots." />
   {% endif %}
