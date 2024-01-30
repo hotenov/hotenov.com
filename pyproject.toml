@@ -15,7 +15,7 @@ gunicorn = "^21.2.0"
 psycopg = {extras = ["binary"], version = "^3.1.17"}
 
 [tool.poetry.group.test.dependencies]
-pytest-django = "^4.7.0"
+pytest-django = "^4.8.0"
 pytest-xdist = "*"
 coverage = {extras = ["toml"], version = "^6.5.0"}
 pytest-cov = "*"
