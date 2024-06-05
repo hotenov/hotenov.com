@@ -32,7 +32,7 @@ mypy = "^0.971"
 [tool.poetry.group.format.dependencies]
 isort = "^5.12.0"
 yapf = "^0.32.0"
-black = "^22.12.0"
+black = "^24.3.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
