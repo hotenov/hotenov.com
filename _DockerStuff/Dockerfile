@@ -1,7 +1,7 @@
 # syntax=docker.io/docker/dockerfile:1.5.0
 
 # pull official base image
-FROM python:3.12.0-alpine AS base
+FROM python:3.12.4-alpine AS base
 
 # Global settings
 # ****************

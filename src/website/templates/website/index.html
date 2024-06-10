@@ -24,10 +24,10 @@
         <div class="site-heading">
           {% if LANGUAGE_CODE == "ru" %}
             <h1>Артём Хотенов</h1>
-            <span class="subheading">Личный сайт, резюме и блог.</span>
+            <span class="subheading">Личный сайт, резюме и одна статья.</span>
           {% else %}
             <h1>Artem Hotenov</h1>
-            <span class="subheading">Personal website, resume and blog.</span>
+            <span class="subheading">Personal website, resume and something else.</span>
           {% endif %}
         </div>
       </div>
@@ -44,27 +44,24 @@
         
         {% if LANGUAGE_CODE == "ru" %}
           {% language LANGUAGE_CODE %}
-          <p>Всем привет!</p>
-          <p>Меня зовут Артём и мне приятно, что вы здесь.</p>
-          <p>На этом сайте вы найдёте немного информации обо мне, моей профессиональной деятельности и увлечениях. Также в моём блоге вы, возможно, найдёте что-то полезное для себя (одну статью, вряд ли, можно назвать блогом, но я планирую писать больше, как только у меня появится на это время и силы).</p>
-          <p>Сейчас я погружён в самостоятельное изучение веб-разработки, пытаясь создать удобное и красивое местечко в Интернете для своих идей, мыслей и профессионального опыта.</p>
-          <p>Моя предыдущая профессия - специалист по тестированию программного обеспечения (с дополнительными обязанностями по управлению / координации небольшой команды разработки). Сейчас я широко открыт к предложениям и сотрудничеству. Хочется попробовать себя в новой роли - full-stack веб-разработчик (Python и/или JavaScript). Или писать Web/UI/API авто-тесты как QA (автоматизированное тестирование).</p>
-          <p>Как показывает моя карьера (на данный момент не очень продолжительная, но довольная насыщенная) у меня неплохо получается управлять / координировать по задачам небольшую (до 10-15 чел) команду. Поэтому если вам нужен менеджер IT проекта / команды, то я могу вам прекрасно подойти.</p>
-          <p>Более подробную информацию вы найдёте в моём <a href="{% url 'resume:index' %}">резюме (CV)</a>. Если вам нужно резюме для конкретной позиции (должности) - свяжитесь со мной, и я адаптирую его под определенную роль.</p>
+          <p>Всем привет! 👋😊</p>
+          <p>Меня зовут Артём и это мой скромный уголок в Интернете.</p>
+          <p>На сайте вы найдёте немного информации обо мне, моей профессиональной деятельности и увлечениях. Скорее всего, он будет редко обновляться и часто быть недоступным. Но я продолжаю верить, что когда-нибудь смогу сделать его действительно "динамическим" и вы больше не увидите этого текста.</p>
+          <p>Сейчас я погружён в изучение веб-разработки, каждый день повышая своё мастерство и пытаясь в будущем создать удобное и красивое местечко в сети для своих идей, мыслей и жизненного опыта. Чуть ранее это был больше бэк-энд: Python (Django). Теперь 95% времени это фронт-энд: Nuxt 3, Vue 3, JavaScript, TypeScript, TailwindCSS и даже немного браузерные расширения в Manifest V3.</p>
+          <p>Моя предыдущая профессия - специалист по тестированию программного обеспечения (с дополнительными обязанностями по управлению небольшой команды разработки). Сейчас я широко открыт к предложениям и сотрудничеству. Поэтому если вам нужен перспективный фронт-энд разработчик (при этом имеющий насыщенный бэкграунд и знания из других IT специализаций) - пишите непременно!</p>
+          <p>Подтвержденный опыт работы вы найдёте в моём <a href="{% url 'resume:index' %}">резюме (CV)</a>, а некоторые проекты - на <a href="https://github.com/hotenov/" target="_blank">GitHub</a>.</p>
           {% endlanguage %}
         {% else %}
           {% language LANGUAGE_CODE %}
-          <p>Hello everybody!</p>
+          <p>Hello everybody! 👋😊</p>
           <p>My name is Artem Hotenov and I'm glad that you are here.</p>
-          <p>On this website you can find some information about me and some useful (I hope) information for you from my blog (I plan to write more than one post, but work, learning new things and other real-world events can interfere to do that).</p>
-          <p>I'm currently learning web development on this site, trying to build a pretty place for my ideas and background.</p>
-          <p>My last job was as a QA Engineer (with a variety of dev team management duties). Now I'm available for hire. I'd like to change my career from QA to full-stack web developer (engineer) (with core language as Python or JavaScript). At least, QA automation engineer in Python / JS. Because I still love testing and unit tests are a joy to write for me.</p>
-          <p>Throughout my career, I've noticed that I've always been good with managing tasks and resolving team members needs. So, if you need an IT team manager / project manager - I may be your choice.</p>
+          <p>On this website you can find some facts about me and you will find some useful information for you in the future. In the meantime you'll just have to see sparse out-dated pages or to be unable to open the website at all.</p>
+          <p>I'm currently learning web development on my hobby projects, trying to build a pretty thing for several users.</p>
+          <p>My last job was as a QA Engineer (with a variety of dev team management duties). Now I'm available for hire. I'd like to change my career from QA to frontend web developer (engineer) (with core language as TypeScript or JavaScript and Vue ecosystem).</p>
           <p>
             Look at my <a href="{% url 'resume:index' %}">CV (resume)</a>
-            to see the work experience and other details.
-            Contact me if you need a version for specific position (role).
-            I'll try to adapt it for you.
+            to see the proven work experience and other details.
+            Contact me if you need my skills and knowledge.
           </p>
           {% endlanguage %}
         {% endif %}
@@ -83,7 +80,7 @@
             </a>
             <p class="post-meta">
               Автор:
-              <a href="https://github.com/hotenov">Артём Хотенов</a>
+              <a href="https://github.com/hotenov" target="_blank">Артём Хотенов</a>
               | Опубликовано: 12 августа 2019
             </p>
           </div>
@@ -97,7 +94,7 @@
             </a>
             <p class="post-meta">
               Posted by
-              <a href="https://github.com/hotenov">Artem Hotenov</a>
+              <a href="https://github.com/hotenov" target="_blank">Artem Hotenov</a>
               on August 12, 2019
             </p>
           </div>
