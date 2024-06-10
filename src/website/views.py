@@ -13,13 +13,13 @@ class IndexView(TemplateView):
         """Get and update view context."""
         context = super().get_context_data(**kwargs)
         if self.request.LANGUAGE_CODE == "ru":
-            context["page_title"] = "Главная"
-            context["page_description"] = "Хотенов Артём @hotenov, разработчик ПО, личный сайт, блог. Фанат Python (Django). Руководство командой разработки. Software Engineer"  # noqa: B950
-            context["page_keywords"] = "Питон разработчик, веб-разработка, программист, резюме, блог, проекты"  # noqa: B950
+            context["page_title"] = "Главная |"
+            context["page_description"] = "Хотенов Артём @hotenov, разработчик ПО, личный сайт, блог. Фанат Vue3 и Nuxt3, радуется Python (Django). Software Engineer"  # noqa: B950
+            context["page_keywords"] = "Разработчик фронтэнда, веб-разработка, программист, резюме, блог, IT проекты"  # noqa: B950
         else:
-            context["page_title"] = "Home"
-            context["page_description"] = "Artem Hotenov, Software Engineer. Personal website, blog, projects, about. Python (Django) lover. IT Project manager."  # noqa: B950
-            context["page_keywords"] = "software engineer, python, django, resume, web development"  # noqa: B950
+            context["page_title"] = "Home |"
+            context["page_description"] = "Artem Hotenov, Software Engineer. Personal website, blog, projects, about. Vue 3 и Nuxt 3 lover. IT person."  # noqa: B950
+            context["page_keywords"] = "frontend web developer, software engineer, Vue, Nuxt, resume, web development"  # noqa: B950
         return context
 
 
@@ -32,11 +32,11 @@ class AboutView(TemplateView):
         """Get and update view context."""
         context = super().get_context_data(**kwargs)
         if self.request.LANGUAGE_CODE == "ru":
-            context["page_title"] = "О себе"
+            context["page_title"] = "О себе |"
             context["page_description"] = "Немного о себе, хобби"  # noqa: B950, BLK100
             context["page_keywords"] = "хобби, информационные технологии, программирование, сериалы, dj, миксы"  # noqa: B950
         else:
-            context["page_title"] = "About"
+            context["page_title"] = "About |"
             context["page_description"] = "About me (@hotenov). Hobby, free time activity"  # noqa: B950
             context["page_keywords"] = "hobby, IT, programming, software, free time, dj sets, music mixes"  # noqa: B950
         return context
@@ -51,11 +51,11 @@ class ContactView(TemplateView):
         """Get and update view context."""
         context = super().get_context_data(**kwargs)
         if self.request.LANGUAGE_CODE == "ru":
-            context["page_title"] = "Контактная информация"
+            context["page_title"] = "Контактная информация |"
             context["page_description"] = "Как со мной связаться, написать мне на почту, социальные сети."  # noqa: B950, BLK100
             context["page_keywords"] = "контакты, информация, почта, обратная связь"  # noqa: B950
         else:
-            context["page_title"] = "Contact"
+            context["page_title"] = "Contact |"
             context["page_description"] = "My contact email"  # noqa: B950
             context["page_keywords"] = "contact info, email, social media"  # noqa: B950
         return context
@@ -76,11 +76,11 @@ class OldBlogView(TemplateView):
         """Get and update view context."""
         context = super().get_context_data(**kwargs)
         if self.request.LANGUAGE_CODE == "ru":
-            context["page_title"] = "Блог"
+            context["page_title"] = "Блог |"
             context["page_description"] = "блог @hotenov: разработка ПО, технологии"  # noqa: B950, BLK100
-            context["page_keywords"] = "Питон разработка, веб-разработка, заметки программиста"  # noqa: B950
+            context["page_keywords"] = "фронтэнд разработка, веб-разработка, заметки программиста"  # noqa: B950
         else:
-            context["page_title"] = "Blog"
+            context["page_title"] = "Blog |"
             context["page_description"] = "blog @hotenov: Software Development. Technologies."  # noqa: B950
             context["page_keywords"] = "code notes, thoughts, web development"  # noqa: B950
         return context
