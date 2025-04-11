@@ -40,7 +40,7 @@
         "@fullhuman/postcss-purgecss": "^5.0.0",
         "@popperjs/core": "^2.11.8",
         "autoprefixer": "^10.4.16",
-        "browser-sync": "^3.0.2",
+        "browser-sync": "^3.0.4",
         "chokidar": "3.5.3",
         "concurrently": "^8.2.2",
         "postcss": "^8.4.32",
